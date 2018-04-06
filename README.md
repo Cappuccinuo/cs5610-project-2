@@ -1,4 +1,4 @@
-# cs5610-project-1
+# cs5610-project-2
 
 ## Setting up git
 
