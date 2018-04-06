@@ -1,20 +1,52 @@
-# Ccmonitor
+# cs5610-project-2
 
-To start your Phoenix server:
+## Setting up git
 
-  * Install dependencies with `mix deps.get`
-  * Create and migrate your database with `mix ecto.create && mix ecto.migrate`
-  * Install Node.js dependencies with `cd assets && npm install`
-  * Start Phoenix endpoint with `mix phx.server`
+**Make sure you run this:**
 
-Now you can visit [`localhost:4000`](http://localhost:4000) from your browser.
+```
+git config --global push.default upstream
+```
 
-Ready to run in production? Please [check our deployment guides](http://www.phoenixframework.org/docs/deployment).
+That makes it so that running `git push --force` doesn't overwrite the master branch.
 
-## Learn more
+## Quick Start
 
-  * Official website: http://www.phoenixframework.org/
-  * Guides: http://phoenixframework.org/docs/overview
-  * Docs: https://hexdocs.pm/phoenix
-  * Mailing list: http://groups.google.com/group/phoenix-talk
-  * Source: https://github.com/phoenixframework/phoenix
+We keep a totally linear commit history - no merges, no diamond shapes in our commit history. We only do fast-forward merges on `master`.
+
+### Start your work:
+```bash
+git pull
+git checkout -b new-branch
+# Do your work...
+```
+
+### When work finished:
+```bash
+git status
+# check modified files
+git add modified-files
+git commit -m "commit notes"
+```
+
+### Before your code review:
+```bash
+$ git checkout 
+$ git pull --rebase origin master
+$ git checkout new-branch
+$ git rebase master
+# .. Resolve any conflicts followed with `git rebase --continue`
+```
+
+### Code review:
+For now we use github code review. The user experience is not great but we can re-evaluate after trying it for a month. 
+
+### After your code review:
+```bash
+$ git checkout master
+$ git merge --ff-only new-branch
+# Everything up to here has been local
+# This is what lets others see your changes
+$ git push origin master
+```
+
