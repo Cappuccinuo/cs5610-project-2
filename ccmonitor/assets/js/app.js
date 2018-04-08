@@ -11,7 +11,9 @@
 //
 // If you no longer want to use a dependency, remember
 // to also remove its path from "config.paths.watched".
-import "phoenix_html"
+import "phoenix_html";
+import store from './store';
+import api from './api';
 
 // Import local files
 //
@@ -19,3 +21,7 @@ import "phoenix_html"
 // paths "./socket" or full ones "web/static/js/socket".
 
 // import socket from "./socket"
+import ccmonitor_init from './ccmonitor';
+$(function() {
+  ccmonitor_init(store);
+})
