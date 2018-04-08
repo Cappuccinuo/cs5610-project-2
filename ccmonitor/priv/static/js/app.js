@@ -13843,8 +13843,8 @@ require.alias("underscore/underscore.js", "underscore");process = require('proce
   
 
 // Auto-loaded modules from config.npm.globals.
-window._ = require("underscore");
 window["$"] = require("jquery");
+window._ = require("underscore");
 
 
 });})();require('___globals___');
