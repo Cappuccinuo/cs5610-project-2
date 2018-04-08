@@ -31,7 +31,7 @@ git commit -m "commit notes"
 
 ### Before your code review:
 ```bash
-$ git checkout
+$ git checkout 
 $ git pull --rebase origin master
 $ git checkout new-branch
 $ git rebase master
@@ -39,7 +39,7 @@ $ git rebase master
 ```
 
 ### Code review:
-For now we use github code review. The user experience is not great but we can re-evaluate after trying it for a month.
+For now we use github code review. The user experience is not great but we can re-evaluate after trying it for a month. 
 
 ### After your code review:
 ```bash
@@ -49,3 +49,4 @@ $ git merge --ff-only new-branch
 # This is what lets others see your changes
 $ git push origin master
 ```
+

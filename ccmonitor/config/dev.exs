@@ -51,8 +51,8 @@ config :phoenix, :stacktrace_depth, 20
 # Configure your database
 config :ccmonitor, Ccmonitor.Repo,
   adapter: Ecto.Adapters.Postgres,
-  username: "currency",
-  password: "123456",
+  username: "postgres",
+  password: "postgres",
   database: "ccmonitor_dev",
   hostname: "localhost",
   pool_size: 10
