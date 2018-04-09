@@ -23,5 +23,6 @@ defmodule CcmonitorWeb.Router do
   scope "/api/v1", CcmonitorWeb do
     pipe_through :api
     resources "/users", UserController, except: [:new, :edit]
+    post "/token", TokenController, :create
   end
 end

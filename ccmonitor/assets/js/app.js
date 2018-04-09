@@ -23,5 +23,6 @@ import api from './api';
 // import socket from "./socket"
 import ccmonitor_init from './ccmonitor';
 $(function() {
+  api.request_users();
   ccmonitor_init(store);
 })
