@@ -85,12 +85,19 @@ class Login extends React.Component {
       return <div className="container-fluid">
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav navbar-right">
+            <li><p class="navbar-text">Already have an account?</p></li>
             <li className="dropdown">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b> </a>
+              <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
                 <ul id="login-dp" className="dropdown-menu">
                 <li>
                    <div className="row">
                       <div className="col-md-12">
+                        Login via
+                        <div class="social-buttons">
+                          <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                          <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                        </div>
+                                        or
                          <form className="form" role="form" method="post" action="login" id="login-nav">
                             <div className="form-group">
                                <label className="sr-only">Email address</label>
