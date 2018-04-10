@@ -58,11 +58,25 @@ function signup(state = empty_signup_form, action) {
   }
 }
 
+let initial_price = {
+  BTC: "loading",
+
+};
+
+function price(state = initial_price, action) {
+  switch (action.type) {
+    case 'UPDATE_PRICES':
+      return Object.assign({}, state, {[action.data.type]: action.data.price});
+    default:
+      return state;
+  }
+}
+
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({users, login, token, signup});
+  let reducer = combineReducers({users, login, token, signup, price});
   let state1 = reducer(state0, action);
   console.log("state1", state1);
   return deepFreeze(state1);

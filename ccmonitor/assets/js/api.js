@@ -50,6 +50,33 @@ class TheServer {
     });
   }
 
+  get_price(data) {
+    let currency = 'USD';
+    if(data.currency) {
+      currency = data.currency;
+    }
+
+    let url = "https://api.coinbase.com/v2/prices/"+data.type+'-'+currency+"/spot";
+
+    $.ajax(url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        const data1 = {
+          type: data.type,
+          price: resp.data.amount,
+          currency: resp.data.currency,
+        };
+        store.dispatch({
+          type: 'UPDATE_PRICES',
+          data: data1,
+        });
+      },
+    });
+
+  }
+
   submit_user(data) {
     $.ajax("/api/v1/users", {
       method: "post",
