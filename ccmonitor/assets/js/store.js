@@ -60,7 +60,8 @@ function signup(state = empty_signup_form, action) {
 
 let initial_price = {
   BTC: [],
-
+  LTC: [],
+  ETH: [],
 };
 
 function prices(state = initial_price, action) {

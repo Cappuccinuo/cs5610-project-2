@@ -42,7 +42,7 @@ class CcMonitor extends React.Component {
         <Nav/>
         <Switch>
           <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
-          <Route path="/" render={() => (<Index/>)} />
+          <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
         </Switch>
       </div>
     </Router>
