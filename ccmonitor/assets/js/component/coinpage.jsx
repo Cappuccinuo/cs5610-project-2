@@ -9,32 +9,75 @@ import api from '../api';
 class CoinComponent extends React.Component {
   constructor(props) {
     super(props);
+    const channel = this.props.channel;
+    this.state = Object.assign({ triggered: false }, this.props.prices);
+    channel.on("new:prices", resp => {
+      this.props.dispatch({
+        type: "UPDATE_PRICES",
+        data: {
+          base: resp.base,
+          prices: resp.prices,
+        }
+      });
+    });
+
+    channel.join()
+        .receive("ok", resp => {
+          this.props.dispatch({
+            type: "UPDATE_PRICES",
+            data: {
+              base: resp.base,
+              prices: resp.prices,
+            }
+          });
+        })
+        .receive("error", () => {
+          console.log("Unable to join.");
+        });
     
   }
 
-  componentWillMount(){
-    const data = {type: this.props.match.params.type};
-    api.get_price(data);
+  componentWillUpdate(nextProps, nextState){
+    const btcPrices = nextProps.prices.BTC;
+    if(btcPrices.length != this.state.BTC.length) {
+      this.setState({
+        BTC: btcPrices,
+        triggered: !this.state.triggered,
+      });
+    } else {
+      for(var i = 0; i < this.state.BTC.length; i++) {
+        if(btcPrices[i] != this.state.BTC[i]) {
+          this.setState({
+            BTC: btcPrices,
+            triggered: !this.state.triggered,
+          });
+          console.log("updated");
+          break;
+        }
+      }
+    }
+    //const data = {type: this.props.match.params.type};
+    //api.get_price(data);
   }
 
   render() {
     const type = this.props.match.params.type;
 
-    const price = this.props.price[type];
+    let i = 0;
+    const prices = this.state.BTC.map((price) => (<li key={i++}>{price}</li>));
 
     return (
-      <Card style={{marginTop:10}}>
-        <CardBody>
-          <CardTitle>{type}</CardTitle>
-          <CardText>Price (USD): {price}</CardText>
-        </CardBody>
-      </Card>
+      <div>
+        <ul>
+          {prices}
+        </ul>
+      </div>
     );
   }
 }
 
 const CoinPage = withRouter(connect((state) => ({ 
-  price: state.price, 
+  prices: state.prices, 
 }))(CoinComponent));
 
 export default CoinPage;

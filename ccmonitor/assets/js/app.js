@@ -14,6 +14,7 @@
 import "phoenix_html";
 import store from './store';
 import api from './api';
+import socket from './socket.js';
 
 // Import local files
 //
@@ -23,6 +24,7 @@ import api from './api';
 // import socket from "./socket"
 import ccmonitor_init from './ccmonitor';
 $(function() {
+  let channel = socket.channel("prices:node", {});
   api.request_users();
-  ccmonitor_init(store);
+  ccmonitor_init(store, channel);
 })

@@ -5,12 +5,14 @@ import { Provider, connect }                                    from 'react-redu
 import { CookiesProvider, withCookies, Cookies, cookie }        from 'react-cookie';
 import Nav                                                      from './component/nav'
 import CoinPage from "./component/coinpage.jsx";
+import socket from './socket.js';
 
-export default function ccmonitor_init(store) {
+export default function ccmonitor_init(store, channel) {
+
   ReactDOM.render(
     <Provider store={store}>
       <CookiesProvider>
-        <App state={store.getState()} />
+        <App state={store.getState()} channel={channel} />
       </CookiesProvider>
     </Provider>,
     document.getElementById('root')
@@ -20,15 +22,17 @@ export default function ccmonitor_init(store) {
 class CcMonitor extends React.Component {
   constructor(props) {
     super(props);
+    
   }
 
   componentWillMount() {
     console.log(this.props);
     let token = this.props.cookies.get('token');
-    this.props.dispatch({
+    this.props.state.dispatch({
       type: "SET_TOKEN",
       token: token
     });
+    
   }
 
   render() {
@@ -36,11 +40,19 @@ class CcMonitor extends React.Component {
       <div>
         <Nav/>
         <Switch>
-          <Route path="/coin/:type" render={() => (<CoinPage/>)}/>
+          <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
         </Switch>
       </div>
     </Router>
   }
 };
 
-let App = withCookies(connect((state) => state)(CcMonitor));
+let App = withCookies(connect((state) => state)
+                             ((props) => (
+                                          <CcMonitor 
+                                            state={props} 
+                                            cookies={props.cookies}
+                                            channel={props.channel}
+                                          />)));
+
+

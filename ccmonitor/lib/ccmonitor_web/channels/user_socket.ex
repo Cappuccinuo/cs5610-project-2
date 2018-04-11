@@ -2,7 +2,7 @@ defmodule CcmonitorWeb.UserSocket do
   use Phoenix.Socket
 
   ## Channels
-  # channel "room:*", CcmonitorWeb.RoomChannel
+  channel "prices:*", CcmonitorWeb.PricesChannel
 
   ## Transports
   transport :websocket, Phoenix.Transports.WebSocket
