@@ -77,9 +77,11 @@ class Login extends React.Component {
     if (this.props.token) {
       let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
-      return <div className="navbar-text" style={{marginTop: '30px'}}>
-        <h5>Welcome { user_name } <Button className="btn btn-light" onClick={this.delete_token}>  Log out</Button></h5>
-      </div>;
+      return <ul className="nav navbar-nav navbar-right">
+        <div className="navbar-text">
+          Welcome { user_name } <button className="btn btn-dark" onClick={this.delete_token}>  Log out</button>
+        </div>
+      </ul>;
     }
     else {
       return <div className="container-fluid">
