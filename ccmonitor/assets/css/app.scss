@@ -6,14 +6,14 @@ body {
 }
 
 .index {
-    background-image: url('http://ilovemelville.co.za/wp-content/uploads/2016/01/1920px-Johannesburg_Sunrise_City_of_Gold.jpg');
-    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(255,255,255,0.4) 100%), url('http://ilovemelville.co.za/wp-content/uploads/2016/01/1920px-Johannesburg_Sunrise_City_of_Gold.jpg');
+    background-image: url('https://www.metropolis.org/sites/default/files/media_root/images/johannesburg_caring_cities.jpg');
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(255,255,255,0.4) 100%), url('https://www.metropolis.org/sites/default/files/media_root/images/johannesburg_caring_cities.jpg');
     background-repeat: no-repeat;
-    background-size: contain;
+    background-size: cover;
     padding:50px;
     height: 100%;
     width: 100%;
     min-width: 1000px;
-    min-height: 1000px;
+    min-height: 1500px;
     margin: 0 auto;
 }
