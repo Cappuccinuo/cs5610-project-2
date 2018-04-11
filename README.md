@@ -38,9 +38,6 @@ $ git rebase master
 # .. Resolve any conflicts followed with `git rebase --continue`
 ```
 
-### Code review:
-For now we use github code review. The user experience is not great but we can re-evaluate after trying it for a month. 
-
 ### After your code review:
 ```bash
 $ git checkout master
@@ -49,4 +46,17 @@ $ git merge --ff-only new-branch
 # This is what lets others see your changes
 $ git push origin master
 ```
+
+## Test in development mode:
+Under ccmonitor directory, run
+```bash
+mix phx.server
+```
+to start Phoenix server first.
+
+Then under node_client directory, run
+```bash
+node js/app.js 
+```
+to start node client.
 

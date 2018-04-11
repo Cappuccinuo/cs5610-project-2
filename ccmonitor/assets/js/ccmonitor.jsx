@@ -4,6 +4,7 @@ import { Route, BrowserRouter as Router, Switch }     from 'react-router-dom';
 import { Provider, connect }                                    from 'react-redux';
 import { CookiesProvider, withCookies, Cookies, cookie }        from 'react-cookie';
 import Nav                                                      from './component/nav'
+import Index                                                    from './component/index'
 import CoinPage from "./component/coinpage.jsx";
 import socket from './socket.js';
 
@@ -22,7 +23,7 @@ export default function ccmonitor_init(store, channel) {
 class CcMonitor extends React.Component {
   constructor(props) {
     super(props);
-    
+
   }
 
   componentWillMount() {
@@ -32,7 +33,7 @@ class CcMonitor extends React.Component {
       type: "SET_TOKEN",
       token: token
     });
-    
+
   }
 
   render() {
@@ -40,6 +41,7 @@ class CcMonitor extends React.Component {
       <div>
         <Nav/>
         <Switch>
+          <Route path="/" render={() => (<Index/>)} />
           <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
         </Switch>
       </div>
@@ -49,10 +51,8 @@ class CcMonitor extends React.Component {
 
 let App = withCookies(connect((state) => state)
                              ((props) => (
-                                          <CcMonitor 
-                                            state={props} 
+                                          <CcMonitor
+                                            state={props}
                                             cookies={props.cookies}
                                             channel={props.channel}
                                           />)));
-
-
