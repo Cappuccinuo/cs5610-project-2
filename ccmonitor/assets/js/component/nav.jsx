@@ -9,20 +9,20 @@ import { CookiesProvider } from 'react-cookie';
 function Nav(props) {
   return <header className="header">
 
-    <nav class="navbar navbar-default navbar-inverse" role="navigation">
-      <div class="container-fluid">
+    <nav className="navbar navbar-default navbar-inverse" role="navigation">
+      <div className="container-fluid">
 
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
-            <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
+        <div className="navbar-header">
+          <button type="button" className="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+            <span className="sr-only">Toggle navigation</span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
+            <span className="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Ccmonitor</a>
+          <a className="navbar-brand" href="#">Ccmonitor</a>
         </div>
 
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <CookiesProvider>
             <Login />
           </CookiesProvider>

@@ -1,3 +1,5 @@
+@import url("https://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css");
+
 body {
   width: 100%;
   height: auto;
@@ -5,7 +7,7 @@ body {
 
 .index {
     background-image: url('http://ilovemelville.co.za/wp-content/uploads/2016/01/1920px-Johannesburg_Sunrise_City_of_Gold.jpg');
-    background-image: linear-gradient(to bottom, rgba(255,255,255,0.1) 0%,rgba(255,255,255,0.5) 100%), url('http://ilovemelville.co.za/wp-content/uploads/2016/01/1920px-Johannesburg_Sunrise_City_of_Gold.jpg');
+    background-image: linear-gradient(to bottom, rgba(0,0,0,0.1) 0%,rgba(255,255,255,0.4) 100%), url('http://ilovemelville.co.za/wp-content/uploads/2016/01/1920px-Johannesburg_Sunrise_City_of_Gold.jpg');
     background-repeat: no-repeat;
     background-size: contain;
     padding:50px;
