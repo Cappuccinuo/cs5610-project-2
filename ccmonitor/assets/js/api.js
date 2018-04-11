@@ -95,6 +95,7 @@ class TheServer {
         });
       },
       error: (resp) => {
+        console.log(data);
         swal({
           title: "Wrong!",
           text: "Try again",

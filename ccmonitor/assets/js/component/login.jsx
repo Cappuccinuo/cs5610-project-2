@@ -13,6 +13,8 @@ class Login extends React.Component {
       switch: 0
     }
     this.update = this.update.bind(this);
+    this.update_signup = this.update_signup.bind(this);
+    this.sign_up = this.sign_up.bind(this);
     this.create_token = this.create_token.bind(this);
     this.delete_token = this.delete_token.bind(this);
     this.change_status = this.change_status.bind(this);
@@ -36,6 +38,24 @@ class Login extends React.Component {
     this.props.dispatch({
       type: 'UPDATE_LOGIN_FORM',
       data: data,
+    });
+  }
+
+  update_signup(ev) {
+    let tgt = $(ev.target);
+    let data = {};
+    data[tgt.attr('name')] = tgt.val();
+    let action = {
+      type: 'UPDATE_SIGNUP_FORM',
+      data: data,
+    };
+    this.props.dispatch(action);
+  }
+
+  sign_up(ev) {
+    api.submit_user(this.props.signup);
+    this.props.dispatch({
+      type: 'CLEAR_SIGNUP_FORM',
     });
   }
 
@@ -151,18 +171,23 @@ class Login extends React.Component {
                      <div className="row">
                         <div className="col-md-12">
                            <form className="form" role="form" method="post" action="login" id="login-nav">
+                             <div className="form-group">
+                                <label className="sr-only">Email address</label>
+                                <Input type="text" name="name" placeholder="name"
+                                       value={this.props.signup.name} onChange={this.update_signup} />
+                             </div>
                               <div className="form-group">
                                  <label className="sr-only">Email address</label>
                                  <Input type="text" name="email" placeholder="email"
-                                        value={this.props.login.email} onChange={this.update} />
+                                        value={this.props.signup.email} onChange={this.update_signup} />
                               </div>
                               <div className="form-group">
                                  <label className="sr-only">Password</label>
                                  <Input type="password" name="password" placeholder="password"
-                                        value={this.props.login.password} onChange={this.update} />
+                                        value={this.props.signup.password} onChange={this.update_signup} />
                               </div>
                               <div className="form-group">
-                                 <Button className="btn btn-primary btn-block" onClick={this.create_token}>Sign up</Button>
+                                 <Button className="btn btn-primary btn-block" onClick={this.sign_up}>Sign up</Button>
                               </div>
                            </form>
                         </div>
@@ -189,6 +214,7 @@ function state2props(state) {
     login: state.login,
     token: state.token,
     users: state.users,
+    signup: state.signup,
   };
 }
 
