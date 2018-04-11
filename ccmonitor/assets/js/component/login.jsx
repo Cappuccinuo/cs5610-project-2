@@ -9,11 +9,13 @@ class Login extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      redirect: false
+      redirect: false,
+      switch: 0
     }
     this.update = this.update.bind(this);
     this.create_token = this.create_token.bind(this);
     this.delete_token = this.delete_token.bind(this);
+    this.change_status = this.change_status.bind(this);
   }
 
   componentDidUpdate(prevProps) {
@@ -71,6 +73,12 @@ class Login extends React.Component {
     return user.name;
   }
 
+  change_status(ev) {
+    let flag = 1 - this.state.switch;
+    console.log(this.state.switch);
+    this.setState({switch: flag});
+  }
+
   render() {
     const { from } = '/';
     const { redirect } = this.state;
@@ -79,56 +87,99 @@ class Login extends React.Component {
 
       return <ul className="nav navbar-nav navbar-right">
         <div className="navbar-text">
-          Welcome { user_name } <button className="btn btn-dark" onClick={this.delete_token}>  Log out</button>
+          Welcome { user_name } <button className="btn btn-dark" onClick={this.delete_token}><b>Log out</b></button>
         </div>
       </ul>;
     }
     else {
-      return <div className="container-fluid">
-        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul className="nav navbar-nav navbar-right">
-            <li><p class="navbar-text">Already have an account?</p></li>
-            <li className="dropdown">
-              <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
-                <ul id="login-dp" className="dropdown-menu">
-                <li>
-                   <div className="row">
-                      <div className="col-md-12">
-                        Login via
-                        <div class="social-buttons">
-                          <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
-                          <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+      if (this.state.switch == 0) {
+        return <div className="container-fluid">
+          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul className="nav navbar-nav navbar-right">
+              <li><p class="navbar-text">Already have an account?</p></li>
+              <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
+                  <ul id="login-dp" className="dropdown-menu">
+                  <li>
+                     <div className="row">
+                        <div className="col-md-12">
+                          Login via
+                          <div class="social-buttons">
+                            <a href="#" class="btn btn-fb"><i class="fa fa-facebook"></i> Facebook</a>
+                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                          </div>
+                                          or
+                           <form className="form" role="form" method="post" action="login" id="login-nav">
+                              <div className="form-group">
+                                 <label className="sr-only">Email address</label>
+                                 <Input type="text" name="email" placeholder="email"
+                                        value={this.props.login.email} onChange={this.update} />
+                              </div>
+                              <div className="form-group">
+                                 <label className="sr-only">Password</label>
+                                 <Input type="password" name="password" placeholder="password"
+                                        value={this.props.login.password} onChange={this.update} />
+                              </div>
+                              <div className="form-group">
+                                 <Button className="btn btn-primary btn-block" onClick={this.create_token}>Sign in</Button>
+                              </div>
+                           </form>
                         </div>
-                                        or
-                         <form className="form" role="form" method="post" action="login" id="login-nav">
-                            <div className="form-group">
-                               <label className="sr-only">Email address</label>
-                               <Input type="text" name="email" placeholder="email"
-                                      value={this.props.login.email} onChange={this.update} />
-                            </div>
-                            <div className="form-group">
-                               <label className="sr-only">Password</label>
-                               <Input type="password" name="password" placeholder="password"
-                                      value={this.props.login.password} onChange={this.update} />
-                            </div>
-                            <div className="form-group">
-                               <Button className="btn btn-primary btn-block" onClick={this.create_token}>Sign in</Button>
-                            </div>
-                         </form>
-                      </div>
-                      <div className="bottom text-center">
-                        New here ? <Link to="/signup">Sign up</Link>
-                      </div>
-                   </div>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </div>
-        {redirect && (
-          <Redirect to={from || '/'}/>
-        )}
-      </div>;
+                        <div className="bottom text-center">
+                          New here ? <button className="unstyled-button" onClick={this.change_status}><b>Sign up</b></button>
+                        </div>
+                     </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          {redirect && (
+            <Redirect to={from || '/'}/>
+          )}
+        </div>;
+      }
+      else {
+        return <div className="container-fluid">
+          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul className="nav navbar-nav navbar-right">
+              <li><p class="navbar-text">Already have an account?</p></li>
+              <li className="dropdown">
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
+                  <ul id="login-dp" className="dropdown-menu">
+                  <li>
+                     <div className="row">
+                        <div className="col-md-12">
+                           <form className="form" role="form" method="post" action="login" id="login-nav">
+                              <div className="form-group">
+                                 <label className="sr-only">Email address</label>
+                                 <Input type="text" name="email" placeholder="email"
+                                        value={this.props.login.email} onChange={this.update} />
+                              </div>
+                              <div className="form-group">
+                                 <label className="sr-only">Password</label>
+                                 <Input type="password" name="password" placeholder="password"
+                                        value={this.props.login.password} onChange={this.update} />
+                              </div>
+                              <div className="form-group">
+                                 <Button className="btn btn-primary btn-block" onClick={this.create_token}>Sign up</Button>
+                              </div>
+                           </form>
+                        </div>
+                        <div className="bottom text-center">
+                          Have an account ? <button className="unstyled-button" onClick={this.change_status}><b>Sign in</b></button>
+                        </div>
+                     </div>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          {redirect && (
+            <Redirect to={from || '/'}/>
+          )}
+        </div>;
+      }
     }
   }
 }
