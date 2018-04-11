@@ -48,7 +48,7 @@ $ git push origin master
 ```
 
 ## Test in development mode:
-Under project ccmonitor directory, run
+Under ccmonitor directory, run
 ```bash
 mix phx.server
 ```
