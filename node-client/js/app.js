@@ -20,7 +20,7 @@ channel.join()
 
 function updatePrice(i) {
   setTimeout(() => {
-    coinbase.getBuyPrice({'currencyPair': 'BTC-USD'}, function(err, resp) {
+    coinbase.getSpotPrice({'currencyPair': 'BTC-USD'}, function(err, resp) {
       if(resp) {
         queue.push(resp.data.amount);
         if(queue.length > 100) {

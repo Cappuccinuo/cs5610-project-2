@@ -1,10 +1,12 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import api from '../api';
 
 class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
+    api.get_price({type: 'BTC'});
     const channel = this.props.channel;
     channel.on("new:prices", resp => {
       props.dispatch({

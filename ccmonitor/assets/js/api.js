@@ -52,9 +52,6 @@ class TheServer {
 
   get_price(data) {
     let currency = 'USD';
-    if(data.currency) {
-      currency = data.currency;
-    }
 
     let url = "https://api.coinbase.com/v2/prices/"+data.type+'-'+currency+"/spot";
 
@@ -63,10 +60,10 @@ class TheServer {
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
+        console.log(resp)
         const data1 = {
-          type: data.type,
-          price: resp.data.amount,
-          currency: resp.data.currency,
+          base: resp.data.base,
+          prices: [ resp.data.amount ],
         };
         store.dispatch({
           type: 'UPDATE_PRICES',
