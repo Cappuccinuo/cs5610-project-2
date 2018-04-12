@@ -1,0 +1,21 @@
+defmodule Ccmonitor.Alerts.Alert do
+  use Ecto.Schema
+  import Ecto.Changeset
+
+
+  schema "alerts" do
+    field :alert_type, :string
+    field :coin_type, :string
+    field :threshold, :float
+    field :user_id, :id
+
+    timestamps()
+  end
+
+  @doc false
+  def changeset(alert, attrs) do
+    alert
+    |> cast(attrs, [:coin_type, :alert_type, :user_id, :threshold])
+    |> validate_required([:coin_type, :alert_type, :threshold])
+  end
+end

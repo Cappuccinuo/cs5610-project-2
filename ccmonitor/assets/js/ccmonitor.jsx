@@ -3,10 +3,12 @@ import ReactDOM                                                 from 'react-dom'
 import { Route, BrowserRouter as Router, Switch }     from 'react-router-dom';
 import { Provider, connect }                                    from 'react-redux';
 import { CookiesProvider, withCookies, Cookies, cookie }        from 'react-cookie';
+import socket from './socket.js';
 import Nav                                                      from './component/nav'
 import Index                                                    from './component/index'
 import CoinPage from "./component/coinpage.jsx";
-import socket from './socket.js';
+import AlertForm from "./component/alertform.jsx";
+
 
 export default function ccmonitor_init(store, channel) {
 
@@ -42,6 +44,9 @@ class CcMonitor extends React.Component {
         <Nav/>
         <Switch>
           <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
+          <Route path="/alerts" />
+          <Route path="/alertform/:alert_id" />
+          <Route path="/alertform" render={() => (<AlertForm />)}/>
           <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
         </Switch>
       </div>

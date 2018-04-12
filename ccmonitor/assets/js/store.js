@@ -58,6 +58,30 @@ function signup(state = empty_signup_form, action) {
   }
 }
 
+let empty_alert_form = {
+  coin_type: "BTC",
+  alert_type: "ASC",
+  threshold: 7000.0,
+};
+
+function alert_form(state = empty_alert_form, action) {
+  switch (action.type) {
+    case 'UPDATE_ALERT_FORM':
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
+
+function alerts(state = {}, action) {
+  switch (action.type) {
+    case 'UPDATE_ALERTS':
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
+
 let initial_price = {
   BTC: [],
   LTC: [],
@@ -77,7 +101,7 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({users, login, token, signup, prices});
+  let reducer = combineReducers({users, login, token, signup, prices, alerts, alert_form});
   let state1 = reducer(state0, action);
   console.log("state1", state1);
   return deepFreeze(state1);

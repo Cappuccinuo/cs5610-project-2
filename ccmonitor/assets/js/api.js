@@ -104,6 +104,44 @@ class TheServer {
       },
     });
   }
+
+  create_alert(data, callback) {
+    $.ajax("/api/v1/alerts", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ token: data.token, alert: data.alert_params }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'UPDATE_ALERTS',
+          data: {[resp.data.id]: resp.data},
+        });
+        $(callback);
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+   });
+  }
+
+  update_alert(id, data, callback) {
+    $.ajax("/api/v1/alerts/"+id, {
+      method: "put",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({ alert: data.alert_params, id: id, token: data.token }),
+      success: (resp) => {
+        store.dispatch({
+          type: 'UPDATE_ALERTS',
+          data: {[resp.data.id]: resp.data},
+        });
+        $(callback);
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+    }); 
+  }
 }
 
 export default new TheServer();
