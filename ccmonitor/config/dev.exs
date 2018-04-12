@@ -56,3 +56,7 @@ config :ccmonitor, Ccmonitor.Repo,
   database: "ccmonitor_dev",
   hostname: "localhost",
   pool_size: 10
+
+# Configure Bamboo
+config :ccmonitor, Ccmonitor.Mailer,
+  adapter: Bamboo.LocalAdapter

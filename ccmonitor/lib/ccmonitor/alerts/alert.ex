@@ -7,7 +7,7 @@ defmodule Ccmonitor.Alerts.Alert do
     field :alert_type, :string
     field :coin_type, :string
     field :threshold, :float
-    field :user_id, :id
+    belongs_to :user, Ccmonitor.Users.User
 
     timestamps()
   end

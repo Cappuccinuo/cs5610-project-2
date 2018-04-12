@@ -13,12 +13,17 @@ defmodule CcmonitorWeb.Router do
     plug :accepts, ["json"]
   end
 
+  if Mix.env == :dev do
+    forward "/test_emails", Bamboo.EmailPreviewPlug
+  end
+
   scope "/", CcmonitorWeb do
     pipe_through :browser # Use the default browser stack
 
     get "/", PageController, :index
     get "/coin/:type", PageController, :index
     get "/alertform", PageController, :index
+    get "/alertform/:alert_id", PageController, :index
   end
 
   # Other scopes may use custom stacks.

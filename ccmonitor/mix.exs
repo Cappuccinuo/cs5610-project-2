@@ -18,7 +18,7 @@ defmodule Ccmonitor.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [
+    [    
       mod: {Ccmonitor.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
@@ -43,7 +43,8 @@ defmodule Ccmonitor.Mixfile do
       {:cowboy, "~> 1.0"},
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
-      {:distillery, "~> 1.5", runtime: false}
+      {:distillery, "~> 1.5", runtime: false},
+      {:bamboo, "~> 0.8"}
     ]
   end
 
