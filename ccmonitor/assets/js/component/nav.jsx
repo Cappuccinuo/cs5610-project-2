@@ -23,9 +23,24 @@ function Nav(props) {
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <CookiesProvider>
-            <Login />
-          </CookiesProvider>
+          <ul class="nav navbar-nav navbar-right">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coins <span class="caret"></span></a>
+              <ul class="dropdown-menu" role="menu">
+                <li><NavLink to="/coin/BTC">BTC</NavLink></li>
+                <li><NavLink to="/coin/ETH">ETH</NavLink></li>
+                <li><NavLink to="/coin/LTC">LTC</NavLink></li>
+                <li class="divider"></li>
+                <li><NavLink to="/alertform">Subscribe</NavLink></li>
+              </ul>
+            </li>
+            <li><NavLink to="/"><i class="fa fa-bell"></i></NavLink></li>
+            <li>
+              <CookiesProvider>
+                <Login />
+              </CookiesProvider>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>
