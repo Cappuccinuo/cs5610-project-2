@@ -2,7 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import api from '../api';
-import CurrentPriceChart from './current_price_chart'; // import chart component
+
 
 class IndexComponent extends React.Component {
   constructor(props) {
@@ -34,7 +34,7 @@ class IndexComponent extends React.Component {
         });
   }
 
- 
+
   render() {
     return <div className="index">
       <div id="order-book" style={{display: "block"}}>
@@ -154,11 +154,9 @@ class IndexComponent extends React.Component {
           </dl>
         </div>
 
-        <div className="chart-on-index">
-	  <CurrentPriceChart chart-data ={this.props} />
-        </div>
+
       </div>
-      
+
 
 
       <div className="text offset-lg-1 col-lg-6 col-md-12">
@@ -213,11 +211,11 @@ class IndexComponent extends React.Component {
         </div>
       </div>
     </div>
-  } 
+  }
 }
 
-const Index = withRouter(connect((state) => ({ 
-  prices: state.prices, 
+const Index = withRouter(connect((state) => ({
+  prices: state.prices,
 }))(IndexComponent));
 
 export default Index;

@@ -5,6 +5,7 @@ import { Form, FormGroup, NavItem, Input, Button, Card, CardImg, CardText, CardB
 import { connect } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
 import api from '../api';
+import CurrentPriceChart from './current_price_chart'; // import chart component
 
 class CoinComponent extends React.Component {
   constructor(props) {
@@ -35,7 +36,7 @@ class CoinComponent extends React.Component {
         .receive("error", () => {
           console.log("Unable to join.");
         });
-    
+
   }
 
   componentWillUpdate(nextProps, nextState){
@@ -69,6 +70,9 @@ class CoinComponent extends React.Component {
 
     return (
       <div>
+        <div className="chart-on-index">
+	         <CurrentPriceChart chart-data ={this.props} />
+        </div>
         <ul>
           {prices}
         </ul>
@@ -77,8 +81,8 @@ class CoinComponent extends React.Component {
   }
 }
 
-const CoinPage = withRouter(connect((state) => ({ 
-  prices: state.prices, 
+const CoinPage = withRouter(connect((state) => ({
+  prices: state.prices,
 }))(CoinComponent));
 
 export default CoinPage;
