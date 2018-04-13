@@ -13,29 +13,6 @@ class CoinComponent extends React.Component {
     const channel = this.props.channel;
     this.state = Object.assign({ triggered: false }, this.props.prices);
     api.get_price({type: 'BTC'});
-    channel.on("new:prices", resp => {
-      this.props.dispatch({
-        type: "UPDATE_PRICES",
-        data: {
-          base: resp.base,
-          prices: resp.prices,
-        }
-      });
-    });
-
-    channel.join()
-        .receive("ok", resp => {
-          this.props.dispatch({
-            type: "UPDATE_PRICES",
-            data: {
-              base: resp.base,
-              prices: resp.prices,
-            }
-          });
-        })
-        .receive("error", () => {
-          console.log("Unable to join.");
-        });
 
   }
 

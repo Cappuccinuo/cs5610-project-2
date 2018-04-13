@@ -26,6 +26,32 @@ class CcMonitor extends React.Component {
   constructor(props) {
     super(props);
 
+    const channel = props.channel;
+
+    channel.on("new:prices", resp => {
+      this.props.state.dispatch({
+        type: "UPDATE_PRICES",
+        data: {
+          base: resp.base,
+          prices: resp.prices,
+        }
+      });
+    });
+
+    channel.join()
+        .receive("ok", resp => {
+          this.props.state.dispatch({
+            type: "UPDATE_PRICES",
+            data: {
+              base: resp.base,
+              prices: resp.prices,
+            }
+          });
+        })
+        .receive("error", () => {
+          console.log("Unable to join.");
+        });
+
   }
 
   componentWillMount() {

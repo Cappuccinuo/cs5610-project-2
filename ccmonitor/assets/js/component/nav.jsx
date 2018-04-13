@@ -19,7 +19,7 @@ function Nav(props) {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <NavLink className="navbar-brand" to="/">Ccmonitor</NavLink>
+          <Link className="navbar-brand" to="/">Ccmonitor</Link>
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -27,7 +27,7 @@ function Nav(props) {
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coins <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><NavLink to="/coin/BTC">BTC</NavLink></li>
+                <li><Link to="/coin/BTC">BTC</Link></li>
                 <li><NavLink to="/coin/ETH">ETH</NavLink></li>
                 <li><NavLink to="/coin/LTC">LTC</NavLink></li>
                 <li class="divider"></li>

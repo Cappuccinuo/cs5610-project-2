@@ -8,30 +8,6 @@ class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
     api.get_price({type: 'BTC'});
-    const channel = this.props.channel;
-    channel.on("new:prices", resp => {
-      props.dispatch({
-        type: "UPDATE_PRICES",
-        data: {
-          base: resp.base,
-          prices: resp.prices,
-        }
-      });
-    });
-
-    channel.join()
-        .receive("ok", resp => {
-          this.props.dispatch({
-            type: "UPDATE_PRICES",
-            data: {
-              base: resp.base,
-              prices: resp.prices,
-            }
-          });
-        })
-        .receive("error", () => {
-          console.log("Unable to join.");
-        });
   }
 
 
