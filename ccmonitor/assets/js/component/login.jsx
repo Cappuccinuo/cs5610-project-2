@@ -163,9 +163,8 @@ class Login extends React.Component {
         return <div className="container-fluid">
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
-              <li><p class="navbar-text">Already have an account?</p></li>
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Sign Up</b><span class="caret"></span></a>
                   <ul id="login-dp" className="dropdown-menu">
                   <li>
                      <div className="row">

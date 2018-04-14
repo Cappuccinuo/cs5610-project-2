@@ -34,7 +34,7 @@ function Nav(props) {
                 <li><NavLink to="/alertform">Subscribe</NavLink></li>
               </ul>
             </li>
-            <li><NavLink to="/"><i class="fa fa-bell"></i></NavLink></li>
+            <li><NavLink to="/notifications"><i class="fa fa-bell"></i></NavLink></li>
             <li>
               <CookiesProvider>
                 <Login />

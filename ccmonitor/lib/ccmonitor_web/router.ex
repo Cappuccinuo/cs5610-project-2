@@ -24,6 +24,7 @@ defmodule CcmonitorWeb.Router do
     get "/coin/:type", PageController, :index
     get "/alertform", PageController, :index
     get "/alertform/:alert_id", PageController, :index
+    get "/notifications", PageController, :index
   end
 
   # Other scopes may use custom stacks.
