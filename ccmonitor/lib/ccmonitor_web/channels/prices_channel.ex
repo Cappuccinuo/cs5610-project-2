@@ -2,6 +2,7 @@ defmodule CcmonitorWeb.PricesChannel do
   use CcmonitorWeb, :channel
 
   alias Ccmonitor.{Mailer, Email, Alerts}
+  require Logger
 
 
   def join("prices:" <> name, payload, socket) do
@@ -20,7 +21,7 @@ defmodule CcmonitorWeb.PricesChannel do
     if socket.assigns.name == "node" do
       resp = %{"prices" => prices, "base" => base}
       broadcast! socket, "new:prices", resp
-      curr_price = Enum.at(prices, Kernel.length(prices)-1)
+      {curr_price, _} = Enum.at(prices, Kernel.length(prices)-1) |> Float.parse
       distribute_alerts(base, curr_price)
       {:reply, {:ok, resp}, socket}
     else
@@ -32,17 +33,20 @@ defmodule CcmonitorWeb.PricesChannel do
   defp distribute_alerts(base, price) do
     alerts = Alerts.filter_alerts(base, price)
 
+    Logger.info price
+    Logger.info "#{inspect(alerts)}"
+
     Enum.map(alerts, fn alert -> generate_email(alert, base, price) end)
   end
 
   defp generate_email(alert, base, price) do
-      title = base <> " price is now $" <> price
+      title = base <> " price is now $" <> Kernel.inspect(price)
       limit = case alert.alert_type do
         "ASC" -> "upper limit"
         "DES" -> "lower limit"
       end
       body = "Dear customer, " <> title <> ", which has met your " <> limit <> " setting."
-      if alert.user.email do
+      if alert.user do
         Email.alert_email(
           alert.user.email, 
           title,
