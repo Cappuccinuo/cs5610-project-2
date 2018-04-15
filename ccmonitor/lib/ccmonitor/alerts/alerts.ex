@@ -37,10 +37,10 @@ defmodule Ccmonitor.Alerts do
   """
   def get_alert!(id), do: Repo.get!(Alert, id)
 
-  def filter_alerts(base, price) do
+  def filter_alerts(base, curr_price, last_price) do
     query = from a in Alert,
-                where: (a.coin_type == ^base and a.alert_type == "ASC" and a.threshold < ^price) or
-                       (a.coin_type == ^base and a.alert_type == "DES" and a.threshold > ^price)
+                where: (a.coin_type == ^base and a.alert_type == "ASC" and a.threshold < ^curr_price and a.threshold >= ^last_price) or
+                       (a.coin_type == ^base and a.alert_type == "DES" and a.threshold > ^curr_price and a.threshold <= ^last_price)
     Repo.all(query)
       |> Enum.map(fn alert -> Repo.preload(alert, :user) end)
     

@@ -22,7 +22,11 @@ defmodule CcmonitorWeb.PricesChannel do
       resp = %{"prices" => prices, "base" => base}
       broadcast! socket, "new:prices", resp
       {curr_price, _} = Enum.at(prices, Kernel.length(prices)-1) |> Float.parse
-      distribute_alerts(base, curr_price)
+      {last_price, _} = case Kernel.length(prices) do
+        1 -> {nil, nil}
+        _ -> Enum.at(prices, Kernel.length(prices)-2) |> Float.parse
+      end
+      distribute_alerts(base, curr_price, last_price)
       {:reply, {:ok, resp}, socket}
     else
       resp = nil
@@ -30,13 +34,12 @@ defmodule CcmonitorWeb.PricesChannel do
     end
   end
 
-  defp distribute_alerts(base, price) do
-    alerts = Alerts.filter_alerts(base, price)
-
-    Logger.info price
-    Logger.info "#{inspect(alerts)}"
-
-    Enum.map(alerts, fn alert -> generate_email(alert, base, price) end)
+  defp distribute_alerts(base, curr_price, last_price) do
+    if(last_price != nil) do
+      alerts = Alerts.filter_alerts(base, curr_price, last_price)
+      Logger.info "#{inspect(alerts)}"
+      Enum.map(alerts, fn alert -> generate_email(alert, base, curr_price) end)
+    end
   end
 
   defp generate_email(alert, base, price) do
