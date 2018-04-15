@@ -13,10 +13,13 @@ class AlertFormComponent extends React.Component {
     super(props);
     this.state = {
       redirect: false,
+      chageTab: false,
     };
     this.update = this.update.bind(this);
     this.submit_form = this.submit_form.bind(this);
     this.submit_callback = this.submit_callback.bind(this);
+    this.switchTab1 = this.switchTab1.bind(this);
+    this.switchTab2 = this.switchTab2.bind(this);
   }
 
   update(ev) {
@@ -56,99 +59,132 @@ class AlertFormComponent extends React.Component {
     });
   }
 
+  switchTab1(ev) {
+    ev.preventDefault();
+    this.setState({
+      changeTab: false,
+    });
+  }
+
+  switchTab2(ev) {
+    ev.preventDefault();
+    this.setState({
+      changeTab: true,
+    });
+  }
+
   render() {
     if(this.state.redirect) {
       return (<Redirect to={'/'} />);
     }
 
+    if (this.state.changeTab) {
+      return <div className="tab-contain">
+      <ul id="tabs">
+        <a onClick={this.switchTab1} className="button1 bouncy">New Subscribe</a>
+        <a onClick={this.switchTab2} className="button1 bouncy" style={{animationDelay:"0.07s"}}>My Alert</a>
+      </ul>
+      <div id="content">
+        <div class="container-login100">
+          <div class="table100 ver3 m-b-110">
+        		<div class="table100-head">
+        			<table>
+        				<thead>
+        					<tr class="row100 head">
+        						<th class="cell100 column4">Coin Type</th>
+        						<th class="cell100 column5">Alert Setting</th>
+        						<th class="cell100 column6">Insert Time</th>
+        						<th class="cell100 column7"></th>
+        					</tr>
+        				</thead>
+        			</table>
+        		</div>
+
+        		<div class="table100-body js-pscroll">
+        			<table>
+        				<tbody>
+                  <tr class="row100 body">
+        						<td class="cell100 column4">a</td>
+                    <td class="cell100 column5">b</td>
+        						<td class="cell100 column6">d</td>
+                    <td class="cell100 column7">
+                      <span>delete</span>
+                    </td>
+        					</tr>
+        				</tbody>
+        			</table>
+        		</div>
+        	</div>
+        </div>
+      </div>
+    </div>
+    }
+    else {
     return (
-      <div>
-        {/*
-        <Card>
-          <CardBody>
-            <FormGroup>
-              <Label for="coin_type">Coin Type</Label>
-              <Input type="select" name="coin_type"
-                    value={this.props.alert_form.coin_type} onChange={this.update}>
-                    <option value={"BTC"}>BTC</option>
-                    <option value={"LTC"}>LTC</option>
-                    <option value={"ETH"}>ETH</option>
+      <div className="tab-contain">
+        <ul id="tabs">
+          <a onClick={this.switchTab1} className="button1 bouncy">New Subscribe</a>
+          <a onClick={this.switchTab2} className="button1 bouncy" style={{animationDelay:"0.07s"}}>My Alert</a>
+        </ul>
+        <div id="content">
+          <div class="container-contact100">
+        		<div id="tab1" class="wrap-contact100">
+        			<form class="contact100-form validate-form">
+        				<span class="contact100-form-title">
+        					Alert Setting
+        				</span>
 
-              </Input>
-            </FormGroup>
-            <FormGroup>
-              <Label for="alert_type">Alert Type</Label>
-              <Input type="select" name="alert_type"
-                    value={this.props.alert_form.alert_type} onChange={this.update}>
-                    <option value={"ASC"}>Ascending</option>
-                    <option value={"DES"}>Descending</option>
-              </Input>
-            </FormGroup>
-            <FormGroup>
-              <Label for="threshold">Time Spent</Label>
-              <Input type="number" name="threshold" step={0.1} min={0}
-                    value={this.props.alert_form.threshold} onChange={this.update}/>
-            </FormGroup>
-            <Button onClick={this.submit_form}>Submit</Button>
-          </CardBody>
-        </Card>
-        */}
-        <div class="container-contact100">
-      		<div class="wrap-contact100">
-      			<form class="contact100-form validate-form">
-      				<span class="contact100-form-title">
-      					Alert Setting
-      				</span>
+        				<div class="wrap-input100">
+        					<div class="label-input100">Coin Type</div>
+          					<div>
+                      <select className="input100" name="coin_type" placeholder="title"
+                            value={this.props.alert_form.coin_type} onChange={this.update}>
+          							<option>Please chooses</option>
+          							<option value={"BTC"}>BTC</option>
+          							<option value={"LTC"}>LTC</option>
+          							<option value={"ETH"}>ETH</option>
+          						</select>
+          						<div class="dropDownSelect2"></div>
+          					</div>
+        					<span class="focus-input100"></span>
+        				</div>
 
-      				<div class="wrap-input100">
-      					<div class="label-input100">Coin Type</div>
-        					<div>
-                    <select className="input100" name="coin_type" placeholder="title"
-                          value={this.props.alert_form.coin_type} onChange={this.update}>
-        							<option>Please chooses</option>
-        							<option value={"BTC"}>BTC</option>
-        							<option value={"LTC"}>LTC</option>
-        							<option value={"ETH"}>ETH</option>
-        						</select>
-        						<div class="dropDownSelect2"></div>
-        					</div>
-      					<span class="focus-input100"></span>
-      				</div>
+                <div class="wrap-input100 validate-input">
+        					<div class="label-input100">Alert Type</div>
+          					<div>
+                      <select className="input100" name="alert_type" placeholder="description"
+                            value={this.props.alert_form.alert_type} onChange={this.update}>
+                            <option>Please chooses</option>
+                            <option value={"ASC"}>Ascending</option>
+                            <option value={"DES"}>Descending</option>
+                      </select>
+          						<div class="dropDownSelect2"></div>
+          					</div>
+        					<span class="focus-input100"></span>
+        				</div>
 
-              <div class="wrap-input100 validate-input">
-      					<div class="label-input100">Alert Type</div>
-        					<div>
-                    <select className="input100" name="alert_type" placeholder="description"
-                          value={this.props.alert_form.alert_type} onChange={this.update}>
-                          <option>Please chooses</option>
-                          <option value={"ASC"}>Ascending</option>
-                          <option value={"DES"}>Descending</option>
-                    </select>
-        						<div class="dropDownSelect2"></div>
-        					</div>
-      					<span class="focus-input100"></span>
-      				</div>
+                <div class="wrap-input100 validate-input">
+        					<label class="label-input100" for="email">Threshold</label>
+                  <input type="number" className="input100" name="threshold" step={0.1} min={0}
+                        value={this.props.alert_form.threshold} onChange={this.update}/>
+        					<span class="focus-input100"></span>
+        				</div>
 
-              <div class="wrap-input100 validate-input">
-      					<label class="label-input100" for="email">Threshold</label>
-                <input type="number" className="input100" name="threshold" step={0.1} min={0}
-                      value={this.props.alert_form.threshold} onChange={this.update}/>
-      					<span class="focus-input100"></span>
-      				</div>
-
-      				<div class="container-contact100-form-btn">
-      					<button class="contact100-form-btn" onClick={this.submit_form}>
-      						Subscribe
-      					</button>
-      				</div>
-      			</form>
-            <div class="contact100-more">
-              <CurrentPriceChart chart-data ={this.props} />
-            </div>
-      		</div>
-      	</div>
+        				<div class="container-contact100-form-btn">
+        					<button class="contact100-form-btn" onClick={this.submit_form}>
+        						Subscribe
+        					</button>
+        				</div>
+        			</form>
+              <div class="contact100-more">
+                <CurrentPriceChart chart-data ={this.props} />
+              </div>
+        		</div>
+        	</div>
+      </div>
     </div>
     );
+    }
   }
 }
 
