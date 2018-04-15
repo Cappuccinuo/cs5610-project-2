@@ -1,5 +1,5 @@
 import React from 'react';
-import ReactEcharts from 'echarts-for-react'; 
+import ReactEcharts from 'echarts-for-react';
 
 
 export default function CurrentPriceChart(props) {
@@ -7,7 +7,7 @@ export default function CurrentPriceChart(props) {
   var time = ["2018-4-11/14:52:22", "2018-4-11/14:52:23", "2018-4-11/14:52:24", "2018-4-11/14:52:25",
             "2018-4-11/14:52:26", "2018-4-11/14:52:27", "2018-4-11/14:52:28",]
   time = time.map(function (str) {
-    return str.replace('/', '\n'); // add \n between date and specific time, in case the string is 
+    return str.replace('/', '\n'); // add \n between date and specific time, in case the string is
   });                              // too long to show in x-axis
 
   var current_price_chart_data = { // just for testing, need to get data from props
@@ -54,7 +54,7 @@ function getOption(data){
     legend: {
 	data:['BTC','ETH','LTC'],
         x: 'left',
-        textStyle:{color:"white"},  
+        textStyle:{color:"white"},
     },
     grid: {
 	left: '3%',
@@ -117,4 +117,3 @@ function getOption(data){
   };
   return option;
 }
-

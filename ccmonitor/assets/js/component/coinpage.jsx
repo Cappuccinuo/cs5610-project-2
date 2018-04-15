@@ -47,12 +47,78 @@ class CoinComponent extends React.Component {
 
     return (
       <div>
-        <div className="chart-on-index">
-	         <CurrentPriceChart chart-data ={this.props} />
+        <div className="panel-chart">
+          <div className="coinpage-panel">
+            <dl className="stats-panel">
+              <div className="stat">
+                <div id="currency-pair">
+                  <h4>BTC/USD</h4>
+                </div>
+              </div>
+              <div className="stat">
+                <dt>Last Price</dt>
+                <dd>
+                  $
+                  {this.props.prices.BTC[this.props.prices.BTC.length-1]}
+                  <span className="btc-suffix"></span>
+                </dd>
+              </div>
+              <div className="stat">
+                <dt>24-hour Change</dt>
+                <dd>
+                  +
+                  $
+                  76.53
+                  <span className="btc-suffix"></span>
+                </dd>
+              </div>
+              <div className="stat" id="stat-24h-range">
+                <dt>24-hour Range</dt>
+                <dd>
+                  $
+                  6651.12
+                  <span className="btc-suffix"></span>
+                  -
+                  $
+                  6876.33
+                  <span className="btc-suffix"></span>
+                </dd>
+              </div>
+            </dl>
+          </div>
+
+          <div className="chart-on-coinpage">
+  	         <CurrentPriceChart chart-data ={this.props} />
+          </div>
         </div>
-        <ul>
-          {prices}
-        </ul>
+
+        <div class="history container-login100">
+          <div class="table100 ver3 m-b-110">
+        		<div class="table100-head">
+        			<table>
+        				<thead>
+        					<tr class="row100 head">
+        						<th class="cell100 column1">Date</th>
+        						<th class="cell100 column2">Open</th>
+        						<th class="cell100 column3">Close</th>
+        					</tr>
+        				</thead>
+        			</table>
+        		</div>
+
+        		<div class="table100-body">
+        			<table>
+        				<tbody>
+          					<tr class="row100 body">
+          						<td class="cell100 column1"></td>
+                      <td class="cell100 column2"></td>
+          						<td class="cell100 column3"></td>
+          					</tr>
+        				</tbody>
+        			</table>
+        		</div>
+        	</div>
+        </div>
       </div>
     );
   }

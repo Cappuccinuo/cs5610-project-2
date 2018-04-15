@@ -115,7 +115,7 @@ class TheServer {
         });
         $(callback);
       },
-      error: (xhr) => {
+      error: (resp) => {
         alert('please login first');
       }
    });
@@ -137,7 +137,7 @@ class TheServer {
       error: (xhr) => {
         alert('please login first');
       }
-    }); 
+    });
   }
 }
 
