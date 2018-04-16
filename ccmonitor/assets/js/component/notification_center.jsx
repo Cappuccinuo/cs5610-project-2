@@ -31,7 +31,7 @@ class NotificationCenter extends React.Component {
 
      <div className="notification-select">
       <div className="type-select">
-      <Label for="coin_type">Coin Type:  </Label>
+       <Label for="coin_type">Coin Type:  </Label>
        <select name="coin_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
             <option value={"BTC"}>BTC</option>
             <option value={"LTC"}>LTC</option>
@@ -95,7 +95,7 @@ function update_message_select(user_id){
 // delete given message
 function delete_message(message_id, user_id) {
    //alert();
-   let confirmed = confirm("Do you really want to delelte this message?");
+   let confirmed = confirm("Do you really want to delete this message?");
    if (confirmed) {
       api.delete_message(message_id);
       update_message_select(user_id);
