@@ -39,4 +39,29 @@ defmodule CcmonitorWeb.MessageController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  # get all messages of given user_id
+  def get_messages_all(conn, %{"user_id" => user_id}) do
+    messages = Messages.get_messages_all(user_id)
+    render(conn, "index.json", messages: messages)
+  end
+
+  # get all messages of given user_id and coin type
+  def get_messages_coin_type(conn, %{"user_id" => user_id, "coin_type" => coin_type}) do
+    messages = Messages.get_messages_coin_type(user_id, coin_type)
+    render(conn, "index.json", messages: messages)
+  end
+
+  # get all messages of given user_id and alert type
+  def get_messages_alert_type(conn, %{"user_id" => user_id, "alert_type" => alert_type}) do
+    messages = Messages.get_messages_alert_type(user_id, alert_type)
+    render(conn, "index.json", messages: messages)
+  end
+
+  # get all messages of given user_id, coin type and alert type
+  def get_messages_coin_alert_type(conn, %{"user_id" => user_id, "coin_type" => coin_type, "alert_type" => alert_type}) do
+    messages = Messages.get_messages_coin_alert_type(user_id, coin_type, alert_type)
+    render(conn, "index.json", messages: messages)
+  end
+
 end

@@ -8,7 +8,7 @@ import Nav                                                      from './componen
 import Index                                                    from './component/index'
 import CoinPage                                                 from "./component/coinpage.jsx";
 import AlertForm                                                from "./component/alertform.jsx";
-import NotificationCenter                                       from "./component/notification_center"
+import Notification                                             from "./component/notification_center"
 
 
 export default function ccmonitor_init(store, channel) {
@@ -74,7 +74,7 @@ class CcMonitor extends React.Component {
           <Route path="/alerts" />
           <Route path="/alertform/:alert_id" />
           <Route path="/alertform" render={() => (<AlertForm />)}/>
-          <Route path="/notifications" render={() => (<NotificationCenter />)} />
+          <Route path="/notifications" render={() => (<Notification channel={this.props.channel}/>)} />
           <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
         </Switch>
       </div>

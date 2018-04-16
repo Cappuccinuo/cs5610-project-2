@@ -8,6 +8,7 @@ class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
     api.get_price({type: 'BTC'});
+    console.log("in index");
   }
 
 

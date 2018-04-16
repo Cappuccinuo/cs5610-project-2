@@ -8,6 +8,26 @@ defmodule Ccmonitor.Messages do
 
   alias Ccmonitor.Messages.Message
 
+  # get all messages of given user id
+  def get_messages_all(user_id) do
+    Repo.all(from m in Message, where: m.user_id == ^user_id)
+  end
+
+  # get all messages of given user id and coin type
+  def get_messages_coin_type(user_id, coin_type) do
+    Repo.all(from m in Message, where: m.user_id == ^user_id and m.coin_type == ^coin_type)
+  end
+
+  # get all messages of given user id and alert type
+  def get_messages_alert_type(user_id, alert_type) do
+    Repo.all(from m in Message, where: m.user_id == ^user_id and m.alert_type == ^alert_type)
+  end
+
+  # get all messages of given user id, coin type and alert type
+  def get_messages_coin_alert_type(user_id, coin_type, alert_type) do
+    Repo.all(from m in Message, where: m.user_id == ^user_id and m.coin_type == ^coin_type and m.alert_type == ^alert_type)
+  end
+
   @doc """
   Returns the list of messages.
 

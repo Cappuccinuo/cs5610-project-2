@@ -139,6 +139,102 @@ class TheServer {
       }
     });
   }
+
+
+  // request all messages of given user
+  request_messages_all(user_id) {
+    // alert(user_id);
+    $.ajax("/api/v1/get_messages_all", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user_id: user_id}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'MESSAGES_LIST',
+          messages: resp.data,
+        });
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+    });
+  }
+
+  // request messages of given user id and coin type
+  request_messages_coin_type(user_id, coin_type) {
+    $.ajax("/api/v1/get_messages_coin_type", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user_id: user_id, coin_type: coin_type}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'MESSAGES_LIST',
+          messages: resp.data,
+        });
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+    });
+  }
+
+  // request messages of given user id and alert type
+  request_messages_alert_type(user_id, alert_type) {
+    $.ajax("/api/v1/get_messages_alert_type", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user_id: user_id, alert_type: alert_type}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'MESSAGES_LIST',
+          messages: resp.data,
+        });
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+    });
+  }
+
+  // request messages of given user id and coin type and alert type
+  request_messages_coin_alert_type(user_id, coin_type, alert_type) {
+    $.ajax("/api/v1/get_messages_coin_alert_type", {
+      method: "post",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user_id: user_id, coin_type: coin_type, alert_type: alert_type}),
+      success: (resp) => {
+        store.dispatch({
+          type: 'MESSAGES_LIST',
+          messages: resp.data,
+        });
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+    });
+  }
+
+  // delete given message
+  delete_message(message_id) {
+    $.ajax("/api/v1/messages/"+message_id, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+      },
+      error: (xhr) => {
+        alert('please login first');
+      }
+    }); 
+  }
+
+
 }
+
+
 
 export default new TheServer();

@@ -1,85 +1,111 @@
 import React from 'react';
+import { withRouter } from 'react-router';
+import { connect } from 'react-redux';
+import { Table } from 'reactstrap';
+import { Alert } from 'reactstrap';
+import { Breadcrumb, BreadcrumbItem, Form, FormGroup, NavItem, Label, Input, Button, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import api from '../api';
 
 class NotificationCenter extends React.Component {
   constructor(props) {
     super(props);
+    api.request_messages_all(this.props.token.user_id);
   }
 
   render() {
-    return <div className="notification-panel">
-      <div class="table-row">
-        <div class="column">#</div>
-        <div class="wrapper attributes">
-          <div class="wrapper title-alertmessage-module-reporter">
-            <div className="alertmessage">Alert</div>
-          </div>
-          <div class="wrapper status">
-            <div class="column status">Status</div>
-          </div>
-        </div>
-        <div class="wrapper icons">
-          <div title="Add alertmessage" class="column check-alertmessage">
-            Message
-          </div>
-        </div>
-        <div class="wrapper dates">
-          <div class="column date">Created</div>
-          <div class="column date">Updated</div>
+     let user_id = this.props.token.user_id;
+     let messageList = this.props.messages.map(function(mes){
+	return <tr>
+		<td>{mes.coin_type}</td>
+		<td>{(mes.alert_type == "ASC")?"Ascending":"Descending"}</td>
+		<td>{mes.content}</td>
+		<td>{mes.inserted_at}</td>
+		<td><div class="wrapper icons">
+		       <Button className="fa fa-trash" onClick={()=>delete_message(mes.id, user_id)}></Button>
+		 </div>
+		</td>
+	       </tr>;
+	})
+
+  return (
+   <div className="notification-total">
+
+     <div className="notification-select">
+      <div className="type-select">
+      <Label for="coin_type">Coin Type:  </Label>
+       <select name="coin_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
+            <option value={"BTC"}>BTC</option>
+            <option value={"LTC"}>LTC</option>
+            <option value={"ETH"}>ETH</option>
+            <option value={"ALL"}>ALL</option>
+	</select>
         </div>
 
-        <div class="wrapper icons">
-          <div class="column check-alertmessage"></div>
+      <div className="type-select">
+      <Label for="alert_type">Alert Type:  </Label>
+	<select name="alert_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
+            <option value={"ASC"}>Ascending</option>
+            <option value={"DES"}>Descending</option>
+            <option value={"ALL"}>ALL</option>
+	</select>  
         </div>
       </div>
 
-      <div class="table-row">
-        <div class="column">1</div>
-        <div class="wrapper attributes">
-          <div class="wrapper title-alertmessage-module-reporter">
-            <div class="column alertmessage">Type: ascending Threshold: $7000</div>
-          </div>
-          <div class="wrapper status">
-            <div class="column status"><span class="label label-primary">Completed</span></div>
-          </div>
-        </div>
-        <div class="wrapper icons">
-          <div class="column check-alertmessage"><span class="glyphicon glyphicon-comment active" /></div>
-        </div>
-
-        <div class="wrapper dates">
-          <div class="column date">Feb-1, 2016</div>
-          <div class="column date">Mar-13, 2016</div>
-        </div>
-
-        <div class="wrapper icons">
-          <div class="column check-alertmessage"><i className="fa fa-trash"></i></div>
-        </div>
-      </div>
-
-      <div class="table-row">
-        <div class="column">2</div>
-        <div class="wrapper attributes">
-          <div class="wrapper title-alertmessage-module-reporter">
-            <div class="column alertmessage">Type: descending Threshold: $6800</div>
-          </div>
-          <div class="wrapper status">
-            <div class="column status"><span class="label label-success">Monitoring</span></div>
-          </div>
-        </div>
-        <div class="wrapper icons">
-          <div class="column check-alertmessage"><span class="glyphicon glyphicon-comment" /></div>
-        </div>
-        <div class="wrapper dates">
-          <div class="column date">Mar-3, 2016</div>
-          <div class="column date"></div>
-        </div>
-        <div class="wrapper icons">
-          <div class="column check-alertmessage"><i className="fa fa-trash"></i></div>
-        </div>
+    <div className="notification-message" >
+      <div className="messege-table">
+	<Table>
+	  <thead>
+	    <tr>
+	      <th>Coin Type</th>
+	      <th>Alert Type</th>
+	      <th>Content</th>
+	      <th>Sent Date</th>
+	      <th>Delete</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	   {messageList}
+	  </tbody>
+	</Table>
       </div>
     </div>
 
+</div>
+   );
   }
 }
 
-export default NotificationCenter;
+// update message based on selection of coin and alert type
+function update_message_select(user_id){
+    let coin_type = document.getElementsByName("coin_type")[0].value;
+    let alert_type = document.getElementsByName("alert_type")[0].value;
+    if (coin_type == "ALL" && alert_type == "ALL") { // all messages of given user
+      api.request_messages_all(user_id);
+    }
+    else if (alert_type == "ALL") {  // all messages with given coin type of given user
+      api.request_messages_coin_type(user_id, coin_type);
+    }
+    else if (coin_type == "ALL") { // all messages with given alert type of given user
+      api.request_messages_alert_type(user_id, alert_type);
+    }
+    else {              // all messages with given coin type and alert type of given user
+      api.request_messages_coin_alert_type(user_id, coin_type, alert_type);      
+   }
+}
+
+// delete given message
+function delete_message(message_id, user_id) {
+   //alert();
+   let confirmed = confirm("Do you really want to delelte this message?");
+   if (confirmed) {
+      api.delete_message(message_id);
+      update_message_select(user_id);
+   }
+}
+
+const Notification = withRouter(connect((state) => ({
+  messages: state.messages,
+  token: state.token,
+}))(NotificationCenter));
+
+export default Notification;

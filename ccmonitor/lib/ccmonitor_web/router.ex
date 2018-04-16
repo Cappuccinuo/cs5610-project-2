@@ -42,5 +42,9 @@ defmodule CcmonitorWeb.Router do
     resources "/messages", MessageController, except: [:new, :edit]
     resources "/alerts", AlertController, except: [:new, :edit]
     post "/token", TokenController, :create
+    post "/get_messages_all", MessageController, :get_messages_all
+    post "/get_messages_coin_type", MessageController, :get_messages_coin_type
+    post "/get_messages_alert_type", MessageController, :get_messages_alert_type
+    post "/get_messages_coin_alert_type", MessageController, :get_messages_coin_alert_type
   end
 end
