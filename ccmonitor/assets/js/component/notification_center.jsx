@@ -1,9 +1,8 @@
 import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Table } from 'reactstrap';
-import { Alert } from 'reactstrap';
-import { Breadcrumb, BreadcrumbItem, Form, FormGroup, NavItem, Label, Input, Button, Card, CardImg, CardText, CardBody, CardTitle, CardSubtitle } from 'reactstrap';
+import { Table, Button, Label} from 'reactstrap';
+
 import api from '../api';
 
 class NotificationCenter extends React.Component {
@@ -21,7 +20,7 @@ class NotificationCenter extends React.Component {
 		<td>{mes.content}</td>
 		<td>{mes.inserted_at}</td>
 		<td><div class="wrapper icons">
-		       <Button className="fa fa-trash" onClick={()=>delete_message(mes.id, user_id)}></Button>
+		       <link className="fa fa-trash" onClick={()=>delete_message(mes.id, user_id)}></link>
 		 </div>
 		</td>
 	       </tr>;
@@ -60,7 +59,7 @@ class NotificationCenter extends React.Component {
 	      <th>Alert Type</th>
 	      <th>Content</th>
 	      <th>Sent Date</th>
-	      <th>Delete</th>
+	      <th></th>
 	    </tr>
 	  </thead>
 	  <tbody>
