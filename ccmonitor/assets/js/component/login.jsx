@@ -199,7 +199,7 @@ class Login extends React.Component {
                           <div class="social-buttons">
                             <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onClick={this.handleClick} onlogin={this.checkLoginState}></div>
                             <div id="status"></div>
-                            <a href="#" class="btn btn-tw"><i class="fa fa-twitter"></i> Twitter</a>
+                            <a href="/auth/google" className="btn btn-block btn-social btn-google"><span className="fa fa-google"></span> Sign in with Google</a>
                           </div>
                                           or
                            <form className="form" role="form" method="post" action="login" id="login-nav">

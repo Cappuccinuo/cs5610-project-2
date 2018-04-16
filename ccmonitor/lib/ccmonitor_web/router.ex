@@ -27,6 +27,14 @@ defmodule CcmonitorWeb.Router do
     get "/notifications", PageController, :index
   end
 
+  scope "/auth", CcmonitorWeb do
+    pipe_through :browser
+
+    get "/signout", AuthController, :signout
+    get "/:provider", AuthController, :request
+    get "/:provider/callback", AuthController, :callback
+  end
+
   # Other scopes may use custom stacks.
   scope "/api/v1", CcmonitorWeb do
     pipe_through :api

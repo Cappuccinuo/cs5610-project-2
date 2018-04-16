@@ -18,9 +18,9 @@ defmodule Ccmonitor.Mixfile do
   #
   # Type `mix help compile.app` for more information.
   def application do
-    [    
+    [
       mod: {Ccmonitor.Application, []},
-      extra_applications: [:logger, :runtime_tools, :bamboo]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :ueberauth, :ueberauth_google, :ueberauth_facebook]
     ]
   end
 
@@ -44,7 +44,12 @@ defmodule Ccmonitor.Mixfile do
       {:comeonin, "~> 4.0"},
       {:argon2_elixir, "~> 1.2"},
       {:distillery, "~> 1.5", runtime: false},
-      {:bamboo, "~> 0.8"}
+      {:bamboo, "~> 0.8"},
+      {:ueberauth, "~> 0.4"},
+      {:ueberauth_google, "~> 0.7"},
+      {:ueberauth_facebook, "~> 0.7"},
+      {:httpoison, "~> 1.0"},
+      {:poison, "~> 3.1"}
     ]
   end
 
