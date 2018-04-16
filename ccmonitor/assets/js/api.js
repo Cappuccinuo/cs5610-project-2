@@ -71,7 +71,6 @@ class TheServer {
         });
       },
     });
-
   }
 
   submit_user(data) {
@@ -229,7 +228,7 @@ class TheServer {
       error: (xhr) => {
         alert('please login first');
       }
-    }); 
+    });
   }
 
 

@@ -59,3 +59,12 @@ dd {
     flex: 1 1 50%;
     padding: 22px 0 0 25px;
 }
+
+.news-body a {
+  color: white;
+}
+
+.news-body a:hover {
+  color: gray;
+  text-decoration: none;
+}
