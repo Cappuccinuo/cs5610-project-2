@@ -98,6 +98,22 @@ function prices(state = initial_price, action) {
   }
 }
 
+let initial_historical_price = {
+  BTC: [],
+  LTC: [],
+  ETH: [],
+  time: [],
+};
+
+function historical_prices(state = initial_historical_price, action) {
+  switch (action.type) {
+    case 'UPDATE_HISTORICAL_PRICES':
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
+
 // messages
 function messages(state = [], action) {
   switch (action.type) {
