@@ -7,7 +7,7 @@ import socket                                                   from './socket.j
 import Nav                                                      from './component/nav'
 import Index                                                    from './component/index'
 import CoinPage                                                 from "./component/coinpage.jsx";
-import AlertForm                                                from "./component/alertform.jsx";
+import AlertForm                                                from "./component/alertform";
 import Notification                                             from "./component/notification_center"
 import swal                                                     from 'sweetalert';
 
@@ -70,7 +70,7 @@ class CcMonitor extends React.Component {
             <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
             <Route path="/alerts" />
             <Route path="/alertform/:alert_id" />
-            <Route path="/alertform" render={() => (<AlertForm />)}/>
+            <Route path="/alertform" render={() => (<AlertForm channel={this.props.channel}/>)}/>
             <Route path="/notifications" render={() => (<Notification channel={this.props.channel}/>)} />
             <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
           </Switch>

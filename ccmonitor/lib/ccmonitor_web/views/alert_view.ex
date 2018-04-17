@@ -11,9 +11,17 @@ defmodule CcmonitorWeb.AlertView do
   end
 
   def render("alert.json", %{alert: alert}) do
+    dt = NaiveDateTime.truncate(alert.inserted_at, :second)
+    %NaiveDateTime{year: y, month: m, day: d} = dt
+    ystr = Integer.to_string(y)
+    mstr = Integer.to_string(m)
+    dstr = Integer.to_string(d)
+
     %{id: alert.id,
       coin_type: alert.coin_type,
       alert_type: alert.alert_type,
-      threshold: alert.threshold}
+      threshold: alert.threshold,
+      inserted_at: "" <> ystr <> "-" <> mstr <> "-" <> dstr
+    }
   end
 end
