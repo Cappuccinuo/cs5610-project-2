@@ -27,7 +27,7 @@ class PriceChartComponent extends React.Component {
           api.get_chart_data_one_month();
           break;
       default:
-          api.get_chart_data_real_time(this.props.prices);
+          api.get_chart_data_one_day();
           break;
     }
   }
@@ -45,7 +45,7 @@ class PriceChartComponent extends React.Component {
     </div>
       <div>
       <ReactEcharts
-        option={getOption(this.props.historical_prices)} />
+        option={getOption(this.props.historical_prices, this.props.current_coin_type)} />
       </div>
     </div>
   );
@@ -54,7 +54,23 @@ class PriceChartComponent extends React.Component {
 
 
 // set options for the chart
-function getOption(data){
+function getOption(data, coin_type){
+  let prices = [];
+  switch (coin_type) {
+    case "BTC":
+      prices = data.BTC
+      break;
+    case "ETH":
+      prices = data.ETH
+      break;
+    case "LTC":
+      prices = data.LTC
+      break;
+    default:
+      prices = data.BTC
+      break;
+  }
+  
   var option = {
     title: {
     	x: 'center',
@@ -82,9 +98,9 @@ function getOption(data){
     	}
     },
     legend: {
-    	data:['BTC','ETH','LTC'],
-      x: 'left',
-      textStyle:{color:"white"},
+    	data:[coin_type],
+        x: 'left',
+        textStyle:{color:"white"},
     },
     grid: {
     	left: '3%',
@@ -129,20 +145,10 @@ function getOption(data){
     },
     series: [
 	   {
-	    name:'BTC',
+	    name: coin_type,
 	    type:'line',
-	    data: data.BTC
+	    data: prices
 	   },
-	   {
-	    name:'ETH',
-	    type:'line',
-	    data: data.ETH
-	   },
-	   {
-	    name:'LTC',
-	    type:'line',
-	    data: data.LTC
-	   }
     ]
   };
   return option;
@@ -151,6 +157,7 @@ function getOption(data){
 const PriceChart = withRouter(connect((state) => ({
   prices: state.prices,
   historical_prices: state.historical_prices,
+  current_coin_type: state.current_coin_type,
 }))(PriceChartComponent));
 
 export default PriceChart;

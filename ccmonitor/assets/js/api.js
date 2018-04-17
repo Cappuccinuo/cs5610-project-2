@@ -312,6 +312,14 @@ class TheServer {
    });
  }
 
+ // update current coin type
+ update_current_coin_type(coin_type) {
+   store.dispatch({
+     type: 'UPDATE_CURRENT_COIN_TYPE',
+     coin_type: coin_type,
+   });
+ }
+
 }
 
 
