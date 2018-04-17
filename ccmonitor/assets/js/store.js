@@ -77,6 +77,8 @@ function alerts(state = {}, action) {
   switch (action.type) {
     case 'UPDATE_ALERTS':
       return Object.assign({}, state, action.data);
+    case "ALERT_LIST":
+      return [...action.alerts];
     default:
       return state;
   }
