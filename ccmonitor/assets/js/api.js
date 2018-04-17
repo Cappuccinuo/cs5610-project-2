@@ -50,24 +50,48 @@ class TheServer {
     });
   }
 
-  get_price(data) {
-    let currency = 'USD';
-
-    let url = "https://api.coinbase.com/v2/prices/"+data.type+'-'+currency+"/spot";
-
-    $.ajax(url, {
+  get_price() {
+    let btc_url = "https://api.coinbase.com/v2/prices/BTC-USD/spot";
+    $.ajax(btc_url, {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
-        console.log(resp)
-        const data1 = {
-          base: resp.data.base,
-          prices: [ resp.data.amount ],
-        };
         store.dispatch({
           type: 'UPDATE_PRICES',
-          data: data1,
+          data: {
+            BTC: [ resp.data.amount ],
+          },
+        });
+      },
+    });
+
+    let ltc_url = "https://api.coinbase.com/v2/prices/LTC-USD/spot";
+    $.ajax(ltc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'UPDATE_PRICES',
+          data: {
+            LTC: [ resp.data.amount ],
+          },
+        });
+      },
+    });
+
+    let eth_url = "https://api.coinbase.com/v2/prices/ETH-USD/spot";
+    $.ajax(eth_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        store.dispatch({
+          type: 'UPDATE_PRICES',
+          data: {
+            ETH: [ resp.data.amount ],
+          },
         });
       },
     });

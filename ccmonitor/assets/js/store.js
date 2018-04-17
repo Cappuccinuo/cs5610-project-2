@@ -86,12 +86,13 @@ let initial_price = {
   BTC: [],
   LTC: [],
   ETH: [],
+  time: [],
 };
 
 function prices(state = initial_price, action) {
   switch (action.type) {
     case 'UPDATE_PRICES':
-      return Object.assign({}, state, {[action.data.base]: action.data.prices});
+      return Object.assign({}, state, action.data);
     default:
       return state;
   }

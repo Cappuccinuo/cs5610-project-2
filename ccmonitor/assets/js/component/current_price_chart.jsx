@@ -1,20 +1,22 @@
 import React from 'react';
 import ReactEcharts from 'echarts-for-react';
+import { connect } from 'react-redux';
 
+function CurrentPriceChart(props) {
 
-export default function CurrentPriceChart(props) {
-
-  var time = ["2018-4-11/14:52:22", "2018-4-11/14:52:23", "2018-4-11/14:52:24", "2018-4-11/14:52:25",
-            "2018-4-11/14:52:26", "2018-4-11/14:52:27", "2018-4-11/14:52:28",]
+  var time = props.prices.time;
+  
+ // ["2018-4-11/14:52:22", "2018-4-11/14:52:23", "2018-4-11/14:52:24", "2018-4-11/14:52:25",
+            //"2018-4-11/14:52:26", "2018-4-11/14:52:27", "2018-4-11/14:52:28",]
   time = time.map(function (str) {
     return str.replace('/', '\n'); // add \n between date and specific time, in case the string is
   });                              // too long to show in x-axis
 
   var current_price_chart_data = { // just for testing, need to get data from props
-    price_btc: [200, 250, 200, 300, 280, 300, 350],
-    price_eth: [100, 200, 250, 200, 300, 280, 300],
-    price_ltc: [50, 100, 200, 250, 200, 300, 280],
-    time: time,
+    price_btc: props.prices.BTC,
+    price_eth: props.prices.ETH,
+    price_ltc: props.prices.LTC,
+    time: props.prices.time,
   };
 
   return(
@@ -117,3 +119,5 @@ function getOption(data){
   };
   return option;
 }
+
+export default connect((state) => ({ prices: state.prices }))(CurrentPriceChart);

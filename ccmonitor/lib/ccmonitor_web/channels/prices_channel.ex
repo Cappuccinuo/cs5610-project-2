@@ -8,7 +8,7 @@ defmodule CcmonitorWeb.PricesChannel do
   def join("prices:" <> name, payload, socket) do
     if authorized?(payload) do
       socket = assign(socket, :name, name)
-      resp = %{"prices" => [], "base" => "BTC"}
+      resp = %{"BTC" => [], "ETH" => [], "LTC" => [], "time" => []}
       {:ok, resp, socket}
     else
       {:error, %{reason: "unauthorized"}}
@@ -17,16 +17,17 @@ defmodule CcmonitorWeb.PricesChannel do
 
   # Channels can be used in a request/response fashion
   # by sending replies to requests from the client
-  def handle_in("update", %{"prices" => prices, "base" => base}, socket) do
+  def handle_in("update", %{"BTC" => btc, "ETH" => eth, "LTC" => ltc, "time" => time}, socket) do
     if socket.assigns.name == "node" do
-      resp = %{"prices" => prices, "base" => base}
+      resp = %{"BTC" => btc, "ETH" => eth, "LTC" => ltc, "time" => time}
       broadcast! socket, "new:prices", resp
-      {curr_price, _} = Enum.at(prices, Kernel.length(prices)-1) |> Float.parse
-      {last_price, _} = case Kernel.length(prices) do
-        1 -> {nil, nil}
-        _ -> Enum.at(prices, Kernel.length(prices)-2) |> Float.parse
-      end
-      distribute_alerts(base, curr_price, last_price)
+
+      distribute_alerts("BTC", btc)
+
+      distribute_alerts("LTC", ltc)
+
+      distribute_alerts("ETH", eth)
+
       {:reply, {:ok, resp}, socket}
     else
       resp = nil
@@ -34,7 +35,14 @@ defmodule CcmonitorWeb.PricesChannel do
     end
   end
 
-  defp distribute_alerts(base, curr_price, last_price) do
+  defp distribute_alerts(base, prices) do
+
+    {curr_price, _} = Enum.at(prices, Kernel.length(prices)-1) |> Float.parse
+    {last_price, _} = case Kernel.length(prices) do
+      1 -> {nil, nil}
+      _ -> Enum.at(prices, Kernel.length(prices)-2) |> Float.parse
+    end
+
     if(last_price != nil) do
       alerts = Alerts.filter_alerts(base, curr_price, last_price)
       Logger.info "#{inspect(alerts)}"

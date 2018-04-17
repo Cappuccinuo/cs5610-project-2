@@ -32,10 +32,7 @@ class CcMonitor extends React.Component {
     channel.on("new:prices", resp => {
       this.props.state.dispatch({
         type: "UPDATE_PRICES",
-        data: {
-          base: resp.base,
-          prices: resp.prices,
-        }
+        data: resp,
       });
     });
 
@@ -43,10 +40,7 @@ class CcMonitor extends React.Component {
         .receive("ok", resp => {
           this.props.state.dispatch({
             type: "UPDATE_PRICES",
-            data: {
-              base: resp.base,
-              prices: resp.prices,
-            }
+            data: resp,
           });
         })
         .receive("error", () => {

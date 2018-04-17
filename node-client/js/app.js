@@ -7,7 +7,10 @@ const coinbase = new Client({
  
 let socket = new Socket("ws://localhost:4000/socket"); //FIXME when deploying
 
-let queue = [];
+let btc_queue = [];
+let eth_queue = [];
+let ltc_queue = [];
+let time_queue = [];
  
 socket.connect();
  
@@ -20,18 +23,65 @@ channel.join()
 
 function updatePrice(i) {
   setTimeout(() => {
+    let numDone = 0;
+    let data = {};
     coinbase.getSpotPrice({'currencyPair': 'BTC-USD'}, function(err, resp) {
       if(resp) {
-        queue.push(resp.data.amount);
-        if(queue.length > 100) {
-          queue.shift();
+        btc_queue.push(resp.data.amount);
+        if(btc_queue.length > 100) {
+          btc_queue.shift();
         }
-        channel.push("update", {prices: queue, base: resp.data.base})
+      }
+      data.BTC = btc_queue;
+      numDone++;
+    });
+    coinbase.getSpotPrice({'currencyPair': 'LTC-USD'}, function(err, resp) {
+      if(resp) {
+        ltc_queue.push(resp.data.amount);
+        if(ltc_queue.length > 100) {
+          ltc_queue.shift();
+        }
+      }
+      data.LTC = ltc_queue;
+      numDone++;
+    });
+    coinbase.getSpotPrice({'currencyPair': 'ETH-USD'}, function(err, resp) {
+      if(resp) {
+        eth_queue.push(resp.data.amount);
+        if(eth_queue.length > 100) {
+          eth_queue.shift();
+        }
+      }
+      data.ETH = eth_queue;
+      numDone++;
+    });
+    coinbase.getTime(function(err, resp) {
+      if(resp) {
+        time_queue.push(resp.data.iso);
+        if(time_queue.length > 100) {
+          time_queue.shift();
+        }
+      }
+      data.time = time_queue;
+      numDone++;
+    });
+
+    function detect() {
+      // ensures all ajax calls are done
+      if(numDone < 4) {
+        setTimeout(() => {
+          detect();    
+        }, 200);
+      } else {
+        channel.push("update", data)
               .receive("ok", resp => {
-                console.log("server update success: "+resp.prices);
+                console.log("server update success: "+resp);
               });
       }
-    });
+    }
+
+    detect();
+
     updatePrice(++i);
   }, 10000);
 }

@@ -7,7 +7,7 @@ import api from '../api';
 class IndexComponent extends React.Component {
   constructor(props) {
     super(props);
-    api.get_price({type: 'BTC'});
+    api.get_price();
     console.log("in index");
     this.state = {
       news: [],
@@ -94,7 +94,7 @@ class IndexComponent extends React.Component {
               <dt>Last Price</dt>
               <dd>
                 $
-                6845.01
+                {this.props.prices.ETH[this.props.prices.ETH.length-1]}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
@@ -132,7 +132,7 @@ class IndexComponent extends React.Component {
               <dt>Last Price</dt>
               <dd>
                 $
-                6845.01
+                {this.props.prices.LTC[this.props.prices.LTC.length-1]}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
