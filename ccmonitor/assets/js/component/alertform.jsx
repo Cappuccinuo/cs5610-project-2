@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
 import api from '../api';
 import Login from './login.jsx';
-import CurrentPriceChart from './current_price_chart';
+import PriceChart from './price_chart';
 
 class AlertFormComponent extends React.Component {
   constructor(props) {
@@ -177,7 +177,7 @@ class AlertFormComponent extends React.Component {
         				</div>
         			</form>
               <div class="contact100-more">
-                <CurrentPriceChart chart-data ={this.props} />
+                <PriceChart chart-data ={this.props} />
               </div>
         		</div>
         	</div>

@@ -5,7 +5,7 @@ import { Form, FormGroup, NavItem, Input, Button, Card, CardImg, CardText, CardB
 import { connect } from 'react-redux';
 import { CookiesProvider } from 'react-cookie';
 import api from '../api';
-import CurrentPriceChart from './current_price_chart'; // import chart component
+import PriceChart from './price_chart'; // import chart component
 
 class CoinComponent extends React.Component {
   constructor(props) {
@@ -91,7 +91,7 @@ class CoinComponent extends React.Component {
           </div>
 
           <div className="chart-on-coinpage">
-  	         <CurrentPriceChart chart-data ={this.props} />
+  	         <PriceChart chart-data ={this.props} />
           </div>
         </div>
 
