@@ -173,6 +173,7 @@ class TheServer {
       contentType: "application/json; charset=UTF-8",
       data: JSON.stringify({user_id: user_id}),
       success: (resp) => {
+        console.log(resp.data);
         store.dispatch({
           type: 'MESSAGES_LIST',
           messages: resp.data,
@@ -260,56 +261,56 @@ class TheServer {
  get_chart_data_real_time() {
    store.dispatch({
      type: 'UPDATE_CHART_DATA',
-     data: { 
+     data: {
        price_btc: [200, 250, 200, 300, 280, 300, 220],
        price_eth: [100, 200, 250, 200, 300, 280, 280],
        price_ltc: [50, 100, 200, 250, 200, 300, 250],
        time: ["2018-4-11\n14:52:22", "2018-4-11\n14:52:23", "2018-4-11\n14:52:24", "2018-4-11\n14:52:25",
             "2018-4-11\n14:52:26", "2018-4-11\n14:52:27", "2018-4-11\n14:52:28"],
      }
-   }); 
+   });
  }
 
  // get one day chart data
  get_chart_data_one_day() {
    store.dispatch({
      type: 'UPDATE_CHART_DATA',
-     data: { 
+     data: {
        price_btc: [50, 250, 200, 300, 280, 300, 350],
        price_eth: [300, 200, 250, 200, 300, 280, 300],
        price_ltc: [200, 100, 200, 250, 200, 300, 280],
        time: ["2018-4-11\n1pm", "2018-4-11\n2pm", "2018-4-11\n3pm", "2018-4-11\n4pm",
             "2018-4-11\n5pm", "2018-4-11\n6pm", "2018-4-11\n7pm"],
      }
-   }); 
+   });
  }
 
  // get one week chart data
  get_chart_data_one_week() {
    store.dispatch({
      type: 'UPDATE_CHART_DATA',
-     data: { 
+     data: {
        price_btc: [200, 250, 200, 250, 280, 300, 50],
        price_eth: [100, 200, 250, 1800, 300, 280, 250],
        price_ltc: [50, 100, 200, 230, 200, 300, 100],
        time: ["2018-4-11", "2018-4-12", "2018-4-13", "2018-4-14",
             "2018-4-15", "2018-4-16", "2018-4-17"],
      }
-   }); 
+   });
  }
 
  // get one month chart data
  get_chart_data_one_month() {
    store.dispatch({
      type: 'UPDATE_CHART_DATA',
-     data: { 
+     data: {
        price_btc: [200, 250, 200, 300, 280, 300, 350],
        price_eth: [100, 200, 250, 200, 300, 280, 300],
        price_ltc: [50, 100, 200, 250, 200, 300, 280],
        time: ["2018-4-12", "2018-4-13", "2018-4-14", "2018-4-15",
             "2018-4-16", "2018-4-17", "2018-4-18"],
      }
-   }); 
+   });
  }
 
 }

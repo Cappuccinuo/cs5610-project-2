@@ -11,7 +11,6 @@ class PriceChartComponent extends React.Component {
     api.get_chart_data_real_time();
   }
 
-
   change_chart_data(data_scope){
     switch (data_scope) {
       case "real_time":

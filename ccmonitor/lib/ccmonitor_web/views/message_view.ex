@@ -11,9 +11,17 @@ defmodule CcmonitorWeb.MessageView do
   end
 
   def render("message.json", %{message: message}) do
+    dt = NaiveDateTime.truncate(message.inserted_at, :second)
+    %NaiveDateTime{year: y, month: m, day: d} = dt
+    ystr = Integer.to_string(y)
+    mstr = Integer.to_string(m)
+    dstr = Integer.to_string(d)
+
     %{id: message.id,
       coin_type: message.coin_type,
       alert_type: message.alert_type,
-      content: message.content}
+      content: message.content,
+      inserted_at: "" <> ystr <> "-" <> mstr <> "-" <> dstr
+    }
   end
 end
