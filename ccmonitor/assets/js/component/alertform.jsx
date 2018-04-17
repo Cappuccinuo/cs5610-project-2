@@ -75,21 +75,23 @@ class AlertFormComponent extends React.Component {
     });
   }
 
+
+
   render() {
     if(this.state.redirect) {
       return (<Redirect to={'/'} />);
     }
-
+    let index = 0;
     let alertList = this.props.all_alerts.map(function(alert){
-      return <div class="table100-body js-pscroll">
+      return <div key={index++} class="table100-body js-pscroll">
         <table>
           <tbody>
             <tr class="row100 body">
-              <td class="cell100 column4">alert.coin_type</td>
-              <td class="cell100 column5">alert.alert_type + alert.threshold</td>
-              <td class="cell100 column6">alert.inserted_time</td>
+              <td class="cell100 column4">{alert.coin_type}</td>
+              <td class="cell100 column5">{alert.alert_type} + {alert.threshold}</td>
+              <td class="cell100 column6">{alert.inserted_at}</td>
               <td class="cell100 column7">
-                <span>delete</span>
+                <button className="fa fa-trash" onClick={()=>delete_alert(alert.id)}></button>
               </td>
             </tr>
           </tbody>
@@ -112,7 +114,7 @@ class AlertFormComponent extends React.Component {
         					<tr class="row100 head">
         						<th class="cell100 column4">Coin Type</th>
         						<th class="cell100 column5">Alert Setting</th>
-        						<th class="cell100 column6">Insert Time</th>
+        						<th class="cell100 column6">Create Time</th>
         						<th class="cell100 column7"></th>
         					</tr>
         				</thead>
@@ -192,6 +194,26 @@ class AlertFormComponent extends React.Component {
     );
     }
   }
+}
+
+function delete_alert(alert_id) {
+  swal({
+     title: "Are you sure?",
+     text: "Once deleted, you will not be able to recover!",
+     icon: "warning",
+     buttons: true,
+     dangerMode: true,
+   })
+   .then((willDelete) => {
+     if (willDelete) {
+       api.delete_alert(alert_id);
+       swal("Poof! Your file has been deleted!", {
+         icon: "success",
+       });
+     } else {
+       swal("Your file is safe!");
+     }
+   });
 }
 
 const AlertForm = withRouter(connect((state) => ({

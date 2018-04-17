@@ -85,7 +85,9 @@ function alerts(state = {}, action) {
 function all_alerts(state = [], action) {
   switch (action.type) {
     case "ALERT_LIST":
-      return [...action.alerts];
+      return [...action.all_alerts];
+    case 'DELETE_ALERT':
+      return _.filter(state, (tt) => tt.id != action.alert_id);
     default:
       return state;
   }
