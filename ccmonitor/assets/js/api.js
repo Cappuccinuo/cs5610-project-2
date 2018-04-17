@@ -258,15 +258,14 @@ class TheServer {
 
  // need to get data from back end
  // get real time chart data
- get_chart_data_real_time() {
+ get_chart_data_real_time(prices) {
    store.dispatch({
-     type: 'UPDATE_CHART_DATA',
+     type: 'UPDATE_HISTORICAL_PRICES',
      data: {
-       price_btc: [200, 250, 200, 300, 280, 300, 220],
-       price_eth: [100, 200, 250, 200, 300, 280, 280],
-       price_ltc: [50, 100, 200, 250, 200, 300, 250],
-       time: ["2018-4-11\n14:52:22", "2018-4-11\n14:52:23", "2018-4-11\n14:52:24", "2018-4-11\n14:52:25",
-            "2018-4-11\n14:52:26", "2018-4-11\n14:52:27", "2018-4-11\n14:52:28"],
+       BTC: prices.BTC,
+       ETH: prices.ETH,
+       LTC: prices.LTC,
+       time: prices.time,
      }
    });
  }
@@ -274,11 +273,11 @@ class TheServer {
  // get one day chart data
  get_chart_data_one_day() {
    store.dispatch({
-     type: 'UPDATE_CHART_DATA',
+     type: 'UPDATE_HISTORICAL_PRICES',
      data: {
-       price_btc: [50, 250, 200, 300, 280, 300, 350],
-       price_eth: [300, 200, 250, 200, 300, 280, 300],
-       price_ltc: [200, 100, 200, 250, 200, 300, 280],
+       BTC: [50, 250, 200, 300, 280, 300, 350],
+       ETH: [300, 200, 250, 200, 300, 280, 300],
+       LTC: [200, 100, 200, 250, 200, 300, 280],
        time: ["2018-4-11\n1pm", "2018-4-11\n2pm", "2018-4-11\n3pm", "2018-4-11\n4pm",
             "2018-4-11\n5pm", "2018-4-11\n6pm", "2018-4-11\n7pm"],
      }
@@ -288,11 +287,11 @@ class TheServer {
  // get one week chart data
  get_chart_data_one_week() {
    store.dispatch({
-     type: 'UPDATE_CHART_DATA',
+     type: 'UPDATE_HISTORICAL_PRICES',
      data: {
-       price_btc: [200, 250, 200, 250, 280, 300, 50],
-       price_eth: [100, 200, 250, 1800, 300, 280, 250],
-       price_ltc: [50, 100, 200, 230, 200, 300, 100],
+       BTC: [200, 250, 200, 250, 280, 300, 50],
+       ETH: [100, 200, 250, 1800, 300, 280, 250],
+       LTC: [50, 100, 200, 230, 200, 300, 100],
        time: ["2018-4-11", "2018-4-12", "2018-4-13", "2018-4-14",
             "2018-4-15", "2018-4-16", "2018-4-17"],
      }
@@ -302,11 +301,11 @@ class TheServer {
  // get one month chart data
  get_chart_data_one_month() {
    store.dispatch({
-     type: 'UPDATE_CHART_DATA',
+     type: 'UPDATE_HISTORICAL_PRICES',
      data: {
-       price_btc: [200, 250, 200, 300, 280, 300, 350],
-       price_eth: [100, 200, 250, 200, 300, 280, 300],
-       price_ltc: [50, 100, 200, 250, 200, 300, 280],
+       BTC: [200, 250, 200, 300, 280, 300, 350],
+       ETH: [100, 200, 250, 200, 300, 280, 300],
+       LTC: [50, 100, 200, 250, 200, 300, 280],
        time: ["2018-4-12", "2018-4-13", "2018-4-14", "2018-4-15",
             "2018-4-16", "2018-4-17", "2018-4-18"],
      }
