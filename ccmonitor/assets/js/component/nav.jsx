@@ -27,9 +27,9 @@ function Nav(props) {
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Coins <span class="caret"></span></a>
               <ul class="dropdown-menu" role="menu">
-                <li><Link to="/coin/BTC">BTC</Link></li>
-                <li><NavLink to="/coin/ETH">ETH</NavLink></li>
-                <li><NavLink to="/coin/LTC">LTC</NavLink></li>
+                <li><Link to="/coin/BTC" onClick={()=>api.update_current_coin_type("BTC")}>BTC</Link></li>
+                <li><NavLink to="/coin/ETH" onClick={()=>api.update_current_coin_type("ETH")}>ETH</NavLink></li>
+                <li><NavLink to="/coin/LTC" onClick={()=>api.update_current_coin_type("LTC")}>LTC</NavLink></li>
                 <li class="divider"></li>
                 <li><NavLink to="/alertform">Subscribe</NavLink></li>
               </ul>

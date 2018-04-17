@@ -124,12 +124,22 @@ function messages(state = [], action) {
   }
 }
 
+// current coin type displayed in chart or subscrib
+function current_coin_type(state = "BTC", action) {
+  switch (action.type) {
+  case 'UPDATE_CURRENT_COIN_TYPE':
+    return action.coin_type ? action.coin_type : state;
+  default:
+    return state;
+  }
+}
+
 
 function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({users, login, token, signup, prices, historical_prices, alerts, alert_form, messages});
+  let reducer = combineReducers({users, login, token, signup, prices, historical_prices, alerts, alert_form, messages, current_coin_type});
   let state1 = reducer(state0, action);
   console.log("state1", state1);
   return deepFreeze(state1);

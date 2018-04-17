@@ -31,6 +31,7 @@ class AlertFormComponent extends React.Component {
       type: 'UPDATE_ALERT_FORM',
       data: data,
     });
+    api.update_current_coin_type(target.val());
   }
 
   submit_form(ev) {
