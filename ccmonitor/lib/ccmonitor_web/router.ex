@@ -30,7 +30,7 @@ defmodule CcmonitorWeb.Router do
   scope "/auth", CcmonitorWeb do
     pipe_through :browser
 
-    get "/signout", AuthController, :signout
+    # get "/signout", AuthController, :signout
     get "/:provider", AuthController, :request
     get "/:provider/callback", AuthController, :callback
   end

@@ -23,13 +23,22 @@ config :logger, :console,
   metadata: [:request_id]
 
   # Configure Google OAuth
-  config :ueberauth, Ueberauth,
-    providers: [
-      google: {Ueberauth.Strategy.Google, []}
-    ]
-  config :ueberauth, Ueberauth.Strategy.Google.OAuth,
-    client_id: System.get_env("GOOGLE_CLIENT_ID"),
-    client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+  #config :ueberauth, Ueberauth,
+  #  providers: [
+  #    google: {Ueberauth.Strategy.Google, []}
+  #  ]
+  #config :ueberauth, Ueberauth.Strategy.Google.OAuth,
+  #  client_id: System.get_env("GOOGLE_CLIENT_ID"),
+  #  client_secret: System.get_env("GOOGLE_CLIENT_SECRET")
+
+config :ueberauth, Ueberauth,
+  providers: [
+    github: { Ueberauth.Strategy.Github, [] }
+  ]
+
+config :ueberauth, Ueberauth.Strategy.Github.OAuth,
+  client_id: "0b93a77c0636c5260a2e",
+  client_secret: "fd86b8be138d5cc0b7de1f35c4dbfce489cc7aa6"
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.

@@ -7,11 +7,18 @@ defmodule CcmonitorWeb.AuthController do
   alias Ccmonitor.Users.User
   alias Ccmonitor.Repo
 
-  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, _params) do
-    user_params = %{token: auth.credentials.token, email: auth.info.email, provider: "google"}
+  def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
+    IO.puts "+++++"
+    IO.inspect(conn.assigns)
+    IO.puts "+++++"
+    IO.inspect(params)
+    IO.puts "+++++"
+    user_params = %{token: auth.credentials.token, email: auth.info.email, name: auth.info.name, provider: "github"}
+    IO.inspect(user_params)
+    IO.puts "+++++"
     changeset = User.changeset(%User{}, user_params)
 
-    create(conn, changeset)
+    signin(conn, changeset)
   end
 
   def signout(conn, _params) do
@@ -20,16 +27,16 @@ defmodule CcmonitorWeb.AuthController do
     |> redirect(to: page_path(conn, :index))
   end
 
-  def create(conn, changeset) do
+  defp signin(conn, changeset) do
     case insert_or_update_user(changeset) do
       {:ok, user} ->
+        IO.inspect(conn)
+        IO.inspect(user.id)
         conn
-        |> put_flash(:info, "Thank you for signing in!")
         |> put_session(:user_id, user.id)
         |> redirect(to: page_path(conn, :index))
       {:error, _reason} ->
         conn
-        |> put_flash(:error, "Error signing in")
         |> redirect(to: page_path(conn, :index))
     end
   end

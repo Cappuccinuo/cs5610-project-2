@@ -8,6 +8,8 @@ defmodule Ccmonitor.Users.User do
     field :name, :string
     field :password_hash, :string
     field :password, :string, virtual: true
+    field :provider, :string
+    field :token, :string
 
     timestamps()
   end
@@ -15,10 +17,10 @@ defmodule Ccmonitor.Users.User do
   @doc false
   def changeset(user, attrs) do
     user
-    |> cast(attrs, [:name, :email, :password])
+    |> cast(attrs, [:name, :email, :password, :provider, :token])
     |> validate_password(:password)
     |> put_pass_hash()
-    |> validate_required([:name, :email, :password_hash])
+    |> validate_required([:name, :email])
   end
 
   def validate_password(changeset, field, options \\ []) do
