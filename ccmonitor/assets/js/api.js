@@ -177,6 +177,28 @@ class TheServer {
     })
   }
 
+  delete_alert(alert_id) {
+    $.ajax("/api/v1/alerts/" + alert_id, {
+      method: "delete",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      data: "",
+      success: (resp) => {
+        store.dispatch({
+          type: 'DELETE_ALERT',
+          alert_id: alert_id,
+        });
+      },
+      error: (xhr) => {
+        swal({
+          title: "Wrong!",
+          text: "Try again",
+          icon: "warning",
+        });
+      },
+    });
+  }
+
 
   // request all messages of given user
   request_messages_all(user_id) {
