@@ -8,13 +8,14 @@ class PriceChartComponent extends React.Component {
   constructor(props) {
     super(props);
     this.change_chart_data = this.change_chart_data.bind(this);
-    api.get_chart_data_real_time();
+
+    api.get_chart_data_one_day();
   }
 
   change_chart_data(data_scope){
     switch (data_scope) {
       case "real_time":
-          api.get_chart_data_real_time();
+          api.get_chart_data_real_time(this.props.prices);
           break;
       case "one_day":
           api.get_chart_data_one_day();
@@ -26,7 +27,7 @@ class PriceChartComponent extends React.Component {
           api.get_chart_data_one_month();
           break;
       default:
-          api.get_chart_data_real_time();
+          api.get_chart_data_real_time(this.props.prices);
           break;
     }
   }
@@ -36,15 +37,15 @@ class PriceChartComponent extends React.Component {
     <div>
       <div className="chart-tabs" >
       <ul className="nav nav-tabs">
-      <li className="active"><a data-toggle="tab" onClick={()=>this.change_chart_data("real_time")}>real time</a></li>
-      <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_day")}>1 day</a></li>
+      <li className="active"><a data-toggle="tab" onClick={()=>this.change_chart_data("one_day")}>1 day</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_week")}>1 week</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_month")}>1 month</a></li>
+      <li><a data-toggle="tab" onClick={()=>this.change_chart_data("real_time")}>real time</a></li>
       </ul>
     </div>
       <div>
       <ReactEcharts
-        option={getOption(this.props.chart_data)} />
+        option={getOption(this.props.historical_prices)} />
       </div>
     </div>
   );
@@ -95,7 +96,7 @@ function getOption(data){
   	{
   	    show: true,
   	    realtime: true,
-  	    start: 50,
+  	    start: 0,
   	    end: 100
   	},
   	{
@@ -130,17 +131,17 @@ function getOption(data){
 	   {
 	    name:'BTC',
 	    type:'line',
-	    data: data.price_btc
+	    data: data.BTC
 	   },
 	   {
 	    name:'ETH',
 	    type:'line',
-	    data: data.price_eth
+	    data: data.ETH
 	   },
 	   {
 	    name:'LTC',
 	    type:'line',
-	    data: data.price_ltc
+	    data: data.LTC
 	   }
     ]
   };
@@ -148,7 +149,8 @@ function getOption(data){
 }
 
 const PriceChart = withRouter(connect((state) => ({
-  chart_data: state.chart_data,
+  prices: state.prices,
+  historical_prices: state.historical_prices,
 }))(PriceChartComponent));
 
 export default PriceChart;
