@@ -60,7 +60,8 @@ class CcMonitor extends React.Component {
   }
 
   render() {
-    let isLoggedIn = (this.props.token != null);
+    console.log("props", this.props);
+    let isLoggedIn = (this.props.state.token != null);
     if (isLoggedIn) {
       return <Router path="/">
         <div>
