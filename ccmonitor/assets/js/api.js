@@ -169,10 +169,9 @@ class TheServer {
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
-        console.log("alerts:" + resp.data);
         store.dispatch({
           type: 'ALERT_LIST',
-          alerts: resp.data,
+          all_alerts: resp.data,
         });
       },
     })

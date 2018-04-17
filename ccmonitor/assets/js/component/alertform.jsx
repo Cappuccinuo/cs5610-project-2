@@ -11,19 +11,16 @@ import PriceChart from './price_chart';
 class AlertFormComponent extends React.Component {
   constructor(props) {
     super(props);
+    api.request_alerts_all();
     this.state = {
       redirect: false,
-      chageTab: false,
+      changeTab: false,
     };
     this.update = this.update.bind(this);
     this.submit_form = this.submit_form.bind(this);
     this.submit_callback = this.submit_callback.bind(this);
     this.switchTab1 = this.switchTab1.bind(this);
     this.switchTab2 = this.switchTab2.bind(this);
-  }
-
-  componentWillMount() {
-    api.request_alerts_all();
   }
 
   update(ev) {
@@ -83,6 +80,23 @@ class AlertFormComponent extends React.Component {
       return (<Redirect to={'/'} />);
     }
 
+    let alertList = this.props.all_alerts.map(function(alert){
+      return <div class="table100-body js-pscroll">
+        <table>
+          <tbody>
+            <tr class="row100 body">
+              <td class="cell100 column4">alert.coin_type</td>
+              <td class="cell100 column5">alert.alert_type + alert.threshold</td>
+              <td class="cell100 column6">alert.inserted_time</td>
+              <td class="cell100 column7">
+                <span>delete</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>;
+    })
+
     if (this.state.changeTab) {
       return <div className="tab-contain">
       <ul id="tabs">
@@ -105,20 +119,7 @@ class AlertFormComponent extends React.Component {
         			</table>
         		</div>
 
-        		<div class="table100-body js-pscroll">
-        			<table>
-        				<tbody>
-                  <tr class="row100 body">
-        						<td class="cell100 column4">a</td>
-                    <td class="cell100 column5">b</td>
-        						<td class="cell100 column6">d</td>
-                    <td class="cell100 column7">
-                      <span>delete</span>
-                    </td>
-        					</tr>
-        				</tbody>
-        			</table>
-        		</div>
+        		{alertList}
         	</div>
         </div>
       </div>
@@ -194,6 +195,7 @@ class AlertFormComponent extends React.Component {
 }
 
 const AlertForm = withRouter(connect((state) => ({
+  all_alerts: state.all_alerts,
   token: state.token,
   alert_form: state.alert_form
 }))(AlertFormComponent));
