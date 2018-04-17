@@ -10,14 +10,12 @@ class Login extends React.Component {
     super(props);
     this.state = {
       redirect: false,
-      switch: 0
     }
     this.update = this.update.bind(this);
     this.update_signup = this.update_signup.bind(this);
     this.sign_up = this.sign_up.bind(this);
     this.create_token = this.create_token.bind(this);
     this.delete_token = this.delete_token.bind(this);
-    this.change_status = this.change_status.bind(this);
     this.checkLoginState = this.checkLoginState.bind(this);
     this.handleClick = this.handleClick.bind(this);
     this.testAPI = this.testAPI.bind(this);
@@ -165,29 +163,26 @@ class Login extends React.Component {
     return user.name;
   }
 
-  change_status(ev) {
-    let flag = 1 - this.state.switch;
-    console.log(this.state.switch);
-    this.setState({switch: flag});
-  }
-
   render() {
     const { from } = '/';
     const { redirect } = this.state;
     if (this.props.token) {
       let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
-      return <ul className="nav navbar-nav navbar-right">
-        <div className="navbar-text">
-          Welcome { user_name } <button className="btn btn-dark" onClick={this.delete_token}><b>Log out</b></button>
+      return <div className="user-info">
+        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul className="nav navbar-nav navbar-right">
+              <span style={{color: "gray"}}>Welcome { user_name }</span> <button className="btn btn-dark" onClick={this.delete_token}><b>Log out</b></button>;
+          </ul>
         </div>
-      </ul>;
+      </div>
     }
     else {
-      if (this.state.switch == 0) {
-        return <div className="container-fluid">
+        return <div>
+        <div className="container-fluid">
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
+
               <li><p class="navbar-text">Already have an account?</p></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
@@ -202,7 +197,7 @@ class Login extends React.Component {
                             <a href="/auth/google" className="btn btn-block btn-social btn-google"><span className="fa fa-google"></span> Sign in with Google</a>
                           </div>
                                           or
-                           <form className="form" role="form" method="post" action="login" id="login-nav">
+                           <form className="form" role="form" method="post" action="login">
                               <div className="form-group">
                                  <label className="sr-only">Email address</label>
                                  <Input type="text" name="email" placeholder="email"
@@ -218,31 +213,18 @@ class Login extends React.Component {
                               </div>
                            </form>
                         </div>
-                        <div className="bottom text-center">
-                          New here ? <button className="unstyled-button" onClick={this.change_status}><b>Sign up</b></button>
-                        </div>
                      </div>
                   </li>
                 </ul>
               </li>
-            </ul>
-          </div>
-          {redirect && (
-            <Redirect to={from || '/'}/>
-          )}
-        </div>;
-      }
-      else {
-        return <div className="container-fluid">
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul className="nav navbar-nav navbar-right">
+
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Sign Up</b><span class="caret"></span></a>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Register</b><span class="caret"></span></a>
                   <ul id="login-dp" className="dropdown-menu">
                   <li>
                      <div className="row">
                         <div className="col-md-12">
-                           <form className="form" role="form" method="post" action="login" id="login-nav">
+                           <form className="form" role="form" method="post" action="login">
                              <div className="form-group">
                                 <label className="sr-only">Email address</label>
                                 <Input type="text" name="name" placeholder="name"
@@ -263,23 +245,21 @@ class Login extends React.Component {
                               </div>
                            </form>
                         </div>
-                        <div className="bottom text-center">
-                          Have an account ? <button className="unstyled-button" onClick={this.change_status}><b>Sign in</b></button>
-                        </div>
                      </div>
                   </li>
                 </ul>
               </li>
             </ul>
           </div>
-          {redirect && (
-            <Redirect to={from || '/'}/>
-          )}
-        </div>;
+        </div>
+        {redirect && (
+          <Redirect to={from || '/'}/>
+        )}
+      </div>;
       }
-    }
   }
 }
+
 
 function state2props(state) {
   return {
