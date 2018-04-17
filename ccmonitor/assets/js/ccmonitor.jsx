@@ -1,6 +1,6 @@
 import React                                                    from 'react';
 import ReactDOM                                                 from 'react-dom';
-import { Route, BrowserRouter as Router, Switch }               from 'react-router-dom';
+import { Route, BrowserRouter as Router, Switch, Redirect }     from 'react-router-dom';
 import { Provider, connect }                                    from 'react-redux';
 import { CookiesProvider, withCookies, Cookies, cookie }        from 'react-cookie';
 import socket                                                   from './socket.js';
@@ -9,7 +9,7 @@ import Index                                                    from './componen
 import CoinPage                                                 from "./component/coinpage.jsx";
 import AlertForm                                                from "./component/alertform.jsx";
 import Notification                                             from "./component/notification_center"
-
+import swal                                                     from 'sweetalert';
 
 export default function ccmonitor_init(store, channel) {
 
@@ -60,19 +60,37 @@ class CcMonitor extends React.Component {
   }
 
   render() {
-    return <Router path="/">
-      <div>
-        <Nav/>
-        <Switch>
-          <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
-          <Route path="/alerts" />
-          <Route path="/alertform/:alert_id" />
-          <Route path="/alertform" render={() => (<AlertForm />)}/>
-          <Route path="/notifications" render={() => (<Notification channel={this.props.channel}/>)} />
-          <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
-        </Switch>
-      </div>
-    </Router>
+    let isLoggedIn = (this.props.token != null);
+    if (isLoggedIn) {
+      return <Router path="/">
+        <div>
+          <Nav/>
+          <Switch>
+            <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
+            <Route path="/alerts" />
+            <Route path="/alertform/:alert_id" />
+            <Route path="/alertform" render={() => (<AlertForm />)}/>
+            <Route path="/notifications" render={() => (<Notification channel={this.props.channel}/>)} />
+            <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
+          </Switch>
+        </div>
+      </Router>
+    }
+    else {
+      return <Router path="/">
+        <div>
+          <Nav/>
+          <Switch>
+            <Route path="/coin/:type" render={() => (<Redirect to="/"></Redirect>)}/>
+            <Route path="/alerts" render={() => (<Redirect to="/"></Redirect>)}/>
+            <Route path="/alertform/:alert_id" render={() => (<Redirect to="/"></Redirect>)}/>
+            <Route path="/alertform" render={() => (<Redirect to="/"></Redirect>)}/>
+            <Route path="/notifications" render={() => (<Redirect to="/"></Redirect>)} />
+            <Route path="/" render={() => (<Index channel={this.props.channel}/>)}/>
+          </Switch>
+        </div>
+      </Router>
+    }
   }
 };
 
