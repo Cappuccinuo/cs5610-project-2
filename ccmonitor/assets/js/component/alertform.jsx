@@ -22,6 +22,10 @@ class AlertFormComponent extends React.Component {
     this.switchTab2 = this.switchTab2.bind(this);
   }
 
+  componentWillMount() {
+    api.request_alerts_all();
+  }
+
   update(ev) {
     let target = $(ev.target);
     console.log(target);

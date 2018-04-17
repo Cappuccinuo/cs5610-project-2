@@ -163,6 +163,21 @@ class TheServer {
     });
   }
 
+  request_alerts_all() {
+    $.ajax("/api/v1/alerts", {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        console.log("alerts:" + resp.data);
+        store.dispatch({
+          type: 'ALERT_LIST',
+          alerts: resp.data,
+        });
+      },
+    })
+  }
+
 
   // request all messages of given user
   request_messages_all(user_id) {
