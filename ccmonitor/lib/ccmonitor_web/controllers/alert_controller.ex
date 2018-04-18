@@ -13,6 +13,8 @@ defmodule CcmonitorWeb.AlertController do
 
   def create(conn, %{"alert" => alert_params, "token" => token_params}) do
     {:ok, user_id} = Phoenix.Token.verify(conn, "auth token", token_params["token"])
+    IO.inspect user_id
+    IO.inspect token_params["user_id"]
     if token_params["user_id"] != user_id do
       raise "unauthourized"
     end
