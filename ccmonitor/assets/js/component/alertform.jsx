@@ -78,8 +78,8 @@ class AlertFormComponent extends React.Component {
 
 
   render() {
-    const { from } = '/';
-    const { redirect } = this.state;
+    const { from } = '/alertform';
+    let redirect = this.state.redirect;
     let index = 0;
     let alertList = this.props.all_alerts.map(function(alert){
       return <div key={index++} class="table100-body js-pscroll">
@@ -124,6 +124,9 @@ class AlertFormComponent extends React.Component {
         	</div>
         </div>
       </div>
+      {redirect && (
+        <Redirect to={from || '/alertform'}/>
+      )}
     </div>
     }
     else {

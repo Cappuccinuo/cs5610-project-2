@@ -13,7 +13,16 @@ defmodule CcmonitorWeb.AuthController do
     IO.puts "+++++"
     IO.inspect(params)
     IO.puts "+++++"
-    user_params = %{token: auth.credentials.token, email: auth.info.email, name: auth.info.name, provider: auth.provider|>Atom.to_string }
+
+    IO.inspect(auth.info.name)
+    name = auth.info.name
+    if auth.info.name == "" do
+      emailSplit = String.split(auth.info.email, ["@"])
+      [name, _rest] = emailSplit
+    end
+    IO.puts "hhhh"
+    IO.inspect(name)
+    user_params = %{token: auth.credentials.token, email: auth.info.email, name: name, provider: auth.provider|>Atom.to_string }
     IO.inspect(user_params)
     IO.puts "+++++"
     changeset = User.changeset(%User{}, user_params)
@@ -35,7 +44,9 @@ defmodule CcmonitorWeb.AuthController do
         conn
         |> put_session(:user_id, user.id)
         |> redirect(to: page_path(conn, :index))
-      {:error, _reason} ->
+      {:error, reason} ->
+        IO.puts "-------"
+        IO.inspect(reason)
         conn
         |> redirect(to: page_path(conn, :index))
     end
