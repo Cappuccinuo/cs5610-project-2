@@ -293,19 +293,6 @@ class TheServer {
   }
 
  // need to get data from back end
- // get real time chart data
- get_chart_data_real_time(prices) {
-   store.dispatch({
-     type: 'UPDATE_HISTORICAL_PRICES',
-     data: {
-       BTC: prices.BTC,
-       ETH: prices.ETH,
-       LTC: prices.LTC,
-       time: prices.time,
-     }
-   });
- }
-
  // get one day chart data
  get_chart_data_one_day() {
    store.dispatch({

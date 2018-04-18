@@ -10,12 +10,18 @@ class PriceChartComponent extends React.Component {
     this.change_chart_data = this.change_chart_data.bind(this);
 
     api.get_chart_data_one_day();
+    this.state = {
+      onSelect: "real_time",
+    }
   }
 
   change_chart_data(data_scope){
+    console.log(data_scope);
+    this.setState({
+      onSelect: data_scope,
+    });
     switch (data_scope) {
       case "real_time":
-          api.get_chart_data_real_time(this.props.prices);
           break;
       case "one_day":
           api.get_chart_data_one_day();
@@ -33,19 +39,23 @@ class PriceChartComponent extends React.Component {
   }
 
   render(){
-   return(
+    let eChart = (<ReactEcharts option={getOption(this.props.historical_prices, this.props.current_coin_type)} />);
+    if(this.state.onSelect == "real_time") {
+      eChart = (<ReactEcharts option={getOption(this.props.prices, this.props.current_coin_type)} />);
+    }
+    return(
     <div>
       <div className="chart-tabs" >
       <ul className="nav nav-tabs">
-      <li className="active"><a data-toggle="tab" onClick={()=>this.change_chart_data("one_day")}>1 day</a></li>
+      <li className="active"><a data-toggle="tab" onClick={()=>this.change_chart_data("real_time")}>real time</a></li>
+      <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_day")}>1 day</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_week")}>1 week</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_month")}>1 month</a></li>
-      <li><a data-toggle="tab" onClick={()=>this.change_chart_data("real_time")}>real time</a></li>
+      
       </ul>
     </div>
       <div>
-      <ReactEcharts
-        option={getOption(this.props.historical_prices, this.props.current_coin_type)} />
+        {eChart}
       </div>
     </div>
   );
