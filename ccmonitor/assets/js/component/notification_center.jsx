@@ -3,6 +3,7 @@ import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Table, Button, Label} from 'reactstrap';
 import { NavLink, Redirect, Link } from 'react-router-dom';
+import swal from 'sweetalert';
 
 import api from '../api';
 
@@ -99,11 +100,24 @@ function update_message_select(user_id){
 // delete given message
 function delete_message(message_id, user_id) {
    //alert();
-   let confirmed = confirm("Do you really want to delete this message?");
-   if (confirmed) {
-      api.delete_message(message_id);
-      update_message_select(user_id);
-   }
+   swal({
+      title: "Are you sure?",
+      text: "Once deleted, you will not be able to recover!",
+      icon: "warning",
+      buttons: true,
+      dangerMode: true,
+    })
+    .then((willDelete) => {
+      if (willDelete) {
+        api.delete_message(message_id);
+        update_message_select(user_id);
+        swal("Poof! Your file has been deleted!", {
+          icon: "success",
+        });
+      } else {
+        swal("Your file is safe!");
+      }
+    });
 }
 
 const Notification = withRouter(connect((state) => ({

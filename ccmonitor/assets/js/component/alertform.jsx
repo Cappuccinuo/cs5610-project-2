@@ -7,6 +7,7 @@ import { CookiesProvider } from 'react-cookie';
 import api from '../api';
 import Login from './login.jsx';
 import PriceChart from './price_chart';
+import swal from 'sweetalert';
 
 class AlertFormComponent extends React.Component {
   constructor(props) {
@@ -52,7 +53,6 @@ class AlertFormComponent extends React.Component {
       // create
       api.create_alert(data, this.submit_callback);
     }
-
   }
 
   submit_callback() {
@@ -78,9 +78,8 @@ class AlertFormComponent extends React.Component {
 
 
   render() {
-    if(this.state.redirect) {
-      return (<Redirect to={'/'} />);
-    }
+    const { from } = '/';
+    const { redirect } = this.state;
     let index = 0;
     let alertList = this.props.all_alerts.map(function(alert){
       return <div key={index++} class="table100-body js-pscroll">
@@ -190,6 +189,9 @@ class AlertFormComponent extends React.Component {
         		</div>
         	</div>
       </div>
+      {redirect && (
+        <Redirect to={from || '/alertform'}/>
+      )}
     </div>
     );
     }
