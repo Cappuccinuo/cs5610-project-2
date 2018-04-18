@@ -74,7 +74,7 @@ class CcMonitor extends React.Component {
     }
   }
 
- 
+
 
   render() {
     console.log("props", this.props);

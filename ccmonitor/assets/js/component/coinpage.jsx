@@ -44,6 +44,7 @@ class CoinComponent extends React.Component {
 
   render() {
     const type = this.props.match.params.type;
+    console.log("current type is" + type);
 
     let i = 0;
     const prices = this.state.BTC.map((price) => (<li key={i++}>{price}</li>));
@@ -55,14 +56,14 @@ class CoinComponent extends React.Component {
             <dl className="stats-panel">
               <div className="stat">
                 <div id="currency-pair">
-                  <h4>BTC/USD</h4>
+                  <h4>{type}/USD</h4>
                 </div>
               </div>
               <div className="stat">
                 <dt>Last Price</dt>
                 <dd>
                   $
-                  {this.props.prices.BTC[this.props.prices.BTC.length-1]}
+                  {this.props.prices[type][this.props.prices[type].length-1]}
                   <span className="btc-suffix"></span>
                 </dd>
               </div>
