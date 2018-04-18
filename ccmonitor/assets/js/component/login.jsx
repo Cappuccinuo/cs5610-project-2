@@ -134,6 +134,7 @@ class Login extends React.Component {
     this.props.dispatch({
       type: "CLEAR_LOGIN_FORM",
     });
+    this.setState({redirect: false});
   }
 
   delete_token(ev) {

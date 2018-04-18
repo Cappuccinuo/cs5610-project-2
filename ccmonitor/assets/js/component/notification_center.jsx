@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import { Table, Button, Label} from 'reactstrap';
+import { NavLink, Redirect, Link } from 'react-router-dom';
 
 import api from '../api';
 
@@ -12,65 +13,67 @@ class NotificationCenter extends React.Component {
   }
 
   render() {
-     let user_id = this.props.token.user_id;
-     let index = 0;
-     let messageList = this.props.messages.map(function(mes){
-    	return <tr key={index++}>
-    		<td>{mes.coin_type}</td>
-    		<td>{(mes.alert_type == "ASC")?"Ascending":"Descending"}</td>
-    		<td>{mes.content}</td>
-    		<td>{mes.inserted_at}</td>
-    		<td><div class="wrapper icons">
-    		       <link className="fa fa-trash" onClick={()=>delete_message(mes.id, user_id)}></link>
-    		 </div>
-    		</td>
-	    </tr>;
-	})
+    if (!this.props.token) {
+      const { from } = '/';
+      return <Redirect to={from || '/'}/>;
+    }
+    console.log("wahahahha" + this.props.token);
+    let user_id = this.props.token.user_id;
+    let index = 0;
+    let messageList = this.props.messages.map(function(mes){
+      return <tr key={index++}>
+      	<td>{mes.coin_type}</td>
+      	<td>{(mes.alert_type == "ASC")?"Ascending":"Descending"}</td>
+      	<td>{mes.content}</td>
+      	<td>{mes.inserted_at}</td>
+      	<td><div class="wrapper icons">
+      	       <link className="fa fa-trash" onClick={()=>delete_message(mes.id, user_id)}></link>
+      	 </div>
+      	</td>
+      </tr>;
+    })
 
-  return (
-   <div className="notification-total">
-
-     <div className="notification-select">
-      <div className="type-select">
-       <Label for="coin_type">Coin Type:  </Label>
-       <select name="coin_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
-            <option value={"BTC"}>BTC</option>
-            <option value={"LTC"}>LTC</option>
-            <option value={"ETH"}>ETH</option>
-            <option value={"ALL"}>ALL</option>
-	</select>
+    return (
+      <div className="notification-total">
+        <div className="notification-select">
+          <div className="type-select">
+            <Label for="coin_type">Coin Type:  </Label>
+            <select name="coin_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
+              <option value={"BTC"}>BTC</option>
+              <option value={"LTC"}>LTC</option>
+              <option value={"ETH"}>ETH</option>
+              <option value={"ALL"}>ALL</option>
+            </select>
+          </div>
+          <div className="type-select">
+            <Label for="alert_type">Alert Type:  </Label>
+            <select name="alert_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
+              <option value={"ASC"}>Ascending</option>
+              <option value={"DES"}>Descending</option>
+              <option value={"ALL"}>ALL</option>
+            </select>
+          </div>
         </div>
 
-      <div className="type-select">
-      <Label for="alert_type">Alert Type:  </Label>
-      	<select name="alert_type" defaultValue="ALL" className="select-item" onChange={()=>update_message_select(this.props.token.user_id)}>
-                  <option value={"ASC"}>Ascending</option>
-                  <option value={"DES"}>Descending</option>
-                  <option value={"ALL"}>ALL</option>
-      	</select>
+        <div className="notification-message" >
+          <div className="messege-table">
+            <Table>
+              <thead>
+                <tr>
+                  <th>Coin Type</th>
+                  <th>Alert Type</th>
+                  <th>Content</th>
+                  <th>Sent Date</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                {messageList}
+              </tbody>
+            </Table>
+          </div>
         </div>
       </div>
-
-    <div className="notification-message" >
-      <div className="messege-table">
-	<Table>
-	  <thead>
-	    <tr>
-	      <th>Coin Type</th>
-	      <th>Alert Type</th>
-	      <th>Content</th>
-	      <th>Sent Date</th>
-	      <th></th>
-	    </tr>
-	  </thead>
-	  <tbody>
-	   {messageList}
-	  </tbody>
-	</Table>
-      </div>
-    </div>
-
-</div>
    );
   }
 }

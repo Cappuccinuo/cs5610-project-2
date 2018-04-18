@@ -80,11 +80,16 @@ class CcMonitor extends React.Component {
     if (token) {
       this.setState({isLoggedIn: true});
     }
+    else {
+      this.setState({isLoggedIn: false});
+    }
   }
 
   render() {
     console.log("props", this.props);
-    if (this.state.isLoggedIn) {
+    console.log("current log in " + this.state.isLoggedIn);
+    console.log("hhhhh" + this.props.state.token);
+    if (this.state.isLoggedIn || this.props.state.token) {
       return <Router path="/">
         <div>
           <Nav/>
