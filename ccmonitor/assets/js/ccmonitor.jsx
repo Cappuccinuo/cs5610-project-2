@@ -29,6 +29,8 @@ class CcMonitor extends React.Component {
 
     const channel = props.channel;
 
+    console.log(window.user_id);
+
     channel.on("new:prices", resp => {
       this.props.state.dispatch({
         type: "UPDATE_PRICES",
@@ -56,8 +58,23 @@ class CcMonitor extends React.Component {
       type: "SET_TOKEN",
       token: token
     });
-
+    if(window.user_id) {
+      token = {
+        token: window.token,
+        user_id: window.user_id,
+      }
+      window.token = null;
+      window.user_id = null;
+      this.props.cookies.remove("token");
+      this.props.cookies.set("token", token);
+      this.props.state.dispatch({
+        type: "SET_TOKEN",
+        token: token,
+      });
+    }
   }
+
+ 
 
   render() {
     console.log("props", this.props);

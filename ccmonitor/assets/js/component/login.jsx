@@ -145,12 +145,10 @@ class Login extends React.Component {
       text: "Please wait for me to refresh, and Have a good one!",
       icon: "success",
     });
-    this.setState({redirect: true});
     this.props.cookies.remove("token");
-    setTimeout(function(){
-        location.reload();
-        location.reload();
-    }, 2500);
+    //this.setState({redirect: true});
+    window.token = null;
+    window.user_id = null;
   }
 
   get_current_user_name(users, user_id) {
