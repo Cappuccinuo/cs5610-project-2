@@ -31,6 +31,10 @@ class CcMonitor extends React.Component {
 
     console.log(window.user_id);
 
+    this.state = {
+      isLoggedIn: false,
+    }
+
     channel.on("new:prices", resp => {
       this.props.state.dispatch({
         type: "UPDATE_PRICES",
@@ -72,14 +76,14 @@ class CcMonitor extends React.Component {
         token: token,
       });
     }
+    if (token) {
+      this.setState({isLoggedIn: true});
+    }
   }
-
-
 
   render() {
     console.log("props", this.props);
-    let isLoggedIn = (this.props.state.token != null);
-    if (isLoggedIn) {
+    if (this.state.isLoggedIn) {
       return <Router path="/">
         <div>
           <Nav/>
