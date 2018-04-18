@@ -139,7 +139,11 @@ class TheServer {
         $(callback);
       },
       error: (resp) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
    });
   }
@@ -158,7 +162,11 @@ class TheServer {
         $(callback);
       },
       error: (xhr) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
     });
   }
@@ -216,7 +224,11 @@ class TheServer {
         });
       },
       error: (xhr) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
     });
   }
@@ -235,7 +247,11 @@ class TheServer {
         });
       },
       error: (xhr) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
     });
   }
@@ -254,7 +270,11 @@ class TheServer {
         });
       },
       error: (xhr) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
     });
   }
@@ -273,7 +293,11 @@ class TheServer {
         });
       },
       error: (xhr) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
     });
   }
@@ -287,7 +311,11 @@ class TheServer {
       success: (resp) => {
       },
       error: (xhr) => {
-        alert('please login first');
+        swal({
+          title: "Wrong!",
+          text: "Log in first",
+          icon: "warning",
+        });
       }
     });
   }
@@ -346,12 +374,12 @@ class TheServer {
 
   // get historical price(close price) for chart
   // scope: price unit is hour or day
-  // limit: number of data 
+  // limit: number of data
   get_historical_price(scope, limit) {
     let price_btc = [];
     let price_eth = [];
     let price_ltc = [];
-    let time = [];   
+    let time = [];
 
     let btc_url = "https://min-api.cryptocompare.com/data/histo" + scope + "?fsym=BTC&tsym=USD&limit=" + limit + "&aggregate=1&e=CCCAGG";
     $.ajax(btc_url, {
