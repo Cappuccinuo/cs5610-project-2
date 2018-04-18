@@ -11,6 +11,7 @@ let btc_queue = [];
 let eth_queue = [];
 let ltc_queue = [];
 let time_queue = [];
+const len_limit = 1000;
  
 socket.connect();
  
@@ -28,7 +29,7 @@ function updatePrice(i) {
     coinbase.getSpotPrice({'currencyPair': 'BTC-USD'}, function(err, resp) {
       if(resp) {
         btc_queue.push(resp.data.amount);
-        if(btc_queue.length > 100) {
+        if(btc_queue.length > len_limit) {
           btc_queue.shift();
         }
       }
@@ -38,7 +39,7 @@ function updatePrice(i) {
     coinbase.getSpotPrice({'currencyPair': 'LTC-USD'}, function(err, resp) {
       if(resp) {
         ltc_queue.push(resp.data.amount);
-        if(ltc_queue.length > 100) {
+        if(ltc_queue.length > len_limit) {
           ltc_queue.shift();
         }
       }
@@ -48,7 +49,7 @@ function updatePrice(i) {
     coinbase.getSpotPrice({'currencyPair': 'ETH-USD'}, function(err, resp) {
       if(resp) {
         eth_queue.push(resp.data.amount);
-        if(eth_queue.length > 100) {
+        if(eth_queue.length > len_limit) {
           eth_queue.shift();
         }
       }
@@ -58,7 +59,7 @@ function updatePrice(i) {
     coinbase.getTime(function(err, resp) {
       if(resp) {
         time_queue.push(resp.data.iso);
-        if(time_queue.length > 100) {
+        if(time_queue.length > len_limit) {
           time_queue.shift();
         }
       }
