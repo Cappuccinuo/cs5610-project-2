@@ -10,8 +10,21 @@ import PriceChart from './price_chart'; // import chart component
 class CoinComponent extends React.Component {
 
   render() {
-    api.get_open_price();
     const type = this.props.match.params.type;
+    let current_price = 0;
+    let open_price = 0;
+    if (type == "BTC") {
+      current_price = this.props.prices.BTC[this.props.prices.BTC.length-1];
+      open_price = this.props.prices.BTC_open;
+    }
+    else if (type == "ETH") {
+      current_price = this.props.prices.ETH[this.props.prices.ETH.length-1];
+      open_price = this.props.prices.ETH_open;
+    }
+    if (type == "LTC") {
+      current_price = this.props.prices.LTC[this.props.prices.LTC.length-1];
+      open_price = this.props.prices.LTC_open;
+    }
 
     return (
       <div>
@@ -24,32 +37,28 @@ class CoinComponent extends React.Component {
                 </div>
               </div>
               <div className="stat">
-                <dt>Last Price</dt>
+                <dt>Current Price</dt>
                 <dd>
                   $
-                  {this.props.prices[type][this.props.prices[type].length-1]}
-                  <span className="btc-suffix"></span>
-                </dd>
-              </div>
-              <div className="stat">
-                <dt>24-hour Change</dt>
-                <dd>
-                  +
-                  $
-                  76.53
+                  {current_price}
                   <span className="btc-suffix"></span>
                 </dd>
               </div>
               <div className="stat" id="stat-24h-range">
-                <dt>24-hour Range</dt>
+                <dt>Open Price</dt>
                 <dd>
                   $
-                  6651.12
+                  <span>{open_price}</span>
                   <span className="btc-suffix"></span>
-                  -
-                  $
-                  6876.33
-                  <span className="btc-suffix"></span>
+                </dd>
+              </div>
+              <div className="stat">
+                <dt>Change Since Open</dt>
+                <dd>
+                 {(current_price - open_price >= 0) ? "+" : "-"}
+                 $
+                 {Math.abs(Math.floor((current_price - open_price) * 100) / 100)}
+                 <span className="btc-suffix"></span>
                 </dd>
               </div>
             </dl>

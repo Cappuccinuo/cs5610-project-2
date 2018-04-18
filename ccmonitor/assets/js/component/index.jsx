@@ -113,7 +113,7 @@ class IndexComponent extends React.Component {
               </dd>
             </div>
             <div className="stat" id="stat-24h-range">
-              <dt>Open Price </dt>
+              <dt>Open Price</dt>
               <dd>
                 $
                 <span>{eth_open_price}</span>
