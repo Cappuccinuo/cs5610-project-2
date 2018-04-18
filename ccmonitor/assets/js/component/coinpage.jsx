@@ -12,7 +12,6 @@ class CoinComponent extends React.Component {
     super(props);
     const channel = this.props.channel;
     this.state = Object.assign({ triggered: false }, this.props.prices);
-    api.get_price({type: 'BTC'});
     console.log("in coinpage1:");
     console.log( this.props);
     console.log(this.state);

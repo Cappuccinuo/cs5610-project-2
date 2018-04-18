@@ -11,7 +11,7 @@ let btc_queue = [];
 let eth_queue = [];
 let ltc_queue = [];
 let time_queue = [];
-const len_limit = 1000;
+const len_limit = 500;
  
 socket.connect();
  

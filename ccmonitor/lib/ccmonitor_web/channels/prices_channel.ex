@@ -1,18 +1,30 @@
 defmodule CcmonitorWeb.PricesChannel do
   use CcmonitorWeb, :channel
+  use Agent
 
   alias Ccmonitor.{Mailer, Email, Alerts}
   require Logger
 
-
   def join("prices:" <> name, payload, socket) do
     if authorized?(payload) do
       socket = assign(socket, :name, name)
-      resp = %{"BTC" => [], "ETH" => [], "LTC" => [], "time" => []}
+      resp = get_state
       {:ok, resp, socket}
     else
       {:error, %{reason: "unauthorized"}}
     end
+  end
+
+  defp get_state do
+    try do
+      Agent.get(:state, &(&1))
+    catch
+      exit, _ ->
+        {_,_} = Agent.start(fn -> 
+                              %{"BTC" => [], "ETH" => [], "LTC" => [], "time" => []} 
+                            end, name: :state)
+        %{"BTC" => [], "ETH" => [], "LTC" => [], "time" => []}
+    end    
   end
 
   # Channels can be used in a request/response fashion
@@ -28,6 +40,7 @@ defmodule CcmonitorWeb.PricesChannel do
 
       distribute_alerts("ETH", eth)
 
+      :ok = Agent.update(:state, fn last -> resp end)
       {:reply, {:ok, resp}, socket}
     else
       resp = nil
