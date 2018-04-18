@@ -61,7 +61,7 @@ class CcMonitor extends React.Component {
     if(window.user_id) {
       token = {
         token: window.token,
-        user_id: window.user_id,
+        user_id: parseInt(window.user_id),
       }
       window.token = null;
       window.user_id = null;
