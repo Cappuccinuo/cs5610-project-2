@@ -27,7 +27,7 @@ class NotificationCenter extends React.Component {
       	<td>{(mes.alert_type == "ASC")?"Ascending":"Descending"}</td>
       	<td>{mes.content}</td>
       	<td>{mes.inserted_at}</td>
-      	<td><div className="wrapper icons">
+      	<td><div class="wrapper icons">
       	       <link className="fa fa-trash" onClick={()=>delete_message(mes.id, user_id)}></link>
       	 </div>
       	</td>
