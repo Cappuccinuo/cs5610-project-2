@@ -10,6 +10,7 @@ import PriceChart from './price_chart'; // import chart component
 class CoinComponent extends React.Component {
 
   render() {
+    api.get_open_price();
     const type = this.props.match.params.type;
 
     return (
