@@ -91,7 +91,7 @@ class AlertFormComponent extends React.Component {
               <td class="cell100 column5">{alert.alert_type} + {alert.threshold}</td>
               <td class="cell100 column6">{alert.inserted_at}</td>
               <td class="cell100 column7">
-                <button className="fa fa-trash" onClick={()=>delete_alert(alert.id)}></button>
+                <link className="fa fa-trash" onClick={()=>delete_alert(alert.id)}></link>
               </td>
             </tr>
           </tbody>
