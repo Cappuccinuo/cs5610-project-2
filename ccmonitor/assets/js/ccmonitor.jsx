@@ -76,6 +76,7 @@ class CcMonitor extends React.Component {
         token: token,
       });
     }
+    console.log("token is" + token);
     if (token) {
       this.setState({isLoggedIn: true});
     }
