@@ -16,7 +16,79 @@ class Login extends React.Component {
     this.sign_up = this.sign_up.bind(this);
     this.create_token = this.create_token.bind(this);
     this.delete_token = this.delete_token.bind(this);
+    this.checkLoginState = this.checkLoginState.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+    this.testAPI = this.testAPI.bind(this);
+    this.statusChangeCallback = this.statusChangeCallback.bind(this);
   }
+
+  componentDidMount() {
+    window.fbAsyncInit = function() {
+      FB.init({
+        appId      : '578727535820838',
+        cookie     : true,
+        xfbml      : true,
+        version    : 'v2.12'
+      });
+      FB.AppEvents.logPageView();
+      FB.Event.subscribe('auth.statusChange', function(response) {
+        if (response.authResponse) {
+          this.checkLoginState();
+        } else {
+          console.log('---->User cancelled login or did not fully authorize.');
+        }
+      }.bind(this));
+    }.bind(this);
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = '//connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+  }
+
+  // Here we run a very simple test of the Graph API after login is
+  // successful.  See statusChangeCallback() for when this call is made.
+  testAPI() {
+    console.log('Welcome! Fetching your information.... ');
+    FB.api('/me', function(response) {
+      console.log('Successful login for: ' + response.name);
+      document.getElementById('status').innerHTML =
+        'Thanks for logging in, ' + response.name + '!';
+    });
+  }
+
+  // This is called with the results from from FB.getLoginStatus().
+  statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      this.testAPI();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    } else {
+      // The person is not logged into Facebook, so we're not sure if
+      // they are logged into this app or not.
+      document.getElementById('status').innerHTML = 'Please log ' +
+      'into Facebook.';
+    }
+  }
+
+  checkLoginState() {
+    FB.getLoginStatus(function(response) {
+      this.statusChangeCallback(response);
+    }.bind(this));
+  }
+
+  handleClick() {
+    FB.login(this.checkLoginState());
+  }
+
+
 
   componentDidUpdate(prevProps) {
     if(prevProps.token !== this.props.token) {
@@ -111,7 +183,7 @@ class Login extends React.Component {
           <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul className="nav navbar-nav navbar-right">
 
-              <li><p className="navbar-text">Already have an account?</p></li>
+              <li><p class="navbar-text">Already have an account?</p></li>
               <li className="dropdown">
                 <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span className="caret"></span></a>
                   <ul id="login-dp" className="dropdown-menu">
@@ -146,7 +218,7 @@ class Login extends React.Component {
               </li>
 
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Register</b><span className="caret"></span></a>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Register</b><span class="caret"></span></a>
                   <ul id="login-dp" className="dropdown-menu">
                   <li>
                      <div className="row">

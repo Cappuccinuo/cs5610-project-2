@@ -95,27 +95,27 @@ class CoinComponent extends React.Component {
           </div>
         </div>
 
-        <div className="history container-login100">
-          <div className="table100 ver3 m-b-110">
-        		<div className="table100-head">
+        <div class="history container-login100">
+          <div class="table100 ver3 m-b-110">
+        		<div class="table100-head">
         			<table>
         				<thead>
-        					<tr className="row100 head">
-        						<th className="cell100 column1">Date</th>
-        						<th className="cell100 column2">Open</th>
-        						<th className="cell100 column3">Close</th>
+        					<tr class="row100 head">
+        						<th class="cell100 column1">Date</th>
+        						<th class="cell100 column2">Open</th>
+        						<th class="cell100 column3">Close</th>
         					</tr>
         				</thead>
         			</table>
         		</div>
 
-        		<div className="table100-body">
+        		<div class="table100-body">
         			<table>
         				<tbody>
-          					<tr className="row100 body">
-          						<td className="cell100 column1"></td>
-                      <td className="cell100 column2"></td>
-          						<td className="cell100 column3"></td>
+          					<tr class="row100 body">
+          						<td class="cell100 column1"></td>
+                      <td class="cell100 column2"></td>
+          						<td class="cell100 column3"></td>
           					</tr>
         				</tbody>
         			</table>
