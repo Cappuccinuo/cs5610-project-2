@@ -11,7 +11,9 @@ class IndexComponent extends React.Component {
     console.log("in index");
     this.state = {
       news: [],
-    };
+    }; 
+
+    api.get_open_price();
   }
 
   componentDidMount() {
@@ -42,6 +44,13 @@ class IndexComponent extends React.Component {
   }
 
   render() {
+    let btc_current_price = this.props.prices.BTC[this.props.prices.BTC.length-1];
+    let eth_current_price = this.props.prices.ETH[this.props.prices.ETH.length-1];
+    let ltc_current_price = this.props.prices.LTC[this.props.prices.LTC.length-1];
+    let btc_open_price = this.props.prices.BTC_open;
+    let eth_open_price = this.props.prices.ETH_open;
+    let ltc_open_price = this.props.prices.LTC_open;
+   
     return <div className="index">
       <div id="order-book" style={{display: "block"}}>
         <div>
@@ -52,31 +61,27 @@ class IndexComponent extends React.Component {
               </div>
             </div>
             <div className="stat">
-              <dt>Last Price</dt>
+              <dt>Current Price</dt>
               <dd>
                 $
-                {this.props.prices.BTC[this.props.prices.BTC.length-1]}
+                {btc_current_price}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
             <div className="stat">
-              <dt>24-hour Change</dt>
+              <dt>Change Since Open</dt>
               <dd>
-                +
+                {(btc_current_price - btc_open_price >= 0) ? "+" : "-"}
                 $
-                76.53
+                {Math.abs(Math.floor((btc_current_price - btc_open_price) * 100) / 100)}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
             <div className="stat" id="stat-24h-range">
-              <dt>24-hour Range</dt>
+              <dt>Open Price </dt>
               <dd>
                 $
-                6651.12
-                <span className="btc-suffix"></span>
-                -
-                $
-                6876.33
+                <span>{btc_open_price}</span>
                 <span className="btc-suffix"></span>
               </dd>
             </div>
@@ -91,36 +96,34 @@ class IndexComponent extends React.Component {
               </div>
             </div>
             <div className="stat">
-              <dt>Last Price</dt>
+              <dt>Current Price</dt>
               <dd>
                 $
-                {this.props.prices.ETH[this.props.prices.ETH.length-1]}
+                {eth_current_price}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
             <div className="stat">
-              <dt>24-hour Change</dt>
+              <dt>Change Since Open</dt>
               <dd>
-                +
+                {(eth_current_price - eth_open_price >= 0) ? "+" : "-"}
                 $
-                76.53
+                {Math.abs(Math.floor((eth_current_price - eth_open_price) * 100) / 100)}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
             <div className="stat" id="stat-24h-range">
-              <dt>24-hour Range</dt>
+              <dt>Open Price </dt>
               <dd>
                 $
-                6651.12
-                <span className="btc-suffix"></span>
-                -
-                $
-                6876.33
+                <span>{eth_open_price}</span>
                 <span className="btc-suffix"></span>
               </dd>
             </div>
           </dl>
         </div>
+
+
         <div>
           <dl className="stats-panel">
             <div className="stat">
@@ -129,37 +132,32 @@ class IndexComponent extends React.Component {
               </div>
             </div>
             <div className="stat">
-              <dt>Last Price</dt>
+              <dt>Current Price</dt>
               <dd>
                 $
-                {this.props.prices.LTC[this.props.prices.LTC.length-1]}
+                {ltc_current_price}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
             <div className="stat">
-              <dt>24-hour Change</dt>
+              <dt>Change Since Open</dt>
               <dd>
-                +
+                {(ltc_current_price - ltc_open_price >= 0) ? "+" : "-"}
                 $
-                76.53
+                {Math.abs(Math.floor((ltc_current_price - ltc_open_price) * 100) / 100)}
                 <span className="btc-suffix"></span>
               </dd>
             </div>
             <div className="stat" id="stat-24h-range">
-              <dt>24-hour Range</dt>
+              <dt>Open Price </dt>
               <dd>
                 $
-                6651.12
-                <span className="btc-suffix"></span>
-                -
-                $
-                6876.33
+                <span>{ltc_open_price}</span>
                 <span className="btc-suffix"></span>
               </dd>
             </div>
           </dl>
         </div>
-
 
       </div>
 

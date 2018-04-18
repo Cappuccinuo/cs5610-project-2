@@ -38,9 +38,9 @@ class PriceChartComponent extends React.Component {
   }
 
   render(){
-    let eChart = (<ReactEcharts option={getOption(this.props.historical_prices, this.props.current_coin_type)} />);
+    let eChart = (<ReactEcharts option={getOption(this.props.historical_prices, this.props.current_coin_type, this.state.onSelect)} />);
     if(this.state.onSelect == "real_time") {
-      eChart = (<ReactEcharts option={getOption(this.props.prices, this.props.current_coin_type)} />);
+      eChart = (<ReactEcharts option={getOption(this.props.prices, this.props.current_coin_type, this.state.onSelect)} />);
     }
     return(
     <div>
@@ -62,7 +62,14 @@ class PriceChartComponent extends React.Component {
 
 
 // set options for the chart
-function getOption(data, coin_type){
+function getOption(data, coin_type, select){
+  let time = data.time;
+  if (select == "real_time") { // change the style of real time
+    time = time.map(function (t) {
+                return  t.replace(/T/g, "\n").replace(/Z/g, "");
+           });
+  }
+
   let prices = [];
   switch (coin_type) {
     case "BTC":
@@ -133,7 +140,7 @@ function getOption(data, coin_type){
     xAxis: {
     	type: 'category',
     	boundaryGap: false,
-    	data: data.time,
+    	data: time,
     	axisLine:{
     	  lineStyle:{
                 color:'white',

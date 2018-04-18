@@ -98,6 +98,9 @@ let initial_price = {
   LTC: [],
   ETH: [],
   time: [],
+  BTC_open:0,
+  LTC_open:0,
+  ETH_open:0,
 };
 
 function prices(state = initial_price, action) {

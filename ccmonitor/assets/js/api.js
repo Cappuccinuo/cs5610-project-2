@@ -442,7 +442,61 @@ class TheServer {
     });
   }
 
+// get coins' open price for today
+  get_open_price() {
+    let btc_url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=1&aggregate=1&e=CCCAGG";
+    $.ajax(btc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        let open_price = resp.Data[0].open;
+	store.dispatch({
+	  type: 'UPDATE_PRICES',
+	  data: {
+	    BTC_open: open_price,
+	  }
+	});
+      },
+    });
+
+    let eth_url = "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=1&aggregate=1&e=CCCAGG";
+    $.ajax(eth_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        let open_price = resp.Data[0].open;
+	store.dispatch({
+	  type: 'UPDATE_PRICES',
+	  data: {
+	    ETH_open: open_price,
+	  }
+	});
+      },
+    });
+
+    let ltc_url = "https://min-api.cryptocompare.com/data/histoday?fsym=LTC&tsym=USD&limit=1&aggregate=1&e=CCCAGG";
+    $.ajax(ltc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        let open_price = resp.Data[0].open;
+	store.dispatch({
+	  type: 'UPDATE_PRICES',
+	  data: {
+	    LTC_open: open_price,
+	  }
+	});
+      },
+    });
+
+  }
+
 }
+
+
 
 // convert unix timestamp into normal time
 function convertTime(unixtime, scope) {
