@@ -82,14 +82,14 @@ class AlertFormComponent extends React.Component {
     let redirect = this.state.redirect;
     let index = 0;
     let alertList = this.props.all_alerts.map(function(alert){
-      return <div key={index++} class="table100-body js-pscroll">
+      return <div key={index++} className="table100-body js-pscroll">
         <table>
           <tbody>
-            <tr class="row100 body">
-              <td class="cell100 column4">{alert.coin_type}</td>
-              <td class="cell100 column5">{alert.alert_type} + {alert.threshold}</td>
-              <td class="cell100 column6">{alert.inserted_at}</td>
-              <td class="cell100 column7">
+            <tr className="row100 body">
+              <td className="cell100 column4">{alert.coin_type}</td>
+              <td className="cell100 column5">{alert.alert_type} + {alert.threshold}</td>
+              <td className="cell100 column6">{alert.inserted_at}</td>
+              <td className="cell100 column7">
                 <link className="fa fa-trash" onClick={()=>delete_alert(alert.id)}></link>
               </td>
             </tr>
@@ -105,16 +105,16 @@ class AlertFormComponent extends React.Component {
         <a onClick={this.switchTab2} className="button1 bouncy" style={{animationDelay:"0.07s"}}>My Alert</a>
       </ul>
       <div id="content">
-        <div class="container-login100">
-          <div class="table100 ver3 m-b-110">
-        		<div class="table100-head">
+        <div className="container-login100">
+          <div className="table100 ver3 m-b-110">
+        		<div className="table100-head">
         			<table>
         				<thead>
-        					<tr class="row100 head">
-        						<th class="cell100 column4">Coin Type</th>
-        						<th class="cell100 column5">Alert Setting</th>
-        						<th class="cell100 column6">Create Time</th>
-        						<th class="cell100 column7"></th>
+        					<tr className="row100 head">
+        						<th className="cell100 column4">Coin Type</th>
+        						<th className="cell100 column5">Alert Setting</th>
+        						<th className="cell100 column6">Create Time</th>
+        						<th className="cell100 column7"></th>
         					</tr>
         				</thead>
         			</table>
@@ -137,15 +137,15 @@ class AlertFormComponent extends React.Component {
           <a onClick={this.switchTab2} className="button1 bouncy" style={{animationDelay:"0.07s"}}>My Alert</a>
         </ul>
         <div id="content">
-          <div class="container-contact100">
-        		<div id="tab1" class="wrap-contact100">
-        			<form class="contact100-form validate-form">
-        				<span class="contact100-form-title">
+          <div className="container-contact100">
+        		<div id="tab1" className="wrap-contact100">
+        			<form className="contact100-form validate-form">
+        				<span className="contact100-form-title">
         					Alert Setting
         				</span>
 
-        				<div class="wrap-input100">
-        					<div class="label-input100">Coin Type</div>
+        				<div className="wrap-input100">
+        					<div className="label-input100">Coin Type</div>
           					<div>
                       <select className="input100" name="coin_type" placeholder="title"
                             value={this.props.alert_form.coin_type} onChange={this.update}>
@@ -154,13 +154,13 @@ class AlertFormComponent extends React.Component {
           							<option value={"LTC"}>LTC</option>
           							<option value={"ETH"}>ETH</option>
           						</select>
-          						<div class="dropDownSelect2"></div>
+          						<div className="dropDownSelect2"></div>
           					</div>
-        					<span class="focus-input100"></span>
+        					<span className="focus-input100"></span>
         				</div>
 
-                <div class="wrap-input100 validate-input">
-        					<div class="label-input100">Alert Type</div>
+                <div className="wrap-input100 validate-input">
+        					<div className="label-input100">Alert Type</div>
           					<div>
                       <select className="input100" name="alert_type" placeholder="description"
                             value={this.props.alert_form.alert_type} onChange={this.update}>
@@ -168,25 +168,25 @@ class AlertFormComponent extends React.Component {
                             <option value={"ASC"}>Ascending</option>
                             <option value={"DES"}>Descending</option>
                       </select>
-          						<div class="dropDownSelect2"></div>
+          						<div className="dropDownSelect2"></div>
           					</div>
-        					<span class="focus-input100"></span>
+        					<span className="focus-input100"></span>
         				</div>
 
-                <div class="wrap-input100 validate-input">
-        					<label class="label-input100" for="email">Threshold</label>
+                <div className="wrap-input100 validate-input">
+        					<label className="label-input100" for="email">Threshold</label>
                   <input type="number" className="input100" name="threshold" step={0.1} min={0}
                         value={this.props.alert_form.threshold} onChange={this.update}/>
-        					<span class="focus-input100"></span>
+        					<span className="focus-input100"></span>
         				</div>
 
-        				<div class="container-contact100-form-btn">
-        					<button class="contact100-form-btn" onClick={this.submit_form}>
+        				<div className="container-contact100-form-btn">
+        					<button className="contact100-form-btn" onClick={this.submit_form}>
         						Subscribe
         					</button>
         				</div>
         			</form>
-              <div class="contact100-more">
+              <div className="contact100-more">
                 <PriceChart chart-data ={this.props} />
               </div>
         		</div>

@@ -24,7 +24,7 @@ function Nav(props) {
       </li>
     );
     alert = (
-      <li><NavLink to="/notifications"><i class="fa fa-bell"></i></NavLink></li>
+      <li><NavLink to="/notifications"><i className="fa fa-bell"></i></NavLink></li>
     );
   }
   return <header className="header">
@@ -43,7 +43,7 @@ function Nav(props) {
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-          <ul class="nav navbar-nav navbar-right">
+          <ul className="nav navbar-nav navbar-right">
             {coin}
             {alert}
             <li>
