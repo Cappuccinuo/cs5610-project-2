@@ -163,7 +163,7 @@ class IndexComponent extends React.Component {
 
       </div>
 
-      <div className="text offset-lg-1 col-lg-6 col-md-12">
+      <div className="text offset-lg-1 col-lg-7 col-md-12">
         {this.state.news}
       </div>
     </div>
