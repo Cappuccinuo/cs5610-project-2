@@ -8,45 +8,9 @@ import api from '../api';
 import PriceChart from './price_chart'; // import chart component
 
 class CoinComponent extends React.Component {
-  constructor(props) {
-    super(props);
-    const channel = this.props.channel;
-    this.state = Object.assign({ triggered: false }, this.props.prices);
-    console.log("in coinpage1:");
-    console.log( this.props);
-    console.log(this.state);
-
-  }
-
-  componentWillUpdate(nextProps, nextState){
-    const btcPrices = nextProps.prices.BTC;
-    if(btcPrices.length != this.state.BTC.length) {
-      this.setState({
-        BTC: btcPrices,
-        triggered: !this.state.triggered,
-      });
-    } else {
-      for(var i = 0; i < this.state.BTC.length; i++) {
-        if(btcPrices[i] != this.state.BTC[i]) {
-          this.setState({
-            BTC: btcPrices,
-            triggered: !this.state.triggered,
-          });
-          console.log("updated");
-          break;
-        }
-      }
-    }
-    //const data = {type: this.props.match.params.type};
-    //api.get_price(data);
-  }
 
   render() {
     const type = this.props.match.params.type;
-    console.log("current type is" + type);
-
-    let i = 0;
-    const prices = this.state.BTC.map((price) => (<li key={i++}>{price}</li>));
 
     return (
       <div>

@@ -78,7 +78,7 @@ class Login extends React.Component {
     //this.setState({redirect: true});
     window.token = null;
     window.user_id = null;
-    this.setState({redirect: true});
+    //this.setState({redirect: true});
   }
 
   get_current_user_name(users, user_id) {

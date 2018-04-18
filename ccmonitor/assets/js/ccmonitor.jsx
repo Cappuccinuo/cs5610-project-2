@@ -31,10 +31,6 @@ class CcMonitor extends React.Component {
 
     console.log(window.user_id);
 
-    this.state = {
-      isLoggedIn: false,
-    }
-
     channel.on("new:prices", resp => {
       this.props.state.dispatch({
         type: "UPDATE_PRICES",
@@ -76,49 +72,35 @@ class CcMonitor extends React.Component {
         token: token,
       });
     }
-    console.log("token is" + token);
-    if (token) {
-      this.setState({isLoggedIn: true});
-    }
-    else {
-      this.setState({isLoggedIn: false});
-    }
+    
   }
 
   render() {
-    console.log("props", this.props);
-    console.log("current log in " + this.state.isLoggedIn);
-    console.log("hhhhh" + this.props.state.token);
-    if (this.state.isLoggedIn || this.props.state.token) {
-      return <Router path="/">
-        <div>
-          <Nav/>
-          <Switch>
-            <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
-            <Route path="/alerts" />
-            <Route path="/alertform/:alert_id" />
-            <Route path="/alertform" render={() => (<AlertForm channel={this.props.channel}/>)}/>
-            <Route path="/notifications" render={() => (<Notification channel={this.props.channel}/>)} />
-            <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
-          </Switch>
-        </div>
-      </Router>
+
+    if(this.props.state.token) {
+      return (<Router path="/">
+                <div>
+                  <Nav/>
+                  <Switch>
+                    <Route path="/coin/:type" render={() => (<CoinPage channel={this.props.channel}/>)}/>
+                    <Route path="/alerts" />
+                    <Route path="/alertform/:alert_id" />
+                    <Route path="/alertform" render={() => (<AlertForm channel={this.props.channel}/>)}/>
+                    <Route path="/notifications" render={() => (<Notification channel={this.props.channel}/>)} />
+                    <Route path="/" render={() => (<Index channel={this.props.channel}/>)} />
+                  </Switch>
+                </div>
+              </Router>); 
+    } else {
+      console.log(this.props.state.token);
+      return (<Router path="/">
+                <div>
+                  <Nav/>
+                  <Index channel={this.props.channel}/>
+                </div>
+              </Router>);
     }
-    else {
-      return <Router path="/">
-        <div>
-          <Nav/>
-          <Switch>
-            <Route path="/coin/:type" render={() => (<Redirect to="/"></Redirect>)}/>
-            <Route path="/alerts" render={() => (<Redirect to="/"></Redirect>)}/>
-            <Route path="/alertform/:alert_id" render={() => (<Redirect to="/"></Redirect>)}/>
-            <Route path="/alertform" render={() => (<Redirect to="/"></Redirect>)}/>
-            <Route path="/notifications" render={() => (<Redirect to="/"></Redirect>)} />
-            <Route path="/" render={() => (<Index channel={this.props.channel}/>)}/>
-          </Switch>
-        </div>
-      </Router>
-    }
+        
   }
 };
 
