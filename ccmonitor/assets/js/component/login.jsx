@@ -192,7 +192,9 @@ class Login extends React.Component {
                         <div className="col-md-12">
                           <span className="badge badge-info"> Login with : </span>
                           <div className="social-buttons">
-                            <a href="/auth/github" className="btn btn-social btn-github"><span className="fa fa-github"></span> Github </a>
+                            <i className="fa fa-github fa-2x"></i>
+                            <i className="fa fa-google fa-2x"></i>
+                            <a href="/auth/github" className="btn btn-social btn-github"  style={{paddingRight: "40px"}}><span className="fa fa-github"></span> Github </a>
                             <a href="/auth/google" className="btn btn-social btn-google"><span className="fa fa-google"></span> Google </a>
                           </div>
                                           or
