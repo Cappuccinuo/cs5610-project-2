@@ -146,6 +146,7 @@ function getOption(data, coin_type){
     yAxis: {
     	type: 'value',
       name: 'price ($)',
+      min: 'dataMin',
     	axisLine:{
     	  lineStyle:{
           color:'white',
