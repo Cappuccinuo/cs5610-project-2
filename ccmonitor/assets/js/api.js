@@ -343,8 +343,22 @@ class TheServer {
    });
  }
 
+
+ // get historical_price
+ get_historical_price() {
+    let btc_url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=30&aggregate=3&e=CCCAGG";
+    $.ajax(btc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        alert(resp.data);
+      },
+    });
+
+
+  }
+
 }
-
-
 
 export default new TheServer();

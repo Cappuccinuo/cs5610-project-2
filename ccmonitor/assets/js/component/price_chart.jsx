@@ -31,6 +31,7 @@ class PriceChartComponent extends React.Component {
           break;
       case "one_month":
           api.get_chart_data_one_month();
+          api.get_historical_price();
           break;
       default:
           api.get_chart_data_one_day();
