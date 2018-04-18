@@ -2,6 +2,7 @@ import React from 'react';
 import { withRouter } from 'react-router';
 import { connect } from 'react-redux';
 import api from '../api';
+import { Link } from 'react-router-dom';
 
 
 class IndexComponent extends React.Component {
@@ -48,7 +49,7 @@ class IndexComponent extends React.Component {
           <dl className="stats-panel">
             <div className="stat">
               <div id="currency-pair">
-                <h4>BTC/USD</h4>
+                <h4><Link style={{color: "white"}} to="/coin/BTC">BTC/USD</Link></h4>
               </div>
             </div>
             <div className="stat">
@@ -87,7 +88,7 @@ class IndexComponent extends React.Component {
           <dl className="stats-panel">
             <div className="stat">
               <div id="currency-pair">
-                <h4>ETH/USD</h4>
+                <h4><Link style={{color: "white"}} to="/coin/ETH">ETH/USD</Link></h4>
               </div>
             </div>
             <div className="stat">
@@ -125,7 +126,7 @@ class IndexComponent extends React.Component {
           <dl className="stats-panel">
             <div className="stat">
               <div id="currency-pair">
-                <h4>LTC/USD</h4>
+                <h4><Link style={{color: "white"}} to="/coin/LTC">LTC/USD</Link></h4>
               </div>
             </div>
             <div className="stat">
