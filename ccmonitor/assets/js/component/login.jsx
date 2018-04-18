@@ -185,16 +185,15 @@ class Login extends React.Component {
 
               <li><p class="navbar-text">Already have an account?</p></li>
               <li className="dropdown">
-                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span class="caret"></span></a>
+                <a href="#" className="dropdown-toggle" data-toggle="dropdown"><b>Login</b><span className="caret"></span></a>
                   <ul id="login-dp" className="dropdown-menu">
                   <li>
                      <div className="row">
                         <div className="col-md-12">
-                          Login via
-                          <div class="social-buttons">
-                            <div class="fb-login-button" data-max-rows="1" data-size="medium" data-button-type="login_with" data-show-faces="false" data-auto-logout-link="true" data-use-continue-as="false" scope="public_profile,email" onClick={this.handleClick} onlogin={this.checkLoginState}></div>
-                            <div id="status"></div>
-                            <a href="/auth/google" className="btn btn-block btn-social btn-google"><span className="fa fa-google"></span> Sign in with Google</a>
+                          <span className="badge badge-info"> Login with : </span>
+                          <div className="social-buttons">
+                            <a href="/auth/github" className="btn btn-social btn-github"><span className="fa fa-github"></span> Github </a>
+                            <a href="/auth/google" className="btn btn-social btn-google"><span className="fa fa-google"></span> Google </a>
                           </div>
                                           or
                            <form className="form" role="form" method="post" action="login">

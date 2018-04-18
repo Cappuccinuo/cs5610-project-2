@@ -22,17 +22,17 @@
 #login-dp .form-group {
     margin-bottom: 10px;
 }
-.btn-fb{
+.btn-github{
     color: #fff;
     background-color:#3b5998;
 }
-.btn-fb:hover{
+.btn-github:hover{
     color: #fff;
-    background-color:#496ebc
+    background-color:#59b5fa
 }
 .btn-google{
     color: #fff;
-    background-color:#55acee;
+    background-color:#3b5998;
 }
 .btn-google:hover{
     color: #fff;

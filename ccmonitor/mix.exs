@@ -20,7 +20,7 @@ defmodule Ccmonitor.Mixfile do
   def application do
     [
       mod: {Ccmonitor.Application, []},
-      extra_applications: [:logger, :runtime_tools, :bamboo, :ueberauth, :ueberauth_google, :ueberauth_facebook, :ueberauth_github]
+      extra_applications: [:logger, :runtime_tools, :bamboo, :ueberauth, :ueberauth_google, :ueberauth_github]
     ]
   end
 
@@ -47,7 +47,6 @@ defmodule Ccmonitor.Mixfile do
       {:bamboo, "~> 0.8"},
       {:ueberauth, "~> 0.4"},
       {:ueberauth_google, "~> 0.7"},
-      {:ueberauth_facebook, "~> 0.7"},
       {:ueberauth_github, "~> 0.7"},
       {:httpoison, "~> 1.0"},
       {:poison, "~> 3.1"}

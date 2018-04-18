@@ -13,7 +13,7 @@ defmodule CcmonitorWeb.AuthController do
     IO.puts "+++++"
     IO.inspect(params)
     IO.puts "+++++"
-    user_params = %{token: auth.credentials.token, email: auth.info.email, name: auth.info.name, provider: "github"}
+    user_params = %{token: auth.credentials.token, email: auth.info.email, name: auth.info.name, provider: auth.provider|>Atom.to_string }
     IO.inspect(user_params)
     IO.puts "+++++"
     changeset = User.changeset(%User{}, user_params)
