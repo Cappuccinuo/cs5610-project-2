@@ -9,7 +9,6 @@ class PriceChartComponent extends React.Component {
     super(props);
     this.change_chart_data = this.change_chart_data.bind(this);
 
-    api.get_chart_data_one_day();
     this.state = {
       onSelect: "real_time",
     }
@@ -24,17 +23,16 @@ class PriceChartComponent extends React.Component {
       case "real_time":
           break;
       case "one_day":
-          api.get_chart_data_one_day();
+          api.get_historical_price("hour", "24");
           break;
       case "one_week":
-          api.get_chart_data_one_week();
+          api.get_historical_price("day", "7");
           break;
       case "one_month":
-          api.get_chart_data_one_month();
-          api.get_historical_price();
+          api.get_historical_price("day", "30");
           break;
       default:
-          api.get_chart_data_one_day();
+          api.get_historical_price("hour", "24");
           break;
     }
   }
@@ -52,7 +50,6 @@ class PriceChartComponent extends React.Component {
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_day")}>1 day</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_week")}>1 week</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_month")}>1 month</a></li>
-      
       </ul>
     </div>
       <div>

@@ -294,8 +294,8 @@ class TheServer {
 
  // need to get data from back end
  // get one day chart data
- get_chart_data_one_day() {
-   store.dispatch({
+  get_chart_data_one_day() {
+    store.dispatch({
      type: 'UPDATE_HISTORICAL_PRICES',
      data: {
        BTC: [50, 250, 200, 300, 280, 300, 350],
@@ -308,8 +308,8 @@ class TheServer {
  }
 
  // get one week chart data
- get_chart_data_one_week() {
-   store.dispatch({
+  get_chart_data_one_week() {
+    store.dispatch({
      type: 'UPDATE_HISTORICAL_PRICES',
      data: {
        BTC: [200, 250, 200, 250, 280, 300, 50],
@@ -322,8 +322,8 @@ class TheServer {
  }
 
  // get one month chart data
- get_chart_data_one_month() {
-   store.dispatch({
+  get_chart_data_one_month() {
+    store.dispatch({
      type: 'UPDATE_HISTORICAL_PRICES',
      data: {
        BTC: [200, 250, 200, 300, 280, 300, 350],
@@ -336,29 +336,97 @@ class TheServer {
  }
 
  // update current coin type
- update_current_coin_type(coin_type) {
-   store.dispatch({
+  update_current_coin_type(coin_type) {
+    store.dispatch({
      type: 'UPDATE_CURRENT_COIN_TYPE',
      coin_type: coin_type,
    });
  }
 
 
- // get historical_price
- get_historical_price() {
-    let btc_url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=30&aggregate=3&e=CCCAGG";
+  // get historical price(close price) for chart
+  // scope: price unit is hour or day
+  // limit: number of data 
+  get_historical_price(scope, limit) {
+    let price_btc = [];
+    let price_eth = [];
+    let price_ltc = [];
+    let time = [];   
+
+    let btc_url = "https://min-api.cryptocompare.com/data/histo" + scope + "?fsym=BTC&tsym=USD&limit=" + limit + "&aggregate=1&e=CCCAGG";
     $.ajax(btc_url, {
       method: "get",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
       success: (resp) => {
-        alert(resp.data);
+        price_btc = resp.Data.map(function (price) {
+                return price.close;
+            });
+        time = resp.Data.map(function (price) {
+                return  convertTime(price.time, scope);
+            });
+	store.dispatch({
+	  type: 'UPDATE_HISTORICAL_PRICES',
+	  data: {
+	    BTC: price_btc,
+	    time: time,
+	  }
+	});
       },
     });
 
+    let eth_url = "https://min-api.cryptocompare.com/data/histo" + scope + "?fsym=ETH&tsym=USD&limit=" + limit + "&aggregate=1&e=CCCAGG";
+    $.ajax(eth_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        price_eth = resp.Data.map(function (price) {
+                return price.close;
+            });
+	store.dispatch({
+	  type: 'UPDATE_HISTORICAL_PRICES',
+	  data: {
+	    ETH: price_eth,
+	    time: time,
+	  }
+	});
+      },
+    });
 
+    let ltc_url = "https://min-api.cryptocompare.com/data/histo" + scope + "?fsym=LTC&tsym=USD&limit=" + limit + "&aggregate=1&e=CCCAGG";
+    $.ajax(ltc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        price_ltc = resp.Data.map(function (price) {
+                return price.close;
+            });
+	store.dispatch({
+	  type: 'UPDATE_HISTORICAL_PRICES',
+	  data: {
+	    LTC: price_ltc,
+	    time: time,
+	  }
+	});
+      },
+    });
   }
 
 }
+
+// convert unix timestamp into normal time
+function convertTime(unixtime, scope) {
+  let u = new Date(unixtime*1000);
+  let date = u.toLocaleDateString();
+  let time = u.toLocaleTimeString();
+  if (scope == "day") {
+    return date;
+  }
+  else if (scope == "hour") {
+    return date + "\n" + time;
+  }
+};
 
 export default new TheServer();
