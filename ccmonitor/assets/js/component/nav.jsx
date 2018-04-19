@@ -40,7 +40,7 @@ function Nav(props) {
             <span className="icon-bar"></span>
           </button>
           <Link className="navbar-brand" to="/">
-            <img src="https://cdn1.iconfinder.com/data/icons/social-shade-rounded-rects/512/creative_common-128.png" width="40" height="40" className="d-inline-block align-text-bottom" alt=""></img>
+            <span className="cc-icon"><img src="https://cdn1.iconfinder.com/data/icons/social-shade-rounded-rects/512/creative_common-128.png" width="35" height="35" className="d-inline-block align-top cc-icon" alt=""></img></span>
             <span className="project-name text-white"> Ccmonitor</span>
           </Link>
         </div>

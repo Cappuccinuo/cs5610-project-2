@@ -23,11 +23,16 @@
     margin-bottom: 10px;
 }
 .navbar-brand{
+  padding: 10px;
+  margin-bottom: 10px;
   color: white;
   font-family: 'Cabin', sans-serif;
 }
+.cc-icon{
+  margin-bottom: 10px;
+}
 .project-name{
-  font-size: 25px;
+  font-size: 30px;
 }
 .social-buttons{
   padding: 5px;
