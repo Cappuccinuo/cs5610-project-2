@@ -1,349 +1,227 @@
-\section{Introduction and Game Description}
-\subsection{Game Introduction}
-\subsubsection{Game rules}
-Othello, also called Reversi, is a strategy board game for two players, played 
-on an 8*8 uncheckered board. There are sixty-four identical game pieces called 
-disks (Black and White). Players take turns placing disks on the board with 
-their assigned color facing up. During a play, any disks of the opponent's color 
-that are in a straight line and bounded by the disk just placed and another disk 
-of the current player's color are turned over to the current player's color.
+\section{Introduction and App Description}
 
-Only placement of disk that can flip opponent's disk can be considered as a valid placement, otherwise the player cannot put disk at this position. If in a player's turn, no valid placement exists under the situation, it will automatically becomes opponent's turn. If both players don't have a valid placement, the player with more disks win.
 
-\subsubsection{Game object}
-The object of the game is to have the majority of disks turned to display your 
-color when the last playable empty square is filled.
 
-\subsection{Design Introduction}
-
-\subsubsection{Join/Create/Speculate a game} There are two ways for a logged-in 
-user to join an existing game. He can either 
-click the join game button on the index page and type in the existing game name
-if he/she knows, or he can enter the game lobby by clicking the 
-game lobby button. There are two kinds of game, one is games already started, 
-which other users can speculate, the other is games still wait for matching, 
-which other users can join to play against others. 
-
-\subsubsection{Speculators and Players authority} We allow anonymous user
-(who don't log in) to speculate the game that has started but that user will not
-be shown in speaculator list in game page. But one user is only 
-be allowed to join or create the game when he/she is logged in. 
-
-\subsubsection{Priority for current players}
-When a player creates a new room, the game board is locked, he must wait for an
-opponent to join to start the game. After second player enters the room, the board
-will be unlocked, first person enter the room will move first. After the game 
-start, other users can speculate the game. When one of the players leaves the 
-room, the room will still exist, while when both players left the room, the 
-room will be deleted and all the speculators will receive an alert and be 
-redirected to index page . That's why we call the design choice priority for 
-players, as they are the key roles of the game.
-
-\section{UI Design}
-There are four main pages in our game.
+\section{Interact with application}
+There are four main pages in our application.
 \subsection{Index Page}
-Index page contains the entry to log in, create game and enter game lobby.
+Index page contains three main parts: navbar, news, and coin info of three types 
+of cryptocurrency.
 \begin{itemize}
-\item When click log in, the app will redirect user to log-in page.
-\item When click join game button, user can create a new game or join an 
-existing game by entering the game name. When hit enter, the app will redirect
-user to game page.
-\item When click game lobby button, the app will redirect user to lobby page.
-\end{itemize}
+\item If the user is not logged in, he/she can only see the log in and sign up
+dropdown on the navbar. 
+\item By clicking the log in dropdown, the user can log in with google or github
+account. Or he/she can log in using his/her own account on our website.
+\item By clicking the sign up dropdown, the user can sign up an account on our 
+website.
+\item If the user is logged in, he/she can access coins info page, alert page
+and notification center page via button on navbar.
+\item Left part of main body in index is news part, where our application will
+show the latest cryptocurrency news. By clicking the news title, we can view the
+detail of that new on news websites.
+\item Right part of main body in index is coin info part, where our application 
+will show the real time price, change since open, and open price of three different 
+coins(BTC, ETH, LTC). By clicking the coin name, we can enter the specific info 
+page of that type of coin.
 \begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{index.png}
+\includegraphics[height=2.0in, width=3.5in]{index.png}
 \caption{\texttt{Index Page}}
 \end{figure}
-\begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{index2.png}
-\caption{\texttt{Join Game Button}}
-\end{figure}
-
-\subsection{Log in Page}
-Log in part is very basic. User can just enter the name without password to 
-log in.
-\begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{login.png}
-\caption{\texttt{Log in Page}}
-\end{figure}
-
-\subsection{Lobby Page}
-The information shown on the lobby page including game name, game status(user
-is waiting for a match/the players currently playing), number of speculators,
-and a column indicates choice of joining or speculating one game. Notice that 
-when the lobby is empty, the user receive empty lobby alert instead of being
-directed to empty lobby.
-\begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{lobby.png}
-\caption{\texttt{Empty Lobby}}
-\end{figure}
-\begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{lobby2.png}
-\caption{\texttt{Lobby Page}}
-\end{figure}
-
-\subsection{Game Page}
-In the game page, there are three main sections.
-\begin{itemize}
-  \item Header shows the game info, including game name, and game status(waiting
-  for a match or players name who are currently playing).
-  \item Side bar shows all the speculators' names and has one exit button for 
-  a player to exit a game.
-  \item Game board uses react-konva component. The disc uses Circle, the board 
-  uses Rect, and board line uses Line. On right side of board shows the ownership
-  of current move, and number of white and black discs.
-
 \end{itemize}
+
+\subsection{Coin Info Page}
+The coin page show specific info of each coin. On the top of the page, we display 
+the same brief information on index of that coin. Right of that part we use a chart
+to display the trend of that coin, including real time price trend, day price trend,
+week price trend and month price trend. On the bottom part of the page, we display
+a table that shows 30 days historical price of that coin.
 \begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{game.png}
-\caption{\texttt{Game Page}}
+\includegraphics[height=2.0in, width=3.5in]{coinpage.png}
+\caption{\texttt{BitCoin Info Page}}
 \end{figure}
-\section{UI to Server Protocal}
-In this project, there are two types of connection from UI to Server. For page 
-rendering and user login, the connection is supported by Phoenix controllers 
-invoked from the router in response to HTTP requests (as used in Tasktracker 
-homework). For game joining, game state update and broadcasting, the connection 
-is supported by websocket implemented by Phoenix channel, which provides a 
-bidirectional communication from UI to server.
 
-\subsection{HTTP request and Controllers}
-The paths under router.ex are shown as following:
+\subsection{Alert Page}
+There are two parts of our alert page, new subscribe and my alert.
 
-\begin{lstlisting}
-get "/", PageController, :index
-get "/login", PageController, :login
-get "/lobby", PageController, :lobby
-get "/game/:game", PageController, :game
+To subsribe a new alert, the user can click coins on nav bar and click subsribe. Users
+can choose coin type(BTC, LTC, ETH), alert type(Ascending or Descending), as well as the 
+threshold of that alert.
 
-post "/session", SessionController, :create
-delete "/session", SessionController, :delete
-\end{lstlisting}
-
-PageController handles all page requests, and SessionController only handles 
-login/logout operations. PageController is invoked as corresponding function 
-calls by Router, and corresponding templates are rendered. 
-
-SessionController is invoked in login template and uses put\_session to assign 
-username to window session. In router.ex, we also added a plug :get\_current\_user, 
-by which the username can be retrieved from session in any template. Based on 
-this, we can use <script> in game template to assign session username to window, 
-by which a socket can obtain session username for later use in channel.
-
-
-\subsection{Websocket and Channel}
-In user\_socket.ex, we defined channel as "gamechannel:*", where the "*" stands 
-for specific name of game table. Therefore a instance of channel stands for a 
-specific game table. 
-
- When a user joins a game (no matter as a player or a speculator), the user just 
- provides the channel name that stands for the name of game table, as well as 
- the socket that contains username originally from session. The join function 
- in game\_channel.ex will invoke module in game.ex to handle the real joining 
- logic, e.g. whether the game exists or needs to be created in Agent, or 
- whether the user joined as a player or speculator...
-
- We will cover in more details about the data structure on server in later part 
- of the report, but to illustrate the payload structure, we just put our 
- server-side data structure here:
-
- \begin{lstlisting}
- %{ 
-  colors: [],          # a list of numbers of length 64
-  turn: 0,             # a number to indicate who's turn, the 
-                         number is the index in players
-  players: [],         # a list of string that stands for 
-                         players
-  winner: nil,         # a number that stands for the winner, 
-                         nil if no winner
-  speculators: [],     # a list of string that stands for 
-                         speculators
-  online_players: 2    # number of players remained online in 
-                         this table
-  }
-  \end{lstlisting}
-
-  The above data structure stands for a state of game in a game table, 
-  which has uniform structure through UI to Server, and we will call it "state" 
-  or "game state" in later parts for simplicity. After a join function is called, 
-  it wraps and returns a response through socket in a structure like this: 
-\begin{lstlisting}
-%{"state" => state, "msg" => "message to be displayed", "type" => "optional type"}
-\end{lstlisting}
-
-where state is the current game state, which has a structure we discussed above. 
-The "msg" stands for the message to be displayed at front-end to notify a new 
-user/speculator has joined/left. "type" stands for what kind of notification or 
-dialog(success, warning or error) should be displayed.
-
-Apart from a direct return, the join function also triggers handle\_info
-({:after\_join, resp}, socket) to be invoked after joining, where resp is 
-identical with the reponse passed to socket. In this handle\_info function, 
-we broadcast resp to every socket that subsribed to this channel 
-(this game table). In this way, every player and speculator will be notified 
-that a new player or new speculator has joined this room/table, or a player 
-comes back to this room/table. This broadcast has a label "new:user", and the 
-callback in front-end's channel.on("new:user") will be called to determine 
-how the notification will be executed according to the resp["msg"] and \\
-resp["type"].
-
-When a player clicks a position on game board, the UI pushes "move" through 
-the socket to server by channel.push("move", {index: index}), where index is 
-the index in the 1-D array of colors calculated by x and y coordinates. 
-Therefore, the index in 1-D array is the only variable passed to server 
-in order to make a move. In game\_channel.ex, handle\_in("move", \%{"index" => i}, 
-socket) will be invoked and passed i to Game.simulate\_next\_state(curr\_name, i) 
-in game.ex, curr\_name is the current table name that can be retrieved from socket.
-The Game.simulate\_next\_state/2 function returns a tuple {boolean, resp}, 
-where the boolean indicates whether this move is a valid move, and resp has a 
-structure like this:
- \begin{lstlisting}
-%{"state" => state}
- \end{lstlisting}
-
-where state is the current game state. If current move is a valid move, 
-resp will be broadcasted to every socket subscribed, and {:ok, resp} will 
-be returned. If move is invalid, resp will not be broadcasted, and {:error, 
-resp} will be returned. In client-side, if channel detects "error" in call-back, 
-the player will be notified that the current move is invalid.
-
-When any user leaves the game table (close browser, log out or go to another 
-page), terminate(reason, socket) will be called. The terminate/2 determines 
-whether the game table should persist and what kind of message should be 
-broadcasted, the broadcasted payload has a structure like this:
-
- \begin{lstlisting}
- %{"msg" => msg, "type" => type}
-\end{lstlisting}
-
-
-\section{Data structures on server}
-As discussed before, the game state on server has a structure like this:
-\begin{lstlisting}
-%{ 
-  colors: [],        # a list of numbers of length 64
-  turn: 0 or 1,      # a number to indicate who's turn, the 
-                       number is the index in players
-  players: [],       # a list of string that stands for 
-                       players
-  winner: nil,       # a number that stands for the winner, 
-                       nil if no winner
-  speculators: [],   # a list of string that stands for 
-                       speculators
-  online_players: 2  # number of players remained online in 
-                       this table
-  }
-\end{lstlisting}
-More specifically, each element in the color list stands for the occupation or 
-color on this position, 0 represents unoccupied, 1 represents black disc, and 
-2 represents white disc. The list of players and list of speculators are both 
-lists of usernames. The "turn" attribute is the index in players, the username 
-of owner of this turn is players[turn]. The "winner" attribute uses the similar 
-design, players[winner] is the username of the winner, but apart from 0 and 1, 
-"winner" attribute can also be 2, which stands for a tie situation when game 
-ends. The online\_players stands for the number of online players remained in 
-this table, when online\_players becomes 0, the game table will be closed and 
-deleted as introduced in our design part.
-
-Game states all persist on Agent in server. The Agent in our project has a 
-structure like this:
-\begin{lstlisting}
-%Agent{games: %{game_name: state}}
-\end{lstlisting}
-Under this design, Agent.get(:games, \&(\&1)) will get all game states in a form 
-of map, and this map can get a specific game state using the game\_name as key. 
-The reason why we chose not to directy use {game\_name => state} as key-value 
-pair under Agent is that, in order to implement game lobby, we want the whole 
-list of game states, and Agent.get(:games, \&(\&1)) can simply achieve this. The 
-trade-off is, this makes us need to get all game states before retrieving a 
-specific state, and each game state has O(n) complexity, where n is number of 
-users (players and speculators list), if there are m rooms, the space complexity 
-can be O(mn). However, as this is a course project, even if we have 1000 users 
-and 1000 rooms, the worst-case memory used is just O(1000,000), which can 
-actually use only MBs of memory, therefore making our design totally acceptable.
-
-\section{Implementation of game rules}
-All game rules are implemented under a single module in game.ex. Apart from game 
-rules, game.ex also handles how game state would change, whether a user should be 
-a player or a speculator in a joining or leaving game event, as well as winner check. 
-In general, it handles all behind-the-scene app logic/intelligence, which is the 
-"model" portion of a MVC pattern.
-
-As for game rules, imagine we have a game board, each time a player clicks a position 
-on this board, the algorithm would check in 8 directions (up, down, left, right, 
-up-left, up-right, down-left, down-right) from this position to determine whether 
-there exists a disc in the same color so that all opponent's discs along the path 
-could flip. Since Elixir is a functional language, we implemented the above algorithm 
-using recursion in the function check\_swaps/4. Besides check\_swaps/4, there is 
-in\_bound/2 function working with it to make sure not going out of bound. Also, 
-valid\_next/2 function is used to filter the cases when the next adjacent disc is 
-in the same color, i.e. a valid move should flip at least one opponent's disc.
-
-It's worth noticing that in Othello, in some cases, in one player's turn, the player 
-cannot find any valid move in order to flip opponent's discs. According to many 
-examples of Othello games, they handle this problem by simply giving the current 
-turn to this player's opponent, and we adopted this game rule in our design. 
-Futhermore, even if the opponent take over the turn, the opponent might also not 
-have a valid move, in this case, as both players don't have a valid move, we will 
-start counting number of discs to produce and announce a winner. In our algorithm, 
-a valid next move check will be done after one player successfully makes a move. 
-In the valid next move check, every spare place on board is checked to determine 
-whether the opponent can make a valid move here, if no such place exists, the turn 
-of game state will remain the same and this will be notified at front-end. If current 
-player cannot move, either, a winner will be determined and announced. The time 
-complexity of this process might sound high, i.e. if total positions on board is N, 
-our algorithm is approximately O(N\^2), but there are totally only 64 positions on 
-board, that is, the input size of our algorithm is very small in nature, so the 
-server would definitely afford an "inefficient" algorithm, not to mention it's still 
-poly-nomial.
-
-Check winner is also an important part of game rules. In most cases, players fill up 
-all spaces on board, and player with more discs on the board becomes winner. Besides, 
-as discussed above, if both players cannot make a valid move, the player with more 
-disc on the board becomes winner. Moreover, a special case of the second case is that 
-when all colors of discs on board become identical, this should be combined in second 
-case. These logics are implemented with get\_num\_colors/3 function to count the number 
-of discs in each color. Similar to check\_swaps/4, get\_num\_colors/3 is also implemented 
-using recursion.
-
-
-\section{Problems/Challenges and Solutions}
-\subsection{Server-side update on every client} Every time the server side has
-been updated, every client connect to the same game should see the change. This
-can be done with broadcast in Phoenix.Channel.
-\subsection{Speculator number increase when refresh} When we implement 
-speculators function, the number of speculators will increase when the speculator 
-refresh the page even the actual number of speculators remain the same. That's 
-because at first we just append the user\_name to speculators when the user\_name
-exists. Then we add a judgement that if the speculator is already in current\_game
-speculators, we just move on and do nothing.
-\subsection{Game page login style missed} Sometimes when user log in from lobby page,
-the style is incomplete, this can be fixed by changing all the url in index page
-to absolute path. Like {\bf href="/images/icons/favicon.ico"} instead of 
-{\bf href="images/icons/favicon.ico"}.
 \begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.3in]{stylemiss.png}
-\caption{\texttt{Missing style}}
+\includegraphics[height=1.5in, width=3.5in]{alert.png}
+\caption{\texttt{Alert Page}}
 \end{figure}
-\subsection{Empty lobby} We redirect user to index page when lobby is empty. While 
-when another user created a new table, the user who has been redirected to index
-page has to refresh before clicking into the lobby page. As @gamenum we count on the backend
- is only loaded for once in index page. Solution is that the judgement of gameNum 
- can be moved to lobby page (.html.eex), if in lobby page we find gameNum is 0, 
- just render index page.
-\subsection{Submit form when hit enter} Index part is written in react, and
-we want to submit form by hit enter instead of click on the button. We need
-to write the form onSubmit function and change the button type to submit.
-\begin{lstlisting}
-<form onSubmit={function(e) {
-  e.preventDefault();
-  window.location=link;
-  }}>
-  <div className="input">
-    <input onKeyUp={this.handleChange} placeholder={'Enter game name'}/>
-      <button id="enter" type="submit" color='success'>Join Game</button>
-  </div>
-</form>
-\end{lstlisting}
+
+
+To check all the alerts that the user have, the user can click my alert on alert page,
+the user can delete the alert by clicking the trash icon.
+
+\begin{figure}[!htb]
+\includegraphics[height=1.5in, width=3.5in]{myalert.png}
+\caption{\texttt{My Alert Page}}
+\end{figure}
+
+\subsection{Message Page}
+The user can check all the messages the server sent him/her by clicking my alert on alert
+page. Also the message page provide the function to filter all the message, including filter
+the messages by coin type, filter the messages by alert type.
+
+\begin{figure}[!htb]
+\includegraphics[height=1.0in, width=3.5in]{message.png}
+\caption{\texttt{Message Page}}
+\end{figure}
+
+
+
+
+
+\section{Server-side state}
+\subsection{Database Entities}
+We store some entities permanently in postgres db at server-side. 
+These entities include person, alert-setting and messages. 
+A person has an id, name, email, hashed\_password, provider 
+(google or github) and a token from provider. An alert-setting 
+has an id, threshold, coin\_type (BTC, ETH or LTC), alert\_type 
+(ascending or discending) and a person\_id as foreign key. 
+A message has an id, content, coin\_type and alert\_type used 
+for filtering at front-end. Browser can access and update/delete 
+these entities through corresponding APIs and controllers using 
+ajax call, and ajax callback would dispatch the front-end store 
+and reflect changes.
+\subsection{Agent State}
+Apart from those in-database entities, real-time prices of 
+cryptocurrencies are stored in Phoenix Agent and pushed to 
+browser through web-socket by Phoenix Channel. The real-time 
+price data is fetched from coinbase API through our server-side 
+Nodejs client and supplied to Phoenix Agent through web-socket, 
+too. In the Phoenix Agent, the state of real-time prices has 
+a structure like this: 
+\begin{center} 
+\%{"BTC" => [], "ETH" => [], "LTC" => [], "time" => []}, 
+\end{center}
+where a series of prices in last 5000 seconds 
+with 10 seconds as interval for each cryptocurrency is stored, 
+also the corresponding timestamps are stored. The series of prices 
+and timestamps have a maximum length of 500, which is maintained 
+by the Nodejs client. These real-time prices are used to support 
+the front-end echarts for users to observe a real-time price 
+change in 5000 seconds. 
+\subsection{Structures in Store}
+We maintained a store to create and manage a set of data structures, 
+utilizing Redux to combine these structures into a completed state 
+for components to render. Data structures in store include: "users" 
+that contains all users in our application, "token" contains the 
+token of current user, "login" contains login information, "signup" 
+contains register information, "alerts" contains all the alerts set 
+by current user, "messages" contains all the emails that have been 
+sent to current user, "current\_coin\_type" represents which type of 
+coin user is viewing, "prices" contains the real time prices for 
+coins, "historical\_prices" contains historical prices for coins.
+
+
+
+\section{Related API}
+\subsection{Coinbase}
+\subsection{Crypto Compare}
+We used CryptoCompare API to get historical prices for coins. 
+Historical price data can provide users a straightforward sense 
+of the trending and potential of coins, which is necessary for 
+users to make trading decision. And CryptoCompare provides free 
+and concise API to get historical price data. It parameters to 
+set the time period to aggregate the data over (for daily it's 
+days, for hourly it's hours) and the number of data points to 
+return. We used CryptoCompare to get the past 24 hours, one week, 
+one month, six months and one year's history prices for coins, 
+saving these prices into state and rending them into charts and tables.
+\subsection{Crypto Coins News API}
+We use crypto coins news api, which provides breaking cryptocurrency
+news - focusing on Bitcoin, Ethereum, ICOs, blockchain technology,
+and smart contracts. We can fetch all the news in JSON format by
+using AJAX's GET method. To display the news, we use title, description,
+and URL of that JSON data. Every time the user enter our page, the 
+page will display the top 5 crypto news. In this way, the user 
+can know the latest news of cryptocurrency.
+\subsection{OAuth API(Google and Github)}
+
+
+
+\section{Complex part of application}
+\subsection{Real Time Prices Monitoring at Server Side}
+A complex part of our app is finding a way to monitor real-time 
+prices for cryptocurrencies at server-side. This is necessary 
+because our app needs to: 
+\begin{itemize}
+\item 1. reflect real-time price change 
+through e-charts, 
+\item 2. send user alert emails based on the 
+real-time price change. 
+\end{itemize}
+Actually, it is the second point 
+makes it necessary to monitor real-time prices in server 
+instead of in browser. However, we used coinbase as external 
+API to get real-time price data, but it doesn't supply a 
+Phoenix/Elixir SDK, so we need to find a work-around. 
+
+Our solution is building a server-side Nodejs client, which 
+could work with a corresponding SDK from coinbase and connect 
+with Phoenix server through websocket. In the Nodejs client, 
+we used a recursive setTimeout function to fetch real-time 
+price data every 10 seconds, and we used Phoenix Channel to 
+push the data to Phoenix server through websocket. Since the 
+real-time browser data is also supplied through websocket, 
+it's convenient to let Nodejs client and browsers join at 
+the same channel, so every price update in Nodejs client 
+could reflect in browsers through this channel. Since the 
+Nodejs client is deployed on server and is the only data 
+source to update price data in channel, thus the monitoring 
+of real-time price data on server is implemented.
+
+\subsection{Display Data via Chart}
+To give users a clear and straightforward presentation of 
+coin prices, in “PriceChartComponent”, we utilized Echarts 
+to draw the chart for real time prices and historical prices 
+of selected coin. While implementing this component, first we 
+need to distinguish real time price and historical price, 
+because real time price is pushed by server through socket 
+and history price is returned by API request. To achieve that, 
+we maintained a variable to indicate whether user wanted to 
+view real time price chart or historical chart, detecting 
+whether the variable need to be toggled after each user 
+selection. Besides, since we provided three different coin 
+types, the chart should have ability to show price of different 
+coin types in a single component. To achieve that, we maintained 
+a “current\_coin\_type” variable in state to indicate current 
+coin type being selected. Based on the value of this variable, 
+chart will show corresponding prices for specific coin type. 
+Also, we need to adjust the apperance of the chart (like 
+font, color, axis) to keep consistency with the overall page style.
+
+
+\section{Challenges and Solutions}
+\subsection{Authentication with Social Media Account}
+A challenge we faced was implementing login with Github/Google 
+in our SPA. The auth controller in Phoenix works well with 
+html.eex templates by putting call-back user information in 
+session. However our app is a SPA that maintains a browser-side 
+state as store, which is not easy to get user information from 
+session. Besides, our app supports signup/signin with out website
+account instead of Github or Google, it is uneasy to integrate 
+three type of users together and let them behave equivalenty.
+
+Our solution is giving every user a server-generated token with 
+Token.sign and use this token to uniform users from different 
+login providers. For our own users, the token is generated at 
+TokenController as soon as they successfully login, and is sent 
+back to browser through ajax callback. As for user login by 
+providers, their user\_id is first fetched at PageController 
+from session, and the token is generated at PageController and 
+sent to browsers through window variable. Furthermore, the user 
+information in session will be removed at PageController to avoid 
+confusion in the future. Our front-end app component will mount 
+to detect token from cookies and token from window variable to 
+update the login status.
+
+\subsection{Alert Email Distribution}
 
 
 
