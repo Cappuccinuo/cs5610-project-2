@@ -11,7 +11,7 @@ class IndexComponent extends React.Component {
     console.log("in index");
     this.state = {
       news: [],
-    }; 
+    };
 
     api.get_open_price();
   }
@@ -50,7 +50,7 @@ class IndexComponent extends React.Component {
     let btc_open_price = this.props.prices.BTC_open;
     let eth_open_price = this.props.prices.ETH_open;
     let ltc_open_price = this.props.prices.LTC_open;
-   
+
     return <div className="index">
       <div id="order-book" style={{display: "block"}}>
         <div>
@@ -160,9 +160,10 @@ class IndexComponent extends React.Component {
         </div>
 
       </div>
-
-      <div className="text offset-lg-1 col-lg-7 col-md-12">
-        {this.state.news}
+      <div className="news-panel">
+        <div className="text offset-lg-1 col-lg-7 col-md-12">
+          {this.state.news}
+        </div>
       </div>
     </div>
   }
