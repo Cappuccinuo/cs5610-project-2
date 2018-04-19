@@ -31,6 +31,12 @@ class PriceChartComponent extends React.Component {
       case "one_month":
           api.get_historical_price("day", "30");
           break;
+      case "six_month":
+          api.get_historical_price("day", "180");
+          break;
+      case "one_year":
+          api.get_historical_price("day", "365");
+          break;
       default:
           api.get_historical_price("hour", "24");
           break;
@@ -50,6 +56,8 @@ class PriceChartComponent extends React.Component {
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_day")}>1 day</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_week")}>1 week</a></li>
       <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_month")}>1 month</a></li>
+      <li><a data-toggle="tab" onClick={()=>this.change_chart_data("six_month")}>6 months</a></li>
+      <li><a data-toggle="tab" onClick={()=>this.change_chart_data("one_year")}>1 year</a></li>
       </ul>
     </div>
       <div>

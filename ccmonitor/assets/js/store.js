@@ -128,6 +128,23 @@ function historical_prices(state = initial_historical_price, action) {
   }
 }
 
+
+let initial_price_for_table = {
+  BTC: [],
+  LTC: [],
+  ETH: [],
+};
+
+function prices_for_table(state = initial_price_for_table, action) {
+  switch (action.type) {
+    case 'UPDATE_PRICES_FOR_TABLE':
+      return Object.assign({}, state, action.data);
+    default:
+      return state;
+  }
+}
+
+
 // messages
 function messages(state = [], action) {
   switch (action.type) {
@@ -153,7 +170,7 @@ function root_reducer(state0, action) {
   console.log("reducer", action);
   // {posts, users, form} is ES6 shorthand for
   // {posts: posts, users: users, form: form}
-  let reducer = combineReducers({users, login, token, signup, prices, historical_prices, all_alerts, alerts, alert_form, messages, current_coin_type});
+  let reducer = combineReducers({users, login, token, signup, prices, historical_prices, all_alerts, alerts, alert_form, messages, current_coin_type, prices_for_table});
   let state1 = reducer(state0, action);
   console.log("state1", state1);
   return deepFreeze(state1);

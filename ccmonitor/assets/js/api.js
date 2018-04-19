@@ -320,48 +320,6 @@ class TheServer {
     });
   }
 
- // need to get data from back end
- // get one day chart data
-  get_chart_data_one_day() {
-    store.dispatch({
-     type: 'UPDATE_HISTORICAL_PRICES',
-     data: {
-       BTC: [50, 250, 200, 300, 280, 300, 350],
-       ETH: [300, 200, 250, 200, 300, 280, 300],
-       LTC: [200, 100, 200, 250, 200, 300, 280],
-       time: ["2018-4-11\n1pm", "2018-4-11\n2pm", "2018-4-11\n3pm", "2018-4-11\n4pm",
-            "2018-4-11\n5pm", "2018-4-11\n6pm", "2018-4-11\n7pm"],
-     }
-   });
- }
-
- // get one week chart data
-  get_chart_data_one_week() {
-    store.dispatch({
-     type: 'UPDATE_HISTORICAL_PRICES',
-     data: {
-       BTC: [200, 250, 200, 250, 280, 300, 50],
-       ETH: [100, 200, 250, 1800, 300, 280, 250],
-       LTC: [50, 100, 200, 230, 200, 300, 100],
-       time: ["2018-4-11", "2018-4-12", "2018-4-13", "2018-4-14",
-            "2018-4-15", "2018-4-16", "2018-4-17"],
-     }
-   });
- }
-
- // get one month chart data
-  get_chart_data_one_month() {
-    store.dispatch({
-     type: 'UPDATE_HISTORICAL_PRICES',
-     data: {
-       BTC: [200, 250, 200, 300, 280, 300, 350],
-       ETH: [100, 200, 250, 200, 300, 280, 300],
-       LTC: [50, 100, 200, 250, 200, 300, 280],
-       time: ["2018-4-12", "2018-4-13", "2018-4-14", "2018-4-15",
-            "2018-4-16", "2018-4-17", "2018-4-18"],
-     }
-   });
- }
 
  // update current coin type
   update_current_coin_type(coin_type) {
@@ -491,8 +449,59 @@ class TheServer {
 	});
       },
     });
-
   }
+
+// get prices for table in coin page
+  get_prices_for_table() {
+    let btc_url = "https://min-api.cryptocompare.com/data/histoday?fsym=BTC&tsym=USD&limit=30&aggregate=1&e=CCCAGG";
+    $.ajax(btc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        let prices = resp.Data;
+	store.dispatch({
+	  type: 'UPDATE_PRICES_FOR_TABLE',
+	  data: {
+	    BTC: prices,
+	  }
+	});
+      },
+    });
+
+    let eth_url = "https://min-api.cryptocompare.com/data/histoday?fsym=ETH&tsym=USD&limit=30&aggregate=1&e=CCCAGG";
+    $.ajax(eth_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        let prices = resp.Data;
+	store.dispatch({
+	  type: 'UPDATE_PRICES_FOR_TABLE',
+	  data: {
+	    ETH: prices,
+	  }
+	});
+      },
+    });
+
+    let ltc_url = "https://min-api.cryptocompare.com/data/histoday?fsym=LTC&tsym=USD&limit=30&aggregate=1&e=CCCAGG";
+    $.ajax(ltc_url, {
+      method: "get",
+      dataType: "json",
+      contentType: "application/json; charset=UTF-8",
+      success: (resp) => {
+        let prices = resp.Data;
+	store.dispatch({
+	  type: 'UPDATE_PRICES_FOR_TABLE',
+	  data: {
+	    LTC: prices,
+	  }
+	});
+      },
+    });
+  }
+
 
 }
 
