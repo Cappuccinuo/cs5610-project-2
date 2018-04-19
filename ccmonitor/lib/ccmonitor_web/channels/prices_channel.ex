@@ -2,7 +2,7 @@ defmodule CcmonitorWeb.PricesChannel do
   use CcmonitorWeb, :channel
   use Agent
 
-  alias Ccmonitor.{Mailer, Email, Alerts}
+  alias Ccmonitor.{Mailer, Email, Alerts, Messages}
   require Logger
 
   def join("prices:" <> name, payload, socket) do
@@ -77,6 +77,9 @@ defmodule CcmonitorWeb.PricesChannel do
           body
         ) |> Mailer.deliver_later
       end
+      message = %{content: body, coin_type: alert.coin_type, alert_type: alert.alert_type, user_id: alert.user.id }
+      _ = Messages.create_message(message)
+
   end
 
   # Add authorization logic here as required.

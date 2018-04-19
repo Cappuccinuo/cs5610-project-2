@@ -59,4 +59,5 @@ config :ccmonitor, Ccmonitor.Repo,
 
 # Configure Bamboo
 config :ccmonitor, Ccmonitor.Mailer,
-  adapter: Bamboo.LocalAdapter
+  adapter: Bamboo.SendgridAdapter,
+  api_key: "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"

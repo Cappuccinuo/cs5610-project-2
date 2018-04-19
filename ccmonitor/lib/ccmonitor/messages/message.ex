@@ -15,7 +15,7 @@ defmodule Ccmonitor.Messages.Message do
   @doc false
   def changeset(message, attrs) do
     message
-    |> cast(attrs, [:coin_type, :alert_type, :content])
+    |> cast(attrs, [:coin_type, :alert_type, :content, :user_id])
     |> validate_required([:coin_type, :alert_type, :content])
   end
 end

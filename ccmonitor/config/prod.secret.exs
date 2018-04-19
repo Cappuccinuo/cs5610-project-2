@@ -12,6 +12,12 @@ config :ccmonitor, CcmonitorWeb.Endpoint,
   url: [host: "localhost", port: 5108],
   secret_key_base: "T9sn5wFh4N2o4k7KEISnYceH8SSatXHyig7JZyqwsfXBOdFq+YjJo5SwyIjnOS3t"
 
+# Configure Bamboo
+config :ccmonitor, Ccmonitor.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  api_key: "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"
+
+
 # Configure your database
 config :ccmonitor, Ccmonitor.Repo,
   adapter: Ecto.Adapters.Postgres,

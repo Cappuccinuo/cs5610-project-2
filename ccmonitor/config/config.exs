@@ -17,6 +17,11 @@ config :ccmonitor, CcmonitorWeb.Endpoint,
   pubsub: [name: Ccmonitor.PubSub,
            adapter: Phoenix.PubSub.PG2]
 
+# Mailer
+config :ccmonitor, Ccmonitor.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  api_key: "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"
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
