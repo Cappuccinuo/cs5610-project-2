@@ -22,6 +22,13 @@
 #login-dp .form-group {
     margin-bottom: 10px;
 }
+.navbar-brand{
+  color: white;
+  font-family: 'Cabin', sans-serif;
+}
+.project-name{
+  font-size: 25px;
+}
 .social-buttons{
   padding: 5px;
   border-radius: 25px;
