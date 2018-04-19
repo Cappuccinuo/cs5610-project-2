@@ -11,7 +11,7 @@ config :ccmonitor,
 
 # Configures the endpoint
 config :ccmonitor, CcmonitorWeb.Endpoint,
-  url: [host: "localhost"],
+  url: [host: "localhost", port: 5108],
   secret_key_base: "rxQxMn5D4eyl8W7CMK7tHi/LlusiIMrftKLaLBO7v/cPdSfp/kviWumch9Z8sE7E",
   render_errors: [view: CcmonitorWeb.ErrorView, accepts: ~w(html json)],
   pubsub: [name: Ccmonitor.PubSub,
