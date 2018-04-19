@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.1.21)  19 APR 2018 16:15
+This is XeTeX, Version 3.14159265-2.6-0.99992 (TeX Live 2015) (preloaded format=xelatex 2016.1.21)  19 APR 2018 16:49
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1027,26 +1027,26 @@ Underfull \vbox (badness 1303) has occurred while \output is active []
  [1.1
 
 ]
-Overfull \hbox (5.20087pt too wide) in paragraph at lines 165--178
+Overfull \hbox (5.20087pt too wide) in paragraph at lines 177--190
 \T1/LinuxLibertineT-TLF/m/n/9 data is also sup-plied through web-socket, it's c
 on-ve-nient to let Nodejs
  []
 
 LaTeX Font Info:    Font shape `T1/LinuxBiolinumT-TLF/m/n' will be
-(Font)              scaled to size 9.0pt on input line 179.
+(Font)              scaled to size 9.0pt on input line 190.
 [2.2]
 Missing character: There is no “ in font LinLibertineT-tlf-t1!
 Missing character: There is no ” in font LinLibertineT-tlf-t1!
 Missing character: There is no “ in font LinLibertineT-tlf-t1!
 Missing character: There is no ” in font LinLibertineT-tlf-t1!
 
-Overfull \hbox (2.64412pt too wide) in paragraph at lines 180--198
+Overfull \hbox (2.64412pt too wide) in paragraph at lines 192--210
 \T1/LinuxLibertineT-TLF/m/n/9 To give users a clear and straight-for-ward pre-s
 en-ta-tion of coin prices,
  []
 
 
-Overfull \hbox (2.93843pt too wide) in paragraph at lines 202--210
+Overfull \hbox (2.93843pt too wide) in paragraph at lines 214--222
 \T1/LinuxLibertineT-TLF/m/n/9 in our SPA. The auth con-troller in Phoenix works
  well with html.eex
  []

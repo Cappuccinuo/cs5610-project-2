@@ -122,6 +122,18 @@ coins, "historical\_prices" contains historical prices for coins.
 
 \section{Related API}
 \subsection{Coinbase}
+We used Coinbase API to get real time prices for coins. Real 
+time price provides important information for users to keep 
+track of the newest status of interested coins. User behaviors 
+like purchase and sell are closely related to real time price. 
+Besides, real time price is the foundation of other functionalities 
+of our application, like sending messages when the price reached 
+certain threshold configured by users. Coinbase provides simple 
+API to get real time price of different coin types. On the server 
+side, we got real time price every five seconds, then pushed price 
+into browser-side state through web socket.
+
+
 \subsection{Crypto Compare}
 We used CryptoCompare API to get historical prices for coins. 
 Historical price data can provide users a straightforward sense 
