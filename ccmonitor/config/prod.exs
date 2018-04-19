@@ -21,6 +21,10 @@ config :ccmonitor, CcmonitorWeb.Endpoint,
 # Do not print debug messages in production
 config :logger, level: :info
 
+config :ccmonitor, Ccmonitor.Mailer,
+  adapter: Bamboo.SendgridAdapter,
+  api_key: "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"
+
 # ## SSL Support
 #
 # To get SSL working, you will need to add the `https` key
