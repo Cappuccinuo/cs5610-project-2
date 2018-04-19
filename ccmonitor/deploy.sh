@@ -17,9 +17,6 @@ mix deps.get
 mix phx.digest
 mix release --env=prod
 
-cd ../node_client
-npm install
-
 mkdir -p ~/www
 mkdir -p ~/old
 
