@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="">
   <meta name="author" content="">
-  <link rel="shortcut icon" type="image/x-icon" href="Steam.ico" />
+  <link rel="shortcut icon" type="image/x-icon" href="https://cdn1.iconfinder.com/data/icons/social-shade-rounded-rects/512/creative_common-128.png" />
 
   <title>Hello Ccmonitor!</title>
   <link rel="stylesheet" href="<%= static_path(@conn, "/css/app.css") %>">
