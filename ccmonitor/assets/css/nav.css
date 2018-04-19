@@ -22,21 +22,23 @@
 #login-dp .form-group {
     margin-bottom: 10px;
 }
-.btn-github{
-    color: #fff;
-    background-color:#3b5998;
+.social-buttons{
+  background-color: LightGrey;
+  border-radius: 25px;
+  text-decoration: none;
+  text-align: center;
 }
-.btn-github:hover{
-    color: #fff;
-    background-color:#59b5fa
+.fa-github{
+  padding: 0.1em;
+  margin-right: 0.1em;
+  text-decoration: none;
+  text-align: center;
 }
-.btn-google{
-    color: #fff;
-    background-color:#3b5998;
-}
-.btn-google:hover{
-    color: #fff;
-    background-color:#59b5fa;
+.fa-google{
+  padding: 0.1em;
+  margin-left: 0.1em;
+  text-decoration: none;
+  text-align: center;
 }
 @media(max-width:768px){
     #login-dp{
