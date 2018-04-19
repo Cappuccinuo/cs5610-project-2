@@ -39,7 +39,10 @@ function Nav(props) {
             <span className="icon-bar"></span>
             <span className="icon-bar"></span>
           </button>
-          <Link className="navbar-brand" to="/">Ccmonitor</Link>
+          <Link className="navbar-brand" to="/">
+            <img src="https://cdn1.iconfinder.com/data/icons/social-shade-rounded-rects/512/creative_common-128.png" width="40" height="40" className="d-inline-block align-text-bottom" alt=""></img>
+            <span className="project-name text-white"> Ccmonitor</span>
+          </Link>
         </div>
 
         <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
