@@ -120,8 +120,8 @@ class Login extends React.Component {
                         <div className="col-md-12">
                           <span className="badge badge-primary"> Login with : </span>
                           <div className="social-buttons">
-                            <a href="/auth/github" className="social-icons"><i className="fa fa-github fa-4x fa-spin"></i></a>
-                            <a href="/auth/google" className="social-icons"><i className="fa fa-google fa-4x fa-spin"></i></a>
+                            <a href="/auth/github" className="social-icons"><i className="fa fa-github fa-3x"></i></a>
+                            <a href="/auth/google" className="social-icons"><i className="fa fa-google fa-3x"></i></a>
                           </div>
                                           or
                            <form className="form" role="form" method="post" action="login">
