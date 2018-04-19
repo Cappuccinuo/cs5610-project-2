@@ -24,19 +24,24 @@
 }
 .social-buttons{
   background-color: LightGrey;
+  padding: 5px;
   border-radius: 25px;
   text-decoration: none;
   text-align: center;
 }
 .fa-github{
+  background-color: LightGrey;
+  border-radius: 100px;
   padding: 0.1em;
-  margin-right: 0.1em;
+  margin-right: 0.3em;
   text-decoration: none;
   text-align: center;
 }
 .fa-google{
+  background-color: LightGrey;
+  border-radius: 100px;
   padding: 0.1em;
-  margin-left: 0.1em;
+  margin-left: 0.3em;
   text-decoration: none;
   text-align: center;
 }
