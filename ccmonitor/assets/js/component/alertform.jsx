@@ -33,7 +33,11 @@ class AlertFormComponent extends React.Component {
       type: 'UPDATE_ALERT_FORM',
       data: data,
     });
-    api.update_current_coin_type(target.val());
+    
+    let value = target.val();
+    if (value == "BTC" || value == "ETH" || value == "LTC") {
+      api.update_current_coin_type(value);
+    }
   }
 
   submit_form(ev) {
