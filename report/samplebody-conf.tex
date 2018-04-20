@@ -1,4 +1,12 @@
 \section{Introduction and App Description}
+Our app is named Ccmonitor, which comes from Cryptocurrency Monitor. 
+Ccmonitor connects to Coinbase APIs and polls cryptocurrency prices
+to provide information of cryptocurrencies. It allows users to choose 
+the cryptocurrencies they feel interested in to monitor and select 
+specific cryptocurrencies with the desired threshold to create alerts 
+and get emails when the chosen cryptocurrency crosses a price 
+threshold or there’s an arbitrage opportunity. 
+
 
 
 
@@ -30,11 +38,10 @@ page of that type of coin.
 \end{itemize}
 
 \subsection{Coin Info Page}
-The coin page show specific info of each coin. On the top of the page, we display 
-the same brief information on index of that coin. Right of that part we use a chart
-to display the trend of that coin, including real time price trend, day price trend,
-week price trend and month price trend. On the bottom part of the page, we display
-a table that shows 30 days historical price of that coin.
+The coin page show specific info of each coin. An intelligent and detailed chart 
+and a table of historical data is shown to the users. Users can get information 
+from Echarts which are more direct to compare data changes and trace back to understand the trend.
+
 \begin{figure}[!htb]
 \includegraphics[height=2.0in, width=3.5in]{coinpage.png}
 \caption{\texttt{BitCoin Info Page}}
@@ -154,7 +161,28 @@ and URL of that JSON data. Every time the user enter our page, the
 page will display the top 5 crypto news. In this way, the user 
 can know the latest news of cryptocurrency.
 \subsection{OAuth API(Google and Github)}
-
+We used Github and Google APIs to allow users to sign in with 
+their existing accounts in Github and Google. This is a much 
+more convenient way to get access the desired information for 
+the visitors who are not willing to spend several minutes to 
+register or lazy to input their name and email again and again. 
+The users want to get to the detailed page immediately and so 
+we offer them this kind of convenience. Also, emails are a 
+required field for our user table, which will be satisfied by 
+getting the email addresses from Github and Google when making 
+advantage of their APIs. We first have to register our app, 
+Ccmonitor, on the developers console of Github and Google and 
+get the client ID and the client secret, as well as filling out 
+the redirect url of our web app to take people to the successful-login 
+page(index page). We adopted ueberauth\_Google and ueberauth\_Github. 
+So we added ueberauth and ueberauth\_Google and ueberauth\_Github 
+to our defp deps block. Created a scope "/auth" block to handle 
+our authentication with Google and Github routes for get "/:provider". 
+And also inside our config/config.exs, we will start the process 
+of configuring our application to authenticate with Google and Github. 
+We updated our AuthController to add the Ueberauth plug and useful 
+signin, signout and callback functions. Also setting up user table 
+with provider, which can be Github and Google.
 
 
 \section{Complex part of application}
