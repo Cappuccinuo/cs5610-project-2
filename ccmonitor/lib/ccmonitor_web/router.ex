@@ -46,5 +46,6 @@ defmodule CcmonitorWeb.Router do
     post "/get_messages_coin_type", MessageController, :get_messages_coin_type
     post "/get_messages_alert_type", MessageController, :get_messages_alert_type
     post "/get_messages_coin_alert_type", MessageController, :get_messages_coin_alert_type
+    post "/get_alerts_all", AlertController, :get_alerts_all
   end
 end

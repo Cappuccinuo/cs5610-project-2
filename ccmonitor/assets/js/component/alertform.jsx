@@ -12,7 +12,7 @@ import swal from 'sweetalert';
 class AlertFormComponent extends React.Component {
   constructor(props) {
     super(props);
-    api.request_alerts_all();
+    api.request_alerts_all(this.props.token.user_id);
     this.state = {
       redirect: false,
       changeTab: false,

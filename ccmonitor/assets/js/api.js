@@ -115,7 +115,6 @@ class TheServer {
         });
       },
       error: (resp) => {
-        console.log(data);
         swal({
           title: "Wrong!",
           text: "Try again",
@@ -136,6 +135,13 @@ class TheServer {
           type: 'UPDATE_ALERTS',
           data: {[resp.data.id]: resp.data},
         });
+
+        swal({
+          title: "Success!",
+          text: "Please check in my alert",
+          icon: "warning",
+        });
+
         $(callback);
       },
       error: (resp) => {
@@ -171,11 +177,13 @@ class TheServer {
     });
   }
 
-  request_alerts_all() {
-    $.ajax("/api/v1/alerts", {
-      method: "get",
+
+  request_alerts_all(user_id) {
+    $.ajax("/api/v1/get_alerts_all", {
+      method: "post",
       dataType: "json",
       contentType: "application/json; charset=UTF-8",
+      data: JSON.stringify({user_id: user_id}),
       success: (resp) => {
         store.dispatch({
           type: 'ALERT_LIST',

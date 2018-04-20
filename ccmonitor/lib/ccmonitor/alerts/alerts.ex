@@ -8,6 +8,12 @@ defmodule Ccmonitor.Alerts do
 
   alias Ccmonitor.Alerts.Alert
 
+
+  # get all alerts of given user id
+  def get_alerts_all(user_id) do
+    Repo.all(from a in Alert, where: a.user_id == ^user_id)
+  end
+
   @doc """
   Returns the list of alerts.
 

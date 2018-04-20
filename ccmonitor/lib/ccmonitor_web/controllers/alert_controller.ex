@@ -54,4 +54,11 @@ defmodule CcmonitorWeb.AlertController do
       send_resp(conn, :no_content, "")
     end
   end
+
+  # get all alerts of given user_id
+  def get_alerts_all(conn, %{"user_id" => user_id}) do
+    alerts = Alerts.get_alerts_all(user_id)
+    render(conn, "index.json", alerts: alerts)
+  end
+
 end
