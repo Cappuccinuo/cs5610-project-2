@@ -51,6 +51,7 @@ class Login extends React.Component {
   }
 
   sign_up(ev) {
+    ev.preventDefault();
     api.submit_user(this.props.signup);
     this.props.dispatch({
       type: 'CLEAR_SIGNUP_FORM',

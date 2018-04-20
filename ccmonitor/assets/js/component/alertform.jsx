@@ -25,6 +25,7 @@ class AlertFormComponent extends React.Component {
   }
 
   update(ev) {
+    ev.preventDefault();
     let target = $(ev.target);
     console.log(target);
     let data = {};
@@ -41,7 +42,7 @@ class AlertFormComponent extends React.Component {
   }
 
   submit_form(ev) {
-
+    ev.preventDefault();
     let alert_params = this.props.alert_form;
 
     const data = {
