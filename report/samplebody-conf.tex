@@ -50,7 +50,7 @@ will show the real time price, change since open, and open price of three differ
 coins(BTC, ETH, LTC). By clicking the coin name, we can enter the specific info 
 page of that type of coin.
 \begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.5in]{index.png}
+\includegraphics[height=2.0in, width=3.5in]{index.jpg}
 \caption{\texttt{Index Page}}
 \end{figure}
 \end{itemize}
@@ -61,7 +61,7 @@ and a table of historical data is shown to the users. Users can get information
 from Echarts which are more direct to compare data changes and trace back to understand the trend.
 
 \begin{figure}[!htb]
-\includegraphics[height=2.0in, width=3.5in]{coinpage.png}
+\includegraphics[height=2.0in, width=3.5in]{coinpage.jpg}
 \caption{\texttt{BitCoin Info Page}}
 \end{figure}
 
@@ -73,7 +73,7 @@ can choose coin type(BTC, LTC, ETH), alert type(Ascending or Descending), as wel
 threshold of that alert.
 
 \begin{figure}[!htb]
-\includegraphics[height=1.5in, width=3.5in]{alert.png}
+\includegraphics[height=1.5in, width=3.5in]{alert.jpg}
 \caption{\texttt{Alert Page}}
 \end{figure}
 
@@ -82,7 +82,7 @@ To check all the alerts that the user have, the user can click my alert on alert
 the user can delete the alert by clicking the trash icon.
 
 \begin{figure}[!htb]
-\includegraphics[height=1.5in, width=3.5in]{myalert.png}
+\includegraphics[height=1.5in, width=3.5in]{myalert.jpg}
 \caption{\texttt{My Alert Page}}
 \end{figure}
 
@@ -92,7 +92,7 @@ page. Also the message page provide the function to filter all the message, incl
 the messages by coin type, filter the messages by alert type.
 
 \begin{figure}[!htb]
-\includegraphics[height=1.0in, width=3.5in]{message.png}
+\includegraphics[height=1.0in, width=3.5in]{message.jpg}
 \caption{\texttt{Message Page}}
 \end{figure}
 
@@ -280,7 +280,26 @@ to detect token from cookies and token from window variable to
 update the login status.
 
 \subsection{Alert Email Distribution}
+Another challenging part of our project is alert sending 
+through email. As mentioned before, there's a Nodejs client 
+updating cryptocurrency prices and pushing the data to Phoenix 
+Channel through websocket, thus it's natural to put alert 
+handling in the handle\_in function in the channel file. As 
+soon as a new price data is received from Nodejs client, a 
+query to database will be made to find all alert-settings 
+in alerts table according to specific condition: 1. what 
+type of cryptocurrency it is, 2. whether the price is ascending 
+or descending, 3. whether the price change is passing the 
+threshold. In handle\_in function of the channel, all 
+alert-settings that meet above conditions will be fetched 
+with user information preloaded to get user email information. 
 
+The next step is sending emails. We used Bamboo to compose 
+email and push composed email to Bamboo's Mailer, and we 
+chose to use deliver\_later to send emails in the background 
+to avoid blocking the server process. The real email-sending 
+service is supported by SendGrid, who is well integrated with 
+Bamboo where it can be used as SendGridAdapter.
 
 
 

@@ -1,12 +1,12 @@
 # Fdb version 3
-["bibtex sample-aamas18"] 1524355065 "sample-aamas18.aux" "sample-aamas18.bbl" "sample-aamas18" 1524355070
-  "sample-aamas18.aux" 1524355066 3592 d116bfeb97de335168e6c5e7d59270c5 ""
+["bibtex sample-aamas18"] 1524359320 "sample-aamas18.aux" "sample-aamas18.bbl" "sample-aamas18" 1524359322
+  "sample-aamas18.aux" 1524359321 3592 cc01e7557bca1c88832274f333ab4583 ""
   "sample-aamas18.bcf" 0 -1 0 ""
   "sample-bibliography.bib" 1521992380 2227 43084e3d4b25b6d8a84f620283afe4ba ""
   (generated)
   "sample-aamas18.blg"
   "sample-aamas18.bbl"
-["pdflatex"] 1524355065 "sample-aamas18.tex" "sample-aamas18.pdf" "sample-aamas18" 1524355070
+["pdflatex"] 1524359320 "sample-aamas18.tex" "sample-aamas18.pdf" "sample-aamas18" 1524359322
   "/usr/local/texlive/2015/texmf-dist/tex/generic/iftex/iftex.sty" 1365117071 2560 68a7cdbd7a5424fa22f4176117a417e9 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/ifxetex/ifxetex.sty" 1284331290 1458 43ab4710dc82f3edeabecd0d099626b2 ""
   "/usr/local/texlive/2015/texmf-dist/tex/generic/kastrup/binhex.tex" 1215376579 2553 4b99aa9667b708dd355926023d705446 ""
@@ -96,19 +96,19 @@
   "/usr/local/texlive/2015/texmf-dist/tex/latex/xkeyval/xkeyval.sty" 1417732693 4962 9c1069474ff71dbc47d5006555e352d3 ""
   "/usr/local/texlive/2015/texmf-dist/tex/xelatex/xetex-def/xetex.def" 1427500247 17536 f287c5eacddc627c62141f8a352c932d ""
   "aamas.cls" 1521992380 81443 41cc1a642f3320be4faa53954c35b838 ""
-  "alert.png" 1524167103 2816474 a5ba57a21e561a0254e38b4f0122efa2 ""
-  "coinpage.png" 1524161087 2802133 0d524dfdfe7e0292960385bd84acc068 ""
-  "index.png" 1524158912 3358312 43a7f7d630ac7c3b69509fb14b4a4c0b ""
-  "message.png" 1524167834 1245018 8038dca4dbfe5c871dfb55994e102500 ""
-  "myalert.png" 1524167624 1406102 14e7f109d79a4af1962da1112862ad5c ""
-  "sample-aamas18.aux" 1524355066 3592 d116bfeb97de335168e6c5e7d59270c5 ""
-  "sample-aamas18.bbl" 1524355065 0 d41d8cd98f00b204e9800998ecf8427e "bibtex sample-aamas18"
-  "sample-aamas18.out" 1524355066 3823 dfead762585e40e3f344db71f5e415ac ""
+  "alert.jpg" 1524359123 208934 56bbd302ef2092b8b198e7b66ab9c3f2 ""
+  "coinpage.jpg" 1524359057 246120 877f4d9a9e82e3ff8e397fdd5c1968a9 ""
+  "index.jpg" 1524359192 407138 483f11d9377553c708f7f146e424d406 ""
+  "message.jpg" 1524359214 152840 3217ce9f7ffa4011e75b8ece996e32be ""
+  "myalert.jpg" 1524359175 145451 cd498ae92946a5a93e737e9a300034cf ""
+  "sample-aamas18.aux" 1524359321 3592 cc01e7557bca1c88832274f333ab4583 ""
+  "sample-aamas18.bbl" 1524359320 0 d41d8cd98f00b204e9800998ecf8427e "bibtex sample-aamas18"
+  "sample-aamas18.out" 1524359321 3823 dfead762585e40e3f344db71f5e415ac ""
   "sample-aamas18.tex" 1524165024 6073 e4339f0b228755de8cdc9b4f3ec97d11 ""
-  "samplebody-conf.tex" 1524355037 24467 d4ef556805979a7f960835cd66405dfa ""
+  "samplebody-conf.tex" 1524359318 25602 a538e09043e88e75813aa22be107199a ""
   (generated)
+  "comment.cut"
+  "sample-aamas18.out"
   "sample-aamas18.pdf"
   "sample-aamas18.log"
-  "comment.cut"
   "sample-aamas18.aux"
-  "sample-aamas18.out"
