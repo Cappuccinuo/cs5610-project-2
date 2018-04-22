@@ -7,7 +7,25 @@ specific cryptocurrencies with the desired threshold to create alerts
 and get emails when the chosen cryptocurrency crosses a price 
 threshold or there’s an arbitrage opportunity. 
 
+Besides signing users up directly to Ccmonitor, we adopted OAuth2 
+to allow users sign in with third party accounts, Github and Google 
+accounts. We used Redux to manage user’s state, combining structures 
+in store into a general state to render. We made use of React Router 
+to manage the controllers and achieve dynamic routing, routing that 
+takes place as our app is rendering. Also, to implement the Email 
+services, we chose Bamboo to make it flexible and easy to use email 
+for Elixir. Bamboo.SendGridAdapter is being used and helped a lot. 
+As for data visualization, we found Echarts really useful to draw 
+graphs for users to easily get the idea of the overall behavior and 
+trend of the currency they are interested 
+in. Apart from all these technologies, we also get help from Font 
+Awesome, Google Fonts and some other third parties to beautify our 
+UI, such as Github and Google login icon, our font styles, and 
+adding the browser tab icon for our app.
 
+Overall, our Ccmonitor is a complex and integrated web app that 
+combined a number of latest technologies and we will continue to 
+work hard to provide best experience to our users.
 
 
 \section{Interact with application}
