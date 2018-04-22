@@ -58,6 +58,7 @@
   text-decoration: none;
   text-align: center;
 }
+
 @media(max-width:768px){
     #login-dp{
         background-color: inherit;
@@ -66,6 +67,15 @@
     #login-dp .bottom{
         background-color: inherit;
         border-top:0 none;
+    }
+}
+
+@media(max-width:640px){
+    #login-dp{
+        width: 80%;
+    }
+    #bs-example-navbar-collapse-1{
+      width: 80%;
     }
 }
 
