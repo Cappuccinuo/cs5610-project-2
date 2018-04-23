@@ -52,7 +52,7 @@ class IndexComponent extends React.Component {
     let ltc_open_price = this.props.prices.LTC_open;
 
     return <div className="index">
-      <div id="order-book" style={{display: "block"}}>
+      <div id="order-book">
         <div>
           <dl className="stats-panel">
             <div className="stat">
@@ -158,10 +158,10 @@ class IndexComponent extends React.Component {
             </div>
           </dl>
         </div>
-
       </div>
+
       <div className="news-panel">
-        <div className="text offset-lg-1 col-lg-7 col-md-12">
+        <div className="text offset-lg-1 col-lg-12 col-md-12">
           {this.state.news}
         </div>
       </div>

@@ -74,6 +74,7 @@ class AlertFormComponent extends React.Component {
   }
 
   switchTab2(ev) {
+    api.request_alerts_all(this.props.token.user_id);
     ev.preventDefault();
     this.setState({
       changeTab: true,

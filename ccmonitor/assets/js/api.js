@@ -139,7 +139,7 @@ class TheServer {
         swal({
           title: "Success!",
           text: "Please check in my alert",
-          icon: "warning",
+          icon: "success",
         });
 
         $(callback);
@@ -153,6 +153,7 @@ class TheServer {
       }
    });
   }
+
 
   update_alert(id, data, callback) {
     $.ajax("/api/v1/alerts/"+id, {

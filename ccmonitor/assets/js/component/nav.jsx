@@ -12,7 +12,7 @@ function Nav(props) {
 
   if(props.token) {
     coin = (
-      <li className="dropdown">
+      <li className="dropdown" id="nav-coin">
         <a href="#" className="dropdown-toggle" data-toggle="dropdown">Coins <span className="caret"></span></a>
         <ul className="dropdown-menu" role="menu">
           <li><Link to="/coin/BTC" onClick={()=>api.update_current_coin_type("BTC")}>BTC</Link></li>
@@ -24,7 +24,7 @@ function Nav(props) {
       </li>
     );
     alert = (
-      <li><NavLink to="/notifications"><i className="fa fa-bell"></i></NavLink></li>
+      <li id="nav-alert"><NavLink to="/notifications"><i className="fa fa-bell"></i></NavLink></li>
     );
   }
   return <header className="header">
@@ -45,11 +45,11 @@ function Nav(props) {
           </Link>
         </div>
 
-        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div className="collapse navbar-collapse nav-operation" id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav navbar-right">
             {coin}
             {alert}
-            <li>
+            <li id="nav-login">
               <CookiesProvider>
                 <Login />
               </CookiesProvider>

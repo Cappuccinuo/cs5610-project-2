@@ -99,7 +99,7 @@ class Login extends React.Component {
       let user_name = this.get_current_user_name(this.props.users, this.props.token.user_id);
 
       return <div className="user-info">
-        <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div id="bs-example-navbar-collapse-1">
           <ul className="nav navbar-nav navbar-right">
               <span style={{color: "gray"}}>Welcome { user_name }</span> <button className="btn btn-dark" onClick={this.delete_token}><b>Log out</b></button>;
           </ul>
@@ -109,7 +109,7 @@ class Login extends React.Component {
     else {
         return <div>
         <div className="container-fluid">
-          <div className="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <div>
             <ul className="nav navbar-nav navbar-right">
 
               <li><p className="navbar-text">Already have an account?</p></li>
