@@ -116,8 +116,8 @@ class TheServer {
       },
       error: (resp) => {
         swal({
-          title: "Wrong!",
-          text: "Try again",
+          title: "Attention!",
+          text: "Password should have at least 8 digits!",
           icon: "warning",
         });
       },
