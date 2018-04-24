@@ -26,5 +26,13 @@ import ccmonitor_init from './ccmonitor';
 $(function() {
   let channel = socket.channel("prices:node", {});
   api.request_users();
+  if(window.no_email) {
+    swal({
+      title: "Login failed",
+      text: "Please make sure you have a public email from provider",
+      icon: "warning",
+    });
+    window.no_email = false;
+  }
   ccmonitor_init(store, channel);
 })

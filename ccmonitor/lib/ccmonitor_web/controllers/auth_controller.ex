@@ -8,26 +8,26 @@ defmodule CcmonitorWeb.AuthController do
   alias Ccmonitor.Repo
 
   def callback(%{assigns: %{ueberauth_auth: auth}} = conn, params) do
-    IO.puts "+++++"
-    IO.inspect(conn.assigns)
-    IO.puts "+++++"
-    IO.inspect(params)
-    IO.puts "+++++"
-
-    IO.inspect(auth.info.name)
+  
     name = auth.info.name
     if auth.info.name == "" do
       emailSplit = String.split(auth.info.email, ["@"])
       [name, _rest] = emailSplit
     end
-    IO.puts "hhhh"
-    IO.inspect(name)
-    user_params = %{token: auth.credentials.token, email: auth.info.email, name: name, provider: auth.provider|>Atom.to_string }
-    IO.inspect(user_params)
-    IO.puts "+++++"
-    changeset = User.changeset(%User{}, user_params)
 
-    signin(conn, changeset)
+    if auth.info.email do
+      user_params = %{token: auth.credentials.token, email: auth.info.email, name: name, provider: auth.provider|>Atom.to_string }
+    
+      changeset = User.changeset(%User{}, user_params)
+
+      signin(conn, changeset)
+    else
+      conn
+        |> put_session(:no_email, true)
+        |> redirect(to: page_path(conn, :index))
+    end
+    
+    
   end
 
   def signout(conn, _params) do

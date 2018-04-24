@@ -2,6 +2,7 @@
 <script>
   window.token="<%= @token %>"
   window.user_id="<%= @user_id %>"
+  window.no_email="<%= @no_email %>"
 </script>
 <% end %>
 <div id="root">
